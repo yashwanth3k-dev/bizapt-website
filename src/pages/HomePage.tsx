@@ -1,12 +1,15 @@
 import {
+  Clock,
   Eye,
-  FileStack,
-  Layers,
+  HelpCircle,
   Map,
+  MessageSquare,
   Receipt,
   Share2,
-  Split,
-  UserRound,
+  Shield,
+  Tag,
+  UserPlus,
+  Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BrandLogo, SpiralWatermark } from "../components/BrandMark";
@@ -21,65 +24,83 @@ import {
 } from "../components/motion";
 import { usePageTitle } from "../hooks/usePageTitle";
 
-const pains = [
+/** Tangible things in hand on day one — not features, not process steps. */
+const dayOne = [
   {
-    icon: Split,
-    title: "Decision splinters",
-    body: "Model run in Claude → agency sign-off → Slack approval → regulator asks six months later → weeks to reconstruct.",
+    icon: Map,
+    title: "A living company map",
+    body: "People, products, goals — connected. Not a wiki page you wrote once and forgot.",
   },
   {
-    icon: FileStack,
-    title: "Spec lives in three places",
-    body: "Half the decision never made it to the brief. Spend follows the wrong plan.",
+    icon: Receipt,
+    title: "Your first decision receipt",
+    body: "Who decided, why, and what it was for — stamped before the next meeting starts.",
   },
   {
-    icon: Layers,
-    title: "Pivot decided, immediately lost",
-    body: "Strategy changes on a call. Engineering builds the old plan for two weeks.",
+    icon: Tag,
+    title: "Honest labels",
+    body: "What’s stated, what’s guessed, what’s still unknown. No fake certainty.",
+  },
+  {
+    icon: UserPlus,
+    title: "A seat ready for the next person",
+    body: "When a teammate joins, they land in the same picture — not a blank slate.",
   },
 ];
 
+/** Short process — how you get day one, not what you hold. */
 const steps = [
   {
     n: "01",
-    icon: UserRound,
-    title: "Tell us who you are",
-    body: "Role and authority shape the conversation. Different seats get different depth — we ask once.",
+    icon: MessageSquare,
+    title: "Talk",
+    body: "Describe the company in plain language. About ten minutes.",
   },
   {
     n: "02",
-    icon: Layers,
-    title: "Describe your company",
-    body: "People, products, goals, metrics — in plain language. The picture starts taking shape.",
+    icon: Map,
+    title: "Map",
+    body: "See it connected. Fix what’s wrong — history stays labeled.",
   },
   {
     n: "03",
-    icon: Map,
-    title: "Live in the map",
-    body: "Navigate Structure and Dynamics. Ask why. Add context. Invite the team.",
+    icon: Users,
+    title: "Share",
+    body: "Ask why with a trail. Invite someone — propose, approve, live.",
   },
 ];
 
-const outcomes = [
+/** Ongoing returns — different job from day-one deliverables. */
+const returns = [
   {
-    icon: Receipt,
-    title: "Governed decision records",
-    body: "Who decided, why, and what it was for — a trail you can walk, not a vibe.",
+    icon: Clock,
+    title: "Less reconstruction",
+    body: "Decisions stay findable. Stop re-litigating last month’s call in this week’s meeting.",
   },
   {
-    icon: Map,
-    title: "Living company map",
-    body: "People, products, goals, channels — connected. Shape and movement in one place.",
-  },
-  {
-    icon: Eye,
-    title: "Evidence trails",
-    body: "What you told us, what we inferred, what we don’t know yet — with confidence and sources.",
+    icon: HelpCircle,
+    title: "Faster answers",
+    body: "Who owns this? Why did we decide that? Seconds — not Slack archaeology.",
   },
   {
     icon: Share2,
-    title: "Shared org state",
-    body: "Not per-user islands. What the team approves is what everyone sees.",
+    title: "Shared truth",
+    body: "Propose → approve → live for everyone. No more per-person islands of “the truth.”",
+  },
+  {
+    icon: Eye,
+    title: "Honest AI",
+    body: "Belief, confidence, and sources — never “the AI said it’s true, trust us.”",
+  },
+  {
+    icon: Shield,
+    title: "Memory that stays",
+    body: "When people leave, their context doesn’t walk out the door with them.",
+  },
+  {
+    icon: Receipt,
+    title: "Evidence you can show",
+    body: "Board, partner, or new hire — a trail beats a slide deck of vibes.",
   },
 ];
 
@@ -106,7 +127,6 @@ export function HomePage() {
 
   return (
     <>
-      {/* Hero — blur + staggered rise */}
       <section
         className="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-16 text-center sm:px-8"
         style={{ background: "var(--hero-veil)" }}
@@ -167,70 +187,14 @@ export function HomePage() {
             <Button to="/contact" showArrow>
               Request early access
             </Button>
-            <Button to="/product" variant="ghost">
+            <Button to="/how-it-works" variant="ghost">
               See the product
             </Button>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Problem — cascade stagger (cards rise one-by-one) */}
-      <SectionReveal
-        variant="cascade"
-        className="px-5 py-24 sm:px-8"
-        style={{ background: "var(--bg)" }}
-      >
-        <div className="mx-auto max-w-5xl text-center">
-          <motion.div variants={cascadeItem}>
-            <SectionHeader replay>
-              <p
-                className="text-xs font-semibold uppercase tracking-[0.2em]"
-                style={{ color: "var(--teal)" }}
-              >
-                Problem
-              </p>
-              <h2
-                className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-                style={{ color: "var(--fg)" }}
-              >
-                Your firm makes 30+ decisions a week.
-                <br className="hidden sm:block" /> None of them live in one place tomorrow.
-              </h2>
-              <p
-                className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
-                style={{ color: "var(--fg-muted)" }}
-              >
-                The problem isn&apos;t “AI vs governance.” It&apos;s an organization that can&apos;t operate as
-                one across Slack, email, AI tools, and hallway conversations.
-              </p>
-            </SectionHeader>
-          </motion.div>
-
-          <div className="mt-14 grid gap-4 text-left sm:grid-cols-3">
-            {pains.map((card) => (
-              <motion.div key={card.title} variants={cascadeItem}>
-                <AnimatedCard replay className="group h-full p-6 text-left">
-                  <HoverIcon icon={card.icon} variant="shake" color="var(--teal)" />
-                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                    {card.body}
-                  </p>
-                </AnimatedCard>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div variants={cascadeItem} className="mt-12">
-            <Button to="/problem" variant="ghost" showArrow>
-              Explore the problem
-            </Button>
-          </motion.div>
-        </div>
-      </SectionReveal>
-
-      {/* How it works — slide in from left */}
+      {/* Day one — what lands in your hands immediately */}
       <SectionReveal
         variant="slideLeft"
         className="px-5 py-24 sm:px-8"
@@ -240,7 +204,53 @@ export function HomePage() {
           <SectionHeader className="text-center" replay>
             <p
               className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--sky)" }}
+              style={{ color: "var(--accent)" }}
+            >
+              Day one
+            </p>
+            <h2
+              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+              style={{ color: "var(--fg)" }}
+            >
+              What you have the moment you start.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--fg-muted)" }}>
+              After a short conversation — not a three-day workshop — these are in your hands.
+            </p>
+          </SectionHeader>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            {dayOne.map((item, i) => (
+              <AnimatedCard
+                key={item.title}
+                delay={i * 0.08}
+                from={i % 2 === 0 ? "left" : "right"}
+                replay
+                className="p-6 text-left sm:p-7"
+              >
+                <HoverIcon icon={item.icon} variant="float" color="var(--accent)" />
+                <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                  {item.body}
+                </p>
+              </AnimatedCard>
+            ))}
+          </div>
+        </div>
+      </SectionReveal>
+
+      <SectionReveal
+        variant="clip"
+        className="px-5 py-24 sm:px-8"
+        style={{ background: "var(--bg)" }}
+      >
+        <div className="mx-auto max-w-5xl">
+          <SectionHeader className="text-center" replay>
+            <p
+              className="text-xs font-semibold uppercase tracking-[0.2em]"
+              style={{ color: "var(--accent)" }}
             >
               How it works
             </p>
@@ -248,10 +258,10 @@ export function HomePage() {
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              From conversation to a map you can run.
+              Talk. Map. Share.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--fg-muted)" }}>
-              Three steps. No re-onboarding every time the org changes its mind.
+              Three moves. That’s the path from conversation to a shared company picture.
             </p>
           </SectionHeader>
 
@@ -264,7 +274,7 @@ export function HomePage() {
                 replay
                 className="p-6 text-left"
               >
-                <HoverIcon icon={s.icon} variant="float" color="var(--sky)" />
+                <HoverIcon icon={s.icon} variant="float" color="var(--accent)" />
                 <p className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
                   {s.n}
                 </p>
@@ -279,68 +289,67 @@ export function HomePage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button to="/product" showArrow>
-              See the product
+            <Button to="/how-it-works" showArrow>
+              Full walkthrough
             </Button>
           </div>
         </div>
       </SectionReveal>
 
-      {/* What you get — clip-path reveal */}
+      {/* Ongoing ROI — different job from day-one deliverables */}
       <SectionReveal
-        variant="clip"
+        variant="cascade"
         className="px-5 py-24 sm:px-8"
-        style={{ background: "var(--bg)" }}
+        style={{ background: "var(--bg-soft)" }}
       >
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader className="text-center" replay>
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--teal)" }}
-            >
-              What you get
-            </p>
-            <h2
-              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-              style={{ color: "var(--fg)" }}
-            >
-              An honest, living picture — with receipts.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--fg-muted)" }}>
-              Dashboards show numbers. Wikis store documents. Bizdaptive connects decisions, people,
-              goals, and evidence into one map you can question and act on.
-            </p>
-          </SectionHeader>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {outcomes.map((card, i) => (
-              <AnimatedCard
-                key={card.title}
-                delay={i * 0.08}
-                from={i % 2 === 0 ? "left" : "right"}
-                replay
-                className="p-6 sm:p-7 text-left"
+        <div className="mx-auto max-w-5xl text-center">
+          <motion.div variants={cascadeItem}>
+            <SectionHeader replay>
+              <p
+                className="text-xs font-semibold uppercase tracking-[0.2em]"
+                style={{ color: "var(--accent)" }}
               >
-                <HoverIcon icon={card.icon} variant="pulse" color="var(--teal)" />
-                <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {card.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {card.body}
-                </p>
-              </AnimatedCard>
+                Over time
+              </p>
+              <h2
+                className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+                style={{ color: "var(--fg)" }}
+              >
+                Returns you can feel.
+              </h2>
+              <p
+                className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                Day one gives you the picture. Keeping it shared is what gives time back.
+              </p>
+            </SectionHeader>
+          </motion.div>
+
+          <div className="mt-14 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
+            {returns.map((card) => (
+              <motion.div key={card.title} variants={cascadeItem}>
+                <AnimatedCard replay className="group h-full p-6 text-left">
+                  <HoverIcon icon={card.icon} variant="pulse" color="var(--accent)" />
+                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {card.body}
+                  </p>
+                </AnimatedCard>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <Button to="/capabilities" variant="ghost" showArrow>
-              Explore capabilities
+          <motion.div variants={cascadeItem} className="mt-12">
+            <Button to="/returns" variant="ghost" showArrow>
+              Full breakdown
             </Button>
-          </div>
+          </motion.div>
         </div>
       </SectionReveal>
 
-      {/* Closing CTA — scale + spring */}
       <SectionReveal
         variant="scale"
         className="px-5 pb-16 pt-8 sm:px-8"
@@ -369,15 +378,14 @@ export function HomePage() {
               className="mx-auto mt-4 max-w-md text-base"
               style={{ color: "var(--fg-muted)" }}
             >
-              Request early access or book a founder demo. Bring curiosity — leave with a clearer
-              picture.
+              Bring curiosity. Leave with a clearer picture — and a few receipts.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Button to="/contact" showArrow>
                 Request early access
               </Button>
-              <Button to="/contact" variant="ghost">
-                Book a founder demo
+              <Button to="/about" variant="ghost">
+                About us
               </Button>
             </div>
           </div>

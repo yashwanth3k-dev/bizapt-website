@@ -8,12 +8,12 @@ type Props = {
 };
 
 const accentVar = {
-  teal: "var(--teal)",
-  sky: "var(--sky)",
+  teal: "var(--accent)",
+  sky: "var(--accent)",
   accent: "var(--accent)",
 } as const;
 
-export function PageHero({ eyebrow, title, lead, accent = "teal" }: Props) {
+export function PageHero({ eyebrow, title, lead, accent = "accent" }: Props) {
   return (
     <motion.header
       initial={{ opacity: 0, y: 20 }}

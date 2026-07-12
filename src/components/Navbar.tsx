@@ -6,9 +6,9 @@ import { Button } from "./Button";
 import { useTheme } from "../theme/ThemeProvider";
 
 const links = [
-  { label: "Problem", to: "/problem" },
-  { label: "Product", to: "/product" },
-  { label: "Capabilities", to: "/capabilities" },
+  { label: "What you get", to: "/returns" },
+  { label: "How it works", to: "/how-it-works" },
+  { label: "About us", to: "/about" },
 ];
 
 export function Navbar() {

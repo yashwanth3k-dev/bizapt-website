@@ -81,8 +81,8 @@ export function ContactPage() {
       <PageHero
         eyebrow="Contact"
         accent="accent"
-        title="Request early access."
-        lead="Tell us who you are and what you're looking for. We'll follow up personally."
+        title="See your org without the fog."
+        lead="Tell us who you are. We'll follow up personally — bring curiosity, leave with a clearer picture."
       />
 
       <section className="px-5 pb-24 sm:px-8">

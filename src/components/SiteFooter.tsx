@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { BrandMark } from "./BrandMark";
 
 const links = [
-  { label: "Problem", to: "/problem" },
-  { label: "Product", to: "/product" },
-  { label: "Capabilities", to: "/capabilities" },
+  { label: "What you get", to: "/returns" },
+  { label: "How it works", to: "/how-it-works" },
+  { label: "About us", to: "/about" },
   { label: "Contact Us", to: "/contact" },
 ];
 
