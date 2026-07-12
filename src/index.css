@@ -1,43 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
 }
 
 /* ── Shared tokens (portal-aligned: paper / ink / terracotta) ── */
 :root,
 [data-theme="light"] {
-  --bg: #f4efe6;
+  --bg: #f5f1e9;
   --bg-elevated: #ffffff;
   --bg-soft: #ebe4d8;
-  --fg: #1a1b22;
+  --fg: #1a1a1a;
   --fg-muted: #5c5a55;
   --fg-faint: #8a867c;
-  --line: rgba(26, 27, 34, 0.1);
+  --line: rgba(26, 26, 26, 0.1);
   --card: rgba(255, 255, 255, 0.72);
   --card-solid: #ffffff;
-  --accent: #b8462c;
+  --accent: #b85842;
   --accent-soft: #e8b7a5;
-  --teal: #0f766e;
-  --sky: #1d4ed8;
+  --teal: #0e5a55;
+  --sky: #1a8a82;
   --violet: #6d28d9;
   --btn-fg: #ffffff;
-  --btn-bg: #1a1b22;
+  --btn-bg: #1a1a1a;
   --btn-ghost-bg: transparent;
   --hero-veil: linear-gradient(
     165deg,
     #f7f2ea 0%,
-    #f4efe6 42%,
+    #f5f1e9 42%,
     #ebe0d4 78%,
     #e4d5c8 100%
   );
-  --nav-blur: rgba(244, 239, 230, 0.92);
-  --cta-frame: #1a1b22;
-  --cta-inner: #f4efe6;
-  --cta-glow: rgba(184, 70, 44, 0.18);
-  --logo-stroke: #1a1b22;
-  --logo-dot: #b8462c;
+  --nav-blur: rgba(245, 241, 233, 0.92);
+  --cta-frame: #1a1a1a;
+  --cta-inner: #f5f1e9;
+  --cta-glow: rgba(184, 88, 66, 0.18);
+  --logo-stroke: #1a1a1a;
+  --logo-dot: #b85842;
   --spiral-opacity: 0.09;
 }
 
@@ -179,4 +179,133 @@ body {
 
 .accent-text {
   color: var(--accent);
+  font-family: var(--font-serif);
+}
+
+/* ── Per-page icon hover motions (trigger via .group:hover) ── */
+.icon-hover {
+  display: inline-flex;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.group:hover .icon-hover--shake {
+  animation: icon-shake 0.45s ease-in-out;
+}
+
+.group:hover .icon-hover--spin {
+  animation: icon-spin 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .icon-hover--bounce {
+  animation: icon-bounce 0.4s ease-out;
+}
+
+.group:hover .icon-hover--tilt {
+  animation: icon-tilt 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.group:hover .icon-hover--pulse {
+  animation: icon-pulse 0.35s ease-in-out;
+}
+
+.group:hover .icon-hover--float {
+  animation: icon-float 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.group:hover .icon-hover--snap {
+  animation: icon-snap 0.4s ease-out;
+}
+
+@keyframes icon-shake {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-12deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-8deg);
+  }
+  80% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes icon-spin {
+  from {
+    transform: rotate(0) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.12);
+  }
+}
+
+@keyframes icon-bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.15);
+  }
+}
+
+@keyframes icon-tilt {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  100% {
+    transform: rotate(-14deg) scale(1.1) translateX(2px);
+  }
+}
+
+@keyframes icon-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.22);
+  }
+}
+
+@keyframes icon-float {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  100% {
+    transform: translateY(-6px) rotate(6deg);
+  }
+}
+
+@keyframes icon-snap {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  35% {
+    transform: scale(0.85) rotate(-5deg);
+  }
+  70% {
+    transform: scale(1.12) rotate(0);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .icon-hover--shake,
+  .group:hover .icon-hover--spin,
+  .group:hover .icon-hover--bounce,
+  .group:hover .icon-hover--tilt,
+  .group:hover .icon-hover--pulse,
+  .group:hover .icon-hover--float,
+  .group:hover .icon-hover--snap {
+    animation: none;
+  }
 }

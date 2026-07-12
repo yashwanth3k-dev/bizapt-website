@@ -20,11 +20,14 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-const STORAGE_KEY = "bizdaptive-poc-theme";
+const STORAGE_KEY = "bizdaptive-theme";
+const LEGACY_STORAGE_KEY = "bizdaptive-poc-theme";
 
 function getPreferred(): Theme {
   if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
+  const stored =
+    (localStorage.getItem(STORAGE_KEY) as Theme | null) ||
+    (localStorage.getItem(LEGACY_STORAGE_KEY) as Theme | null);
   if (stored === "light" || stored === "dark") return stored;
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
@@ -41,7 +44,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = (e: MediaQueryListEvent) => {
-      if (localStorage.getItem(STORAGE_KEY)) return;
+      if (localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY)) return;
       const next: Theme = e.matches ? "dark" : "light";
       setThemeState(next);
       document.documentElement.dataset.theme = next;

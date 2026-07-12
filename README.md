@@ -1,6 +1,6 @@
-# Bizdaptive PoC Website
+# Bizdaptive Website
 
-Standalone Vite + React + Tailwind marketing site for the Bizdaptive Proof of Concept.
+Standalone Vite + React + Tailwind marketing site for Bizdaptive.
 
 ## Local
 
