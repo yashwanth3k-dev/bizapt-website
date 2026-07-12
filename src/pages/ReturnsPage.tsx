@@ -4,7 +4,6 @@ import {
   CheckSquare,
   Clock,
   LayoutDashboard,
-  MessageSquare,
   UserRound,
   Users,
   UserPlus,
