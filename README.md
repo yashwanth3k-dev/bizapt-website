@@ -1,22 +1,39 @@
 # Bizdaptive PoC Website
 
-Marketing site for the **Bizdaptive Proof of Concept** — Framer-style section layout, portal spiral brand mark, light/dark theme, copy aligned to what Sudarshan + Yashwanth are actually building.
+Standalone Vite + React + Tailwind marketing site for the Bizdaptive Proof of Concept.
 
-## Honest PoC claims (matches `planning/POC-CAPABILITY-MAP.md`)
-
-- WHO-first conversation onboarding → assimilation → Company Graph
-- First-decision receipt
-- Structure & Dynamics, epistemic badges, dual trails
-- Belief + evidence substrate (not a truth oracle)
-- Add-context with supersede
-- Explicit about what’s still ahead (file/comms, full multi-user propose→approve)
-
-## Run
+## Local
 
 ```bash
-cd bizapt-website
+cd ~/Desktop/bizapt-website
 npm install
 npm run dev
 ```
 
-Theme toggle lives in the navbar (persists in `localStorage`, respects `prefers-color-scheme`).
+## Deploy to Vercel
+
+1. Create a new GitHub repo (empty).
+2. From this folder:
+
+```bash
+cd ~/Desktop/bizapt-website
+git remote add origin https://github.com/YOUR_USER/bizapt-website.git
+git push -u origin main
+```
+
+3. In [Vercel](https://vercel.com) → **Add New Project** → import that repo.
+4. Framework preset: **Vite** (auto-detected). Build: `npm run build`, output: `dist`.
+5. Deploy.
+
+Or from CLI:
+
+```bash
+npx vercel
+```
+
+## Stack
+
+- Vite + React 19 + TypeScript  
+- Tailwind CSS v4  
+- Framer Motion + Lucide  
+- Light / dark theme + portal spiral brand mark  
