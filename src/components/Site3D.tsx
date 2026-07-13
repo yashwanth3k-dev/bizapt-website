@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   motion,
-  useMotionValue,
-  useSpring,
   useTransform,
   useScroll,
   useReducedMotion,
@@ -20,121 +18,6 @@ export function usePrefersReducedMotion() {
     return () => mq.removeEventListener("change", update);
   }, []);
   return Boolean(framer || reduced);
-}
-
-const nodes = [
-  { x: 18, y: 32, r: 5, label: "People" },
-  { x: 52, y: 18, r: 6, label: "Goals" },
-  { x: 78, y: 38, r: 5, label: "Assets" },
-  { x: 40, y: 58, r: 7, label: "Core" },
-  { x: 68, y: 72, r: 4.5, label: "Metrics" },
-];
-
-const links: [number, number][] = [
-  [0, 3],
-  [1, 3],
-  [2, 3],
-  [3, 4],
-  [1, 2],
-];
-
-/** Soft 3D company-graph float for the home hero. */
-export function CompanyGraphHero() {
-  const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 80, damping: 18 });
-  const sy = useSpring(my, { stiffness: 80, damping: 18 });
-  const rotateX = useTransform(sy, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(sx, [-0.5, 0.5], [-12, 12]);
-
-  function onMove(e: React.MouseEvent) {
-    if (reduced || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  }
-
-  function onLeave() {
-    mx.set(0);
-    my.set(0);
-  }
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      aria-hidden
-      style={{ perspective: 1000 }}
-    >
-      <motion.div
-        className="absolute -right-8 top-1/2 w-[min(92vw,420px)] -translate-y-1/2 sm:right-0 sm:w-[460px] lg:right-8"
-        style={{
-          rotateX: reduced ? 0 : rotateX,
-          rotateY: reduced ? 0 : rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: easeOut, delay: 0.2 }}
-      >
-        <svg viewBox="0 0 100 90" className="h-auto w-full" style={{ opacity: 0.55 }}>
-          {links.map(([a, b]) => {
-            const na = nodes[a]!;
-            const nb = nodes[b]!;
-            return (
-              <motion.line
-                key={`${a}-${b}`}
-                x1={na.x}
-                y1={na.y}
-                x2={nb.x}
-                y2={nb.y}
-                stroke="var(--accent)"
-                strokeWidth="0.35"
-                strokeOpacity="0.45"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.2, delay: 0.4, ease: easeOut }}
-              />
-            );
-          })}
-          {nodes.map((n, i) => (
-            <motion.g
-              key={n.label}
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={
-                reduced
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 1, scale: 1, y: [0, i % 2 === 0 ? -1.2 : 1.2, 0] }
-              }
-              transition={
-                reduced
-                  ? { delay: 0.5 + i * 0.08 }
-                  : {
-                      opacity: { delay: 0.5 + i * 0.08 },
-                      scale: { delay: 0.5 + i * 0.08 },
-                      y: { duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" },
-                    }
-              }
-            >
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={n.r}
-                fill="var(--card-solid)"
-                stroke="var(--accent)"
-                strokeWidth="0.5"
-              />
-              <circle cx={n.x} cy={n.y} r={1.4} fill="var(--accent)" />
-            </motion.g>
-          ))}
-        </svg>
-      </motion.div>
-    </div>
-  );
 }
 
 type DepthCardProps = {

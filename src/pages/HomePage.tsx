@@ -17,7 +17,6 @@ import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { TiltCard } from "../components/About3D";
 import {
-  CompanyGraphHero,
   DepthStepCard,
   FogCtaShell,
   StampCard,
@@ -139,17 +138,15 @@ export function HomePage() {
           <SpiralWatermark size={320} animate className="hidden sm:block" />
         </motion.div>
 
-        <CompanyGraphHero />
-
         <motion.div
           variants={heroStagger}
           initial="hidden"
           animate="visible"
-          className="relative z-10 mx-auto max-w-3xl lg:mr-auto lg:max-w-xl lg:text-left xl:ml-[8%]"
+          className="relative z-10 mx-auto max-w-3xl"
         >
           <motion.div
             variants={heroItem}
-            className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-xs backdrop-blur lg:mx-0"
+            className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-xs backdrop-blur"
             style={{
               borderColor: "var(--line)",
               background: "var(--card)",
@@ -165,14 +162,14 @@ export function HomePage() {
             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
             style={{ color: "var(--fg)" }}
           >
-            Your organization is one thing.
+            Adaptive org instinct.
             <br />
             <span className="accent-text">Nothing runs it as one.</span>
           </motion.h1>
 
           <motion.p
             variants={heroItem}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg lg:mx-0"
+            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
             style={{ color: "var(--fg-muted)" }}
           >
             Bizdaptive continuously learns how your organization works. This creates a compounding
@@ -182,7 +179,7 @@ export function HomePage() {
 
           <motion.div
             variants={heroItem}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+            className="mt-9 flex flex-wrap items-center justify-center gap-3"
           >
             <Button to="/contact?intent=waitlist" showArrow>
               Join the waitlist
