@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { BrandMark } from "./BrandMark";
 
 const links = [
-  { label: "ROI you can feel", to: "/roi" },
+  { label: "With Bizdaptive", to: "/roi" },
   { label: "How it works", to: "/how-it-works" },
   { label: "About us", to: "/about" },
   { label: "Contact", to: "/contact" },

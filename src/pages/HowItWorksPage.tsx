@@ -253,7 +253,7 @@ export function HowItWorksPage() {
               Join the waitlist
             </Button>
             <Button to="/roi" variant="ghost">
-              ROI you can feel
+              With Bizdaptive you will be able to
             </Button>
           </div>
         </div>

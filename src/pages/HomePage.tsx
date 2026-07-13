@@ -33,7 +33,7 @@ const dayOne = [
   {
     icon: Map,
     title: "A living company map",
-    body: "People, products, goals — connected. Not a wiki page you wrote once and forgot.",
+    body: "People, products, goals — connected from your perspective. Not a wiki page you wrote once and forgot.",
   },
   {
     icon: Receipt,
@@ -120,7 +120,7 @@ const heroItem = {
 };
 
 export function HomePage() {
-  usePageTitle("Bizdaptive — Revolutionizing, Evidence-Driven organizational instinct");
+  usePageTitle("Bizdaptive — Adaptive organizational instinct");
 
   return (
     <>
@@ -144,19 +144,6 @@ export function HomePage() {
           animate="visible"
           className="relative z-10 mx-auto max-w-3xl"
         >
-          <motion.div
-            variants={heroItem}
-            className="mx-auto mb-7 inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-xs backdrop-blur"
-            style={{
-              borderColor: "var(--line)",
-              background: "var(--card)",
-              color: "var(--fg-muted)",
-            }}
-          >
-            <BrandLogo size={16} animate />
-            Revolutionizing, Evidence-Driven organizational instinct
-          </motion.div>
-
           <motion.h1
             variants={heroItem}
             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
@@ -201,19 +188,19 @@ export function HomePage() {
                 className="text-xs font-semibold uppercase tracking-[0.2em]"
                 style={{ color: "var(--accent)" }}
               >
-                ROI you can feel
+                With Bizdaptive you will be able to
               </p>
               <h2
                 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
                 style={{ color: "var(--fg)" }}
               >
-                Compounding organizational intelligence.
+                Use your organization's instinct intelligently always.
               </h2>
               <p
                 className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Every day on Bizdaptive makes the next decision clearer — for people and AI alike.
+                Every day on Bizdaptive makes the next action clearer — for people and AI alike.
               </p>
             </SectionHeader>
           </motion.div>
@@ -266,7 +253,7 @@ export function HomePage() {
               What you have the moment you start.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--fg-muted)" }}>
-              After a short conversation — not a three-day workshop — these are in your hands.
+              After a short conversation and the most minimal information given.
             </p>
           </SectionHeader>
 

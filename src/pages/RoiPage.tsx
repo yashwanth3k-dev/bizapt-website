@@ -124,14 +124,14 @@ const vs = [
 ];
 
 export function RoiPage() {
-  usePageTitle("ROI you can feel — Bizdaptive");
+  usePageTitle("With Bizdaptive you will be able to — Bizdaptive");
 
   return (
     <div style={{ background: "var(--bg)" }}>
       <PageHero
-        eyebrow="ROI you can feel"
+        eyebrow="With Bizdaptive you will be able to"
         accent="accent"
-        title="Compounding organizational intelligence."
+        title="Use your organization's instinct intelligently always."
         lead="Every decision, interaction, and outcome becomes lasting advantage — so people and AI act with proof, confidence, and clarity."
       />
 
@@ -305,7 +305,7 @@ export function RoiPage() {
               className="text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              Ready for ROI you can feel?
+              Ready for what Bizdaptive enables?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base" style={{ color: "var(--fg-muted)" }}>
               Join the waitlist. We&apos;ll show you a live company picture — not a slide.
