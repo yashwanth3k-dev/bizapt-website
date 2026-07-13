@@ -6,7 +6,7 @@ import { Button } from "./Button";
 import { useTheme } from "../theme/ThemeProvider";
 
 const links = [
-  { label: "What you get", to: "/returns" },
+  { label: "ROI you can feel", to: "/roi" },
   { label: "How it works", to: "/how-it-works" },
   { label: "About us", to: "/about" },
 ];
@@ -74,7 +74,7 @@ export function Navbar() {
           >
             {isDark ? <Sun className="size-3.5" aria-hidden /> : <Moon className="size-3.5" aria-hidden />}
           </button>
-          <Button to="/contact" className="!px-4 !py-2 text-xs sm:text-sm">
+          <Button to="/contact?intent=waitlist" className="!px-4 !py-2 text-xs sm:text-sm">
             Contact Us
           </Button>
         </div>

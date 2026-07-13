@@ -1,79 +1,122 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
-import { AnimatedCard } from "../components/motion";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { easeOut } from "../components/motion";
 
-const intents = [
-  { value: "early-access", label: "Request early access" },
-  { value: "founder-demo", label: "Book a founder demo" },
-  { value: "waitlist", label: "Join the design partner waitlist" },
-  { value: "other", label: "Something else" },
-] as const;
+const FOUNDERS_EMAIL = "info@bizdaptive.com";
 
-type FormState = {
-  name: string;
-  email: string;
-  company: string;
-  role: string;
-  intent: (typeof intents)[number]["value"];
-  message: string;
-};
+const PLACEHOLDER =
+  "Hi — I'm Priya, ops lead at Northwind (140 people). Our answers live in Slack and eight wikis — new hires ask the same questions for months. We'd like to join the Bizdaptive waitlist. Can we talk this week?";
 
-const initial: FormState = {
-  name: "",
-  email: "",
-  company: "",
-  role: "",
-  intent: "early-access",
-  message: "",
-};
+const HINT =
+  "THREE LINES IS PLENTY — WHO YOU ARE — YOUR TEAM — WHERE CONTEXT GOES MISSING";
+
+/** Keep mailto URLs short — long bodies break some desktop mail clients. */
+const MAX_BODY_CHARS = 1200;
+
+function subjectForIntent(intent: string | null) {
+  if (intent === "early-access") return "Bizdaptive — early access";
+  if (intent === "founder-demo") return "Bizdaptive — founder demo";
+  if (intent === "other") return "Bizdaptive — hello";
+  return "Bizdaptive — waitlist";
+}
+
+function buildMailto(from: string, subject: string, message: string) {
+  const trimmed = message.trim().slice(0, MAX_BODY_CHARS);
+  const body = encodeURIComponent(`Reply email: ${from.trim()}\n\n${trimmed}`);
+  const sub = encodeURIComponent(subject.trim() || "Bizdaptive — waitlist");
+  return `mailto:${FOUNDERS_EMAIL}?subject=${sub}&body=${body}`;
+}
+
+function openMailto(href: string) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.rel = "noopener";
+  link.style.display = "none";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
 
 export function ContactPage() {
   usePageTitle("Contact — Bizdaptive");
-  const [form, setForm] = useState<FormState>(initial);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const bodyRef = useRef<HTMLTextAreaElement>(null);
+  const opening = useRef(false);
 
-  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
-    setForm((f) => ({ ...f, [key]: value }));
+  const [from, setFrom] = useState("");
+  const [subject, setSubject] = useState(() => subjectForIntent(params.get("intent")));
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [sent, setSent] = useState(false);
+  const [mailtoHref, setMailtoHref] = useState(`mailto:${FOUNDERS_EMAIL}`);
+
+  useEffect(() => {
+    setSubject(subjectForIntent(params.get("intent")));
+  }, [params]);
+
+  useEffect(() => {
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        navigate(-1);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [navigate]);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => bodyRef.current?.focus(), 400);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  function send() {
+    if (opening.current) return;
     setError("");
+
+    if (!from.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from.trim())) {
+      setError("Add a valid From email so we can reply.");
+      return;
+    }
+    if (!message.trim()) {
+      setError("Three lines is plenty — who you are, your team, where context goes missing.");
+      return;
+    }
+
+    const href = buildMailto(from, subject, message);
+    setMailtoHref(href);
+    opening.current = true;
+    openMailto(href);
+    setSent(true);
+    window.setTimeout(() => {
+      opening.current = false;
+    }, 800);
   }
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim()) {
-      setError("Name and email are required.");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      setError("Please enter a valid email.");
-      return;
-    }
-
-    const intentLabel = intents.find((i) => i.value === form.intent)?.label ?? form.intent;
-    const subject = encodeURIComponent(`Bizdaptive — ${intentLabel}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${form.name.trim()}`,
-        `Email: ${form.email.trim()}`,
-        `Company: ${form.company.trim() || "—"}`,
-        `Role: ${form.role.trim() || "—"}`,
-        `Intent: ${intentLabel}`,
-        "",
-        form.message.trim() || "(No additional message)",
-      ].join("\n"),
-    );
-
-    window.location.href = `mailto:info@bizdaptive.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    send();
   }
 
-  const field =
-    "w-full rounded-xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-[var(--accent)]/40";
-  const fieldStyle = {
+  function onBodyKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  }
+
+  const isMac =
+    typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
+
+  const fieldShell =
+    "rounded-2xl border px-4 py-3 transition focus-within:ring-2 focus-within:ring-[var(--accent)]/25";
+  const fieldShellStyle = {
     borderColor: "var(--line)",
-    background: "var(--card-solid)",
-    color: "var(--fg)",
+    background: "var(--bg)",
   } as const;
 
   return (
@@ -81,166 +124,211 @@ export function ContactPage() {
       <PageHero
         eyebrow="Contact"
         accent="accent"
-        title="See your org without the fog."
-        lead="Tell us who you are. We'll follow up personally — bring curiosity, leave with a clearer picture."
+        title="Write the founders."
+        lead="Opens your email app with a draft to info@bizdaptive.com. You hit send — we read every note."
       />
 
       <section className="px-5 pb-24 sm:px-8">
-        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-          <div className="space-y-6">
-            <AnimatedCard className="p-6" delay={0}>
-              <h2 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                What happens next
-              </h2>
-              <ul className="mt-3 space-y-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                <li>· We read every note — founders, not a ticket queue.</li>
-                <li>· If there&apos;s a fit, we book a walkthrough on your org.</li>
-                <li>· Expect a reply within a few business days.</li>
-              </ul>
-            </AnimatedCard>
-            <AnimatedCard className="p-6" delay={0.06}>
-              <h2 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                Prefer email?
-              </h2>
-              <p className="mt-2 text-sm" style={{ color: "var(--fg-muted)" }}>
-                <a
-                  href="mailto:info@bizdaptive.com"
-                  className="font-medium underline-offset-2 hover:underline"
-                  style={{ color: "var(--fg)" }}
+        <motion.form
+          onSubmit={onSubmit}
+          initial={{ opacity: 0, y: 32, rotateX: 18 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ duration: 0.65, ease: easeOut }}
+          className="mx-auto max-w-3xl"
+          style={{ perspective: 1200, transformStyle: "preserve-3d" }}
+          noValidate
+        >
+          <motion.div
+            className="overflow-hidden rounded-[1.75rem] border"
+            style={{
+              borderColor: "var(--line)",
+              background: "var(--card-solid)",
+              boxShadow: "0 0 80px var(--cta-glow)",
+              transformOrigin: "top center",
+            }}
+            initial={{ rotateX: -12 }}
+            animate={{ rotateX: 0 }}
+            transition={{ duration: 0.7, ease: easeOut, delay: 0.05 }}
+          >
+            <div
+              className="flex items-center justify-between gap-3 px-5 py-4 sm:px-8"
+              style={{ background: "var(--bg-soft)" }}
+            >
+              <div className="flex items-center gap-2.5">
+                <span
+                  className="size-2 rounded-full"
+                  style={{ background: "var(--accent)" }}
+                  aria-hidden
+                />
+                <p
+                  className="text-[11px] font-semibold uppercase tracking-[0.14em]"
+                  style={{ color: "var(--fg-faint)" }}
                 >
-                  info@bizdaptive.com
-                </a>
-              </p>
-            </AnimatedCard>
-          </div>
-
-          <AnimatedCard className="p-6 sm:p-8" delay={0.08} from="right">
-            {sent ? (
-              <div className="py-8 text-center">
-                <h2 className="text-2xl font-bold" style={{ color: "var(--fg)" }}>
-                  Almost there.
-                </h2>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  Your mail client should open with the details filled in. Send it, and we&apos;ll be in
-                  touch. If nothing opened, email us at info@bizdaptive.com.
+                  New message — Bizdaptive
                 </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSent(false);
-                    setForm(initial);
-                  }}
-                  className="mt-6 text-sm font-semibold underline-offset-2 hover:underline"
+              </div>
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="rounded-full border px-3 py-1 text-[10px] font-semibold tracking-wide transition hover:opacity-80"
+                style={{
+                  borderColor: "var(--line)",
+                  color: "var(--fg-faint)",
+                  background: "var(--card-solid)",
+                }}
+                aria-label="Close (Escape)"
+              >
+                ESC
+              </button>
+            </div>
+
+            {sent ? (
+              <div className="px-6 py-14 text-center sm:px-10">
+                <p
+                  className="text-[11px] font-semibold uppercase tracking-[0.14em]"
                   style={{ color: "var(--accent)" }}
                 >
-                  Send another
-                </button>
+                  Almost there
+                </p>
+                <h2
+                  className="mt-3 text-2xl font-bold tracking-tight"
+                  style={{ color: "var(--fg)" }}
+                >
+                  Finish in your mail app.
+                </h2>
+                <p
+                  className="mx-auto mt-3 max-w-md text-sm leading-relaxed"
+                  style={{ color: "var(--fg-muted)" }}
+                >
+                  A draft should be open to{" "}
+                  <span style={{ color: "var(--fg)" }}>{FOUNDERS_EMAIL}</span>. Press send there.
+                  Nothing is submitted until you do.
+                </p>
+                <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                  <a
+                    href={mailtoHref}
+                    className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold"
+                    style={{ background: "var(--btn-bg)", color: "var(--btn-fg)" }}
+                  >
+                    Open draft again
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false);
+                      setError("");
+                    }}
+                    className="text-sm font-semibold underline-offset-2 hover:underline"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    Edit message
+                  </button>
+                </div>
+                <p className="mt-8 text-xs" style={{ color: "var(--fg-faint)" }}>
+                  Or email directly:{" "}
+                  <a
+                    href={`mailto:${FOUNDERS_EMAIL}`}
+                    className="underline-offset-2 hover:underline"
+                    style={{ color: "var(--fg-muted)" }}
+                  >
+                    {FOUNDERS_EMAIL}
+                  </a>
+                </p>
+                <p className="mt-4">
+                  <Link
+                    to="/"
+                    className="text-xs font-medium underline-offset-2 hover:underline"
+                    style={{ color: "var(--fg-faint)" }}
+                  >
+                    ← Back home
+                  </Link>
+                </p>
               </div>
             ) : (
-              <form onSubmit={onSubmit} className="space-y-4" noValidate>
+              <div className="space-y-5 px-5 py-6 sm:px-8 sm:py-8">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="block text-left">
-                    <span className="mb-1.5 block text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-                      Name *
-                    </span>
-                    <input
-                      className={field}
-                      style={fieldStyle}
-                      value={form.name}
-                      onChange={(e) => update("name", e.target.value)}
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-                  <label className="block text-left">
-                    <span className="mb-1.5 block text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-                      Email *
+                  <div className={fieldShell} style={fieldShellStyle}>
+                    <p
+                      className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                      style={{ color: "var(--fg-faint)" }}
+                    >
+                      To
+                    </p>
+                    <p className="mt-1.5 truncate text-sm font-semibold" style={{ color: "var(--accent)" }}>
+                      {FOUNDERS_EMAIL}
+                    </p>
+                  </div>
+
+                  <label className={`${fieldShell} block`} style={fieldShellStyle}>
+                    <span
+                      className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                      style={{ color: "var(--fg-faint)" }}
+                    >
+                      From
                     </span>
                     <input
                       type="email"
-                      className={field}
-                      style={fieldStyle}
-                      value={form.email}
-                      onChange={(e) => update("email", e.target.value)}
+                      value={from}
+                      onChange={(e) => {
+                        setFrom(e.target.value);
+                        setError("");
+                      }}
+                      placeholder="you@company.com"
                       autoComplete="email"
                       required
+                      className="mt-1.5 w-full bg-transparent text-sm outline-none placeholder:opacity-45"
+                      style={{ color: "var(--fg)" }}
                     />
                   </label>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="block text-left">
-                    <span className="mb-1.5 block text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-                      Company
-                    </span>
-                    <input
-                      className={field}
-                      style={fieldStyle}
-                      value={form.company}
-                      onChange={(e) => update("company", e.target.value)}
-                      autoComplete="organization"
-                    />
-                  </label>
-                  <label className="block text-left">
-                    <span className="mb-1.5 block text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-                      Role
-                    </span>
-                    <input
-                      className={field}
-                      style={fieldStyle}
-                      value={form.role}
-                      onChange={(e) => update("role", e.target.value)}
-                      autoComplete="organization-title"
-                      placeholder="Founder, ops, investor…"
-                    />
-                  </label>
-                </div>
-
-                <fieldset>
-                  <legend
-                    className="mb-2 text-xs font-semibold"
-                    style={{ color: "var(--fg-muted)" }}
+                <label className={`${fieldShell} block`} style={fieldShellStyle}>
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                    style={{ color: "var(--fg-faint)" }}
                   >
-                    I&apos;m here to
-                  </legend>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {intents.map((opt) => (
-                      <label
-                        key={opt.value}
-                        className="flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition"
-                        style={{
-                          borderColor:
-                            form.intent === opt.value ? "var(--accent)" : "var(--line)",
-                          background: "var(--card-solid)",
-                          color: "var(--fg)",
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name="intent"
-                          value={opt.value}
-                          checked={form.intent === opt.value}
-                          onChange={() => update("intent", opt.value)}
-                          className="accent-[var(--accent)]"
-                        />
-                        {opt.label}
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-
-                <label className="block text-left">
-                  <span className="mb-1.5 block text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-                    Message
+                    Subject
                   </span>
-                  <textarea
-                    className={`${field} min-h-[120px] resize-y`}
-                    style={fieldStyle}
-                    value={form.message}
-                    onChange={(e) => update("message", e.target.value)}
-                    placeholder="What are you trying to run as one org?"
+                  <input
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="mt-1.5 w-full bg-transparent text-base font-semibold outline-none"
+                    style={{ color: "var(--fg)" }}
                   />
                 </label>
+
+                <div
+                  className="rounded-2xl border px-4 py-4 sm:px-5 sm:py-5"
+                  style={{
+                    borderColor: "var(--line)",
+                    background: "var(--bg-soft)",
+                  }}
+                >
+                  <p
+                    className="text-[10px] font-semibold uppercase tracking-[0.14em]"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    {HINT}
+                  </p>
+                  <textarea
+                    ref={bodyRef}
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value.slice(0, MAX_BODY_CHARS));
+                      setError("");
+                    }}
+                    onKeyDown={onBodyKeyDown}
+                    placeholder={PLACEHOLDER}
+                    rows={7}
+                    maxLength={MAX_BODY_CHARS}
+                    className="mt-4 w-full resize-none bg-transparent text-[1.05rem] italic leading-relaxed outline-none placeholder:opacity-50"
+                    style={{
+                      color: "var(--fg)",
+                      fontFamily: "var(--font-serif)",
+                    }}
+                  />
+                </div>
 
                 {error && (
                   <p className="text-sm" style={{ color: "var(--accent)" }} role="alert">
@@ -248,16 +336,31 @@ export function ContactPage() {
                   </p>
                 )}
 
-                <button type="submit" className="btn-solid w-full rounded-full px-5 py-3 text-sm font-semibold">
-                  Send message →
-                </button>
-                <p className="text-center text-xs" style={{ color: "var(--fg-faint)" }}>
-                  Opens your email app to info@bizdaptive.com
-                </p>
-              </form>
+                <div className="flex flex-col-reverse items-stretch justify-between gap-4 pt-1 sm:flex-row sm:items-center">
+                  <p
+                    className="text-center text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-left"
+                    style={{ color: "var(--fg-faint)" }}
+                  >
+                    Goes straight to the founders
+                  </p>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold transition hover:opacity-90"
+                    style={{ background: "var(--btn-bg)", color: "var(--btn-fg)" }}
+                  >
+                    Open in mail
+                    <kbd
+                      className="inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-medium opacity-90"
+                      style={{ borderColor: "rgba(255,255,255,0.35)" }}
+                    >
+                      {isMac ? "⌘" : "Ctrl"}↵
+                    </kbd>
+                  </button>
+                </div>
+              </div>
             )}
-          </AnimatedCard>
-        </div>
+          </motion.div>
+        </motion.form>
       </section>
     </div>
   );

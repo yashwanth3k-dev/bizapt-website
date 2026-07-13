@@ -1,19 +1,52 @@
 import {
   BookOpen,
   Bot,
+  Brain,
   CheckSquare,
-  Clock,
   LayoutDashboard,
+  RefreshCw,
+  Shield,
+  Sparkles,
+  TrendingUp,
+  UserPlus,
   UserRound,
   Users,
-  UserPlus,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
-import { AnimatedCard, SectionHeader, easeOut } from "../components/motion";
+import { TiltCard } from "../components/About3D";
+import { SectionHeader, easeOut } from "../components/motion";
 import { usePageTitle } from "../hooks/usePageTitle";
+
+const roi = [
+  {
+    icon: Brain,
+    title: "Never lose what your organization learns",
+    body: "Every decision, interaction, and lesson becomes part of your organization's permanent knowledge.",
+  },
+  {
+    icon: Sparkles,
+    title: "Make better decisions with complete context",
+    body: "Give your people and your AI the confidence to act with the full picture — not fragmented information.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Stop repeating the same mistakes",
+    body: "Capture every decision once, learn from every outcome, and never solve the same problem twice.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Turn every interaction into a competitive advantage",
+    body: "Every meeting, approval, customer conversation, and workflow strengthens your organization's intelligence over time.",
+  },
+  {
+    icon: Shield,
+    title: "Build an organization that gets smarter every day",
+    body: "The longer you use Bizdaptive, the more context, knowledge, and organizational instinct you accumulate.",
+  },
+];
 
 const stakeholders = [
   {
@@ -90,27 +123,42 @@ const vs = [
   },
 ];
 
-const notYet = [
-  "Automated Slack / email capture (coming later)",
-  "Daily morning digest ritual",
-  "Continuous “always-on” advice or simulate / digital twin",
-  "Guaranteed regulatory compliance outcomes",
-  "Paying-customer production deploy before security audit",
-];
-
-export function ReturnsPage() {
-  usePageTitle("What you get — Bizdaptive");
+export function RoiPage() {
+  usePageTitle("ROI you can feel — Bizdaptive");
 
   return (
     <div style={{ background: "var(--bg)" }}>
       <PageHero
-        eyebrow="What you get"
+        eyebrow="ROI you can feel"
         accent="accent"
-        title="Less reconstruction. One honest picture. Evidence you can show."
-        lead="You describe the company in plain language. You correct it anytime. Your team shares one reality. When someone asks why — you have a trail, not a meeting."
+        title="Compounding organizational intelligence."
+        lead="Every decision, interaction, and outcome becomes lasting advantage — so people and AI act with proof, confidence, and clarity."
       />
 
       <section className="px-5 pb-20 sm:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {roi.map((card, i) => (
+              <div
+                key={card.title}
+                className={i === 4 ? "sm:col-span-2 lg:col-span-1 lg:col-start-2" : undefined}
+              >
+                <TiltCard delay={i * 0.06} className="p-6">
+                  <HoverIcon icon={card.icon} variant="pulse" color="var(--accent)" />
+                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {card.body}
+                  </p>
+                </TiltCard>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
         <div className="mx-auto max-w-5xl">
           <SectionHeader className="text-center">
             <p
@@ -129,7 +177,7 @@ export function ReturnsPage() {
 
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
             {stakeholders.map((s, i) => (
-              <AnimatedCard key={s.role} delay={i * 0.08} className="p-6">
+              <TiltCard key={s.role} delay={i * 0.08} className="p-6">
                 <HoverIcon icon={s.icon} variant="pulse" color="var(--accent)" />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
                   {s.role}
@@ -140,13 +188,13 @@ export function ReturnsPage() {
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
                   {s.body}
                 </p>
-              </AnimatedCard>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
+      <section className="px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-5xl">
           <SectionHeader className="text-center">
             <p
@@ -176,18 +224,12 @@ export function ReturnsPage() {
           >
             <table className="w-full min-w-[640px] text-left text-sm">
               <thead>
-                <motion.tr
-                  style={{ color: "var(--fg-faint)" }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.15, duration: 0.4 }}
-                >
+                <tr style={{ color: "var(--fg-faint)" }}>
                   <th className="px-5 py-3 font-semibold">Metric</th>
                   <th className="px-5 py-3 font-semibold">Typical today</th>
                   <th className="px-5 py-3 font-semibold">With Bizdaptive</th>
                   <th className="px-5 py-3 font-semibold">Why</th>
-                </motion.tr>
+                </tr>
               </thead>
               <tbody>
                 {numbers.map((row, i) => (
@@ -195,31 +237,19 @@ export function ReturnsPage() {
                     key={row.metric}
                     className="border-t"
                     style={{ borderColor: "var(--line)", color: "var(--fg)" }}
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 12, rotateX: -12 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
-                    transition={{ delay: 0.2 + i * 0.1, duration: 0.45, ease: easeOut }}
+                    transition={{ delay: 0.15 + i * 0.08, duration: 0.45, ease: easeOut }}
                   >
                     <td className="px-5 py-4 font-medium">{row.metric}</td>
                     <td className="px-5 py-4" style={{ color: "var(--fg-muted)" }}>
                       {row.today}
                     </td>
                     <td className="px-5 py-4">
-                      <motion.span
-                        className="inline-block font-semibold"
-                        style={{ color: "var(--accent)" }}
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          delay: 0.35 + i * 0.1,
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 22,
-                        }}
-                      >
+                      <span className="font-semibold" style={{ color: "var(--accent)" }}>
                         {row.withUs}
-                      </motion.span>
+                      </span>
                     </td>
                     <td className="px-5 py-4" style={{ color: "var(--fg-muted)" }}>
                       {row.note}
@@ -232,7 +262,7 @@ export function ReturnsPage() {
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8">
+      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
         <div className="mx-auto max-w-5xl">
           <SectionHeader className="text-center">
             <p
@@ -251,7 +281,7 @@ export function ReturnsPage() {
 
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {vs.map((item, i) => (
-              <AnimatedCard key={item.title} delay={i * 0.06} className="p-6">
+              <TiltCard key={item.title} delay={i * 0.06} className="p-6">
                 <HoverIcon icon={item.icon} variant="tilt" color="var(--accent)" />
                 <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
                   {item.title}
@@ -262,49 +292,29 @@ export function ReturnsPage() {
                 <p className="mt-1 text-sm" style={{ color: "var(--fg-muted)" }}>
                   <span style={{ color: "var(--fg)" }}>You still miss:</span> {item.miss}
                 </p>
-              </AnimatedCard>
+              </TiltCard>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
+      <section className="px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <SectionHeader>
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              What&apos;s next
-            </p>
             <h2
-              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+              className="text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              We won&apos;t pretend these are done.
+              Ready for ROI you can feel?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base" style={{ color: "var(--fg-muted)" }}>
-              Honesty builds trust. Here&apos;s what we&apos;re not claiming yet:
+              Join the waitlist. We&apos;ll show you a live company picture — not a slide.
             </p>
           </SectionHeader>
 
-          <ul className="mx-auto mt-10 max-w-md space-y-3 text-left text-sm" style={{ color: "var(--fg-muted)" }}>
-            {notYet.map((item) => (
-              <li key={item} className="flex gap-2">
-                <Clock className="mt-0.5 size-4 shrink-0" style={{ color: "var(--accent)" }} aria-hidden />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <p className="mx-auto mt-8 max-w-md text-sm font-medium" style={{ color: "var(--fg)" }}>
-            Promise we keep: one honest, shared picture of your company — that you can correct,
-            query, and keep.
-          </p>
-
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Button to="/contact" showArrow>
-              Request early access
+            <Button to="/contact?intent=waitlist" showArrow>
+              Join the waitlist
             </Button>
             <Button to="/how-it-works" variant="ghost">
               How it works
