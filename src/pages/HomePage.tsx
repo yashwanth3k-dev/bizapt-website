@@ -162,9 +162,7 @@ export function HomePage() {
             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
             style={{ color: "var(--fg)" }}
           >
-            Adaptive org instinct.
-            <br />
-            <span className="accent-text">Nothing runs it as one.</span>
+            Adaptive organizational instinct.
           </motion.h1>
 
           <motion.p
