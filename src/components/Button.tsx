@@ -18,7 +18,7 @@ export function Button({
   showArrow = false,
 }: Props) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
   const styles = variant === "primary" ? "btn-solid" : "btn-ghost";
   const cls = `${base} ${styles} ${className}`;
   const content = (

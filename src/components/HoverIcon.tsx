@@ -13,7 +13,7 @@ type Props = {
 
 /**
  * Icon with a page-specific hover motion.
- * Place inside a `.group` card — animates when the card is hovered.
+ * Place inside a `.group` card to animate it when the card is hovered.
  */
 export function HoverIcon({
   icon: Icon,

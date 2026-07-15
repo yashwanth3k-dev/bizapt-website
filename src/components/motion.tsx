@@ -29,7 +29,7 @@ export const staggerContainer = {
   },
 };
 
-/** Distinct section reveal styles — appear on enter, disappear on leave. */
+/** Distinct section reveal styles that appear on enter and disappear on leave. */
 export type RevealVariant =
   | "rise"
   | "cascade"

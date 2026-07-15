@@ -1,5 +1,6 @@
 import {
   Brain,
+  BrainCircuit,
   Map,
   MessageSquare,
   Receipt,
@@ -15,12 +16,7 @@ import { motion } from "framer-motion";
 import { BrandLogo, SpiralWatermark } from "../components/BrandMark";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
-import { TiltCard } from "../components/About3D";
-import {
-  DepthStepCard,
-  FogCtaShell,
-  StampCard,
-} from "../components/Site3D";
+import { FogCtaShell } from "../components/Site3D";
 import {
   SectionHeader,
   SectionReveal,
@@ -33,12 +29,12 @@ const dayOne = [
   {
     icon: Map,
     title: "A living company map",
-    body: "People, products, goals — connected from your perspective. Not a wiki page you wrote once and forgot.",
+    body: "People, products, and goals, connected from your perspective. Not a wiki page you wrote once and forgot.",
   },
   {
     icon: Receipt,
     title: "Your first decision receipt",
-    body: "Who decided, why, and what it was for — stamped before the next meeting starts.",
+    body: "Who decided, why, and what it was for, stamped before the next meeting starts.",
   },
   {
     icon: Tag,
@@ -48,28 +44,25 @@ const dayOne = [
   {
     icon: UserPlus,
     title: "A seat ready for the next person",
-    body: "When a teammate joins, they land in the same picture — not a blank slate.",
+    body: "When a teammate joins, they land in the same picture, not a blank slate.",
   },
 ];
 
 const steps = [
   {
-    n: "01",
     icon: MessageSquare,
     title: "Talk",
     body: "Describe the company in plain language. About ten minutes.",
   },
   {
-    n: "02",
     icon: Map,
     title: "Map",
-    body: "See it connected. Fix what’s wrong — history stays labeled.",
+    body: "See it connected. Fix what’s wrong while history stays labeled.",
   },
   {
-    n: "03",
     icon: Users,
     title: "Share",
-    body: "Ask why with a trail. Invite someone — propose, approve, live.",
+    body: "Ask why with a trail. Invite someone, propose a change, approve it, and go live.",
   },
 ];
 
@@ -80,9 +73,14 @@ const roi = [
     body: "Every decision, interaction, and lesson becomes part of your organization's permanent knowledge.",
   },
   {
+    icon: BrainCircuit,
+    title: "Instinct is memory compiled for action",
+    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your organization owns, ready for every person and AI agent at the next decision.",
+  },
+  {
     icon: Sparkles,
     title: "Make better decisions with complete context",
-    body: "Give your people and your AI the confidence to act with the full picture — not fragmented information.",
+    body: "Give your people and your AI agents the confidence to act with the full picture, not fragmented information.",
   },
   {
     icon: RefreshCw,
@@ -120,12 +118,12 @@ const heroItem = {
 };
 
 export function HomePage() {
-  usePageTitle("Bizdaptive — Adaptive organizational instinct");
+  usePageTitle("Adaptive Organizational Instinct | Bizdaptive");
 
   return (
     <>
       <section
-        className="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center overflow-hidden px-5 pb-24 pt-16 text-center sm:px-8"
+        className="relative flex flex-col items-center justify-center overflow-hidden px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-16 md:min-h-[calc(100svh-4rem)]"
         style={{ background: "var(--hero-veil)" }}
       >
         <motion.div
@@ -142,36 +140,72 @@ export function HomePage() {
           variants={heroStagger}
           initial="hidden"
           animate="visible"
-          className="relative z-10 mx-auto max-w-3xl"
+          className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-16 text-center lg:grid-cols-[1.2fr_0.8fr] lg:text-left"
         >
-          <motion.h1
-            variants={heroItem}
-            className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
-            style={{ color: "var(--fg)" }}
-          >
-            Adaptive organizational instinct.
-          </motion.h1>
+          <div>
+            <motion.h1
+              variants={heroItem}
+              className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
+              style={{ color: "var(--fg)" }}
+            >
+              Adaptive Organizational Instinct
+            </motion.h1>
 
-          <motion.p
-            variants={heroItem}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg"
-            style={{ color: "var(--fg-muted)" }}
-          >
-            Bizdaptive continuously learns how your organization works. This creates a compounding
-            impact over time so that every person and every AI have the context they need to make
-            better decisions — backed by proof, confidence, and clarity.
-          </motion.p>
+            <motion.p
+              variants={heroItem}
+              className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg lg:mx-0"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Bizdaptive continuously learns how your organization works. This creates a compounding
+              impact over time so that every person and every AI agent has the context needed to
+              make better decisions, backed by proof, confidence, and clarity.
+            </motion.p>
+
+            <motion.div
+              variants={heroItem}
+              className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+            >
+              <Button to="/contact?intent=waitlist" showArrow>
+                Join the waitlist
+              </Button>
+              <Button to="/how-it-works" variant="ghost">
+                See how it works
+              </Button>
+            </motion.div>
+          </div>
 
           <motion.div
             variants={heroItem}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3"
+            className="hero-cube-container"
+            role="img"
+            aria-label="Organizational instinct connects decisions, evidence, context, authority, execution, and learning."
           >
-            <Button to="/contact?intent=waitlist" showArrow>
-              Join the waitlist
-            </Button>
-            <Button to="/how-it-works" variant="ghost">
-              See how it works
-            </Button>
+            <div className="hero-cube">
+              <div className="hero-cube__face hero-cube__face--front">
+                <strong>Decisions</strong>
+                <span>What the organization chooses</span>
+              </div>
+              <div className="hero-cube__face hero-cube__face--right">
+                <strong>Evidence</strong>
+                <span>Why it makes those choices</span>
+              </div>
+              <div className="hero-cube__face hero-cube__face--top">
+                <strong>Context</strong>
+                <span>What the organization understands</span>
+              </div>
+              <div className="hero-cube__face hero-cube__face--back">
+                <strong>Authority</strong>
+                <span>Who can make decisions</span>
+              </div>
+              <div className="hero-cube__face hero-cube__face--left">
+                <strong>Execution</strong>
+                <span>What happens next</span>
+              </div>
+              <div className="hero-cube__face hero-cube__face--bottom">
+                <strong>Learning</strong>
+                <span>What compounds over time</span>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -200,33 +234,39 @@ export function HomePage() {
                 className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Every day on Bizdaptive makes the next action clearer — for people and AI alike.
+                Every day on Bizdaptive makes the next action clearer for people and AI agents alike.
               </p>
             </SectionHeader>
           </motion.div>
 
-          <div className="mt-14 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {roi.map((card, i) => (
-              <motion.div
+          <div className="insight-card-grid mt-14">
+            {roi.map((card) => (
+              <motion.article
                 key={card.title}
                 variants={cascadeItem}
-                className={card === roi[4] ? "sm:col-span-2 lg:col-span-1 lg:col-start-2" : undefined}
+                className="insight-card"
               >
-                <TiltCard delay={i * 0.04} className="h-full p-6 text-left">
-                  <HoverIcon icon={card.icon} variant="pulse" color="var(--accent)" />
-                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                <div className="insight-card__front">
+                  <span className="insight-card__icon">
+                    <card.icon size={23} strokeWidth={1.6} aria-hidden />
+                  </span>
+                  <h3 className="insight-card__front-title">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                </div>
+                <div className="insight-card__reveal">
+                  <card.icon className="size-7" strokeWidth={1.5} aria-hidden />
+                  <h3 className="insight-card__reveal-title">{card.title}</h3>
+                  <p className="insight-card__body">
                     {card.body}
                   </p>
-                </TiltCard>
-              </motion.div>
+                </div>
+              </motion.article>
             ))}
           </div>
 
           <motion.div variants={cascadeItem} className="mt-12">
-            <Button to="/roi" variant="ghost" showArrow>
+            <Button to="/with-bizdaptive" variant="ghost" showArrow>
               Full breakdown
             </Button>
           </motion.div>
@@ -258,20 +298,24 @@ export function HomePage() {
           </SectionHeader>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {dayOne.map((item, i) => (
-              <StampCard
+            {dayOne.map((item) => (
+              <motion.article
                 key={item.title}
-                delay={i * 0.08}
-                className="p-6 text-left sm:p-7"
+                variants={cascadeItem}
+                className="day-one-card"
               >
-                <HoverIcon icon={item.icon} variant="float" color="var(--accent)" />
-                <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {item.body}
-                </p>
-              </StampCard>
+                <div className="day-one-card__back">
+                  <div className="day-one-card__content">
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                      {item.body}
+                    </p>
+                  </div>
+                </div>
+                <div className="day-one-card__front">
+                  <item.icon className="day-one-card__front-icon" strokeWidth={1.5} aria-hidden />
+                  <h3 className="day-one-card__front-title">{item.title}</h3>
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
@@ -301,23 +345,30 @@ export function HomePage() {
             </p>
           </SectionHeader>
 
-          <div
-            className="mt-12 grid gap-4 sm:grid-cols-3"
-            style={{ perspective: 1000 }}
-          >
+          <div className="step-accordion mt-12">
             {steps.map((s, i) => (
-              <DepthStepCard key={s.n} index={i} className="p-6 text-left">
-                <HoverIcon icon={s.icon} variant="float" color="var(--accent)" />
-                <p className="text-sm font-semibold" style={{ color: "var(--accent)" }}>
-                  {s.n}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {s.body}
-                </p>
-              </DepthStepCard>
+              <motion.article
+                key={s.title}
+                className="step-accordion__item group"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: i * 0.1, duration: 0.5, ease: easeOut }}
+              >
+                <div className="step-accordion__rail" aria-hidden>
+                  <span className="step-accordion__vertical-title">{s.title}</span>
+                </div>
+
+                <div className="step-accordion__content">
+                  <HoverIcon icon={s.icon} variant="float" color="var(--accent)" />
+                  <h3 className="text-xl font-semibold" style={{ color: "var(--fg)" }}>
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {s.body}
+                  </p>
+                </div>
+              </motion.article>
             ))}
           </div>
 
@@ -358,7 +409,7 @@ export function HomePage() {
                 className="mx-auto mt-4 max-w-md text-base"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Join the waitlist. Bring curiosity — leave with proof, confidence, and clarity.
+                Join the waitlist. Bring curiosity and leave with proof, confidence, and clarity.
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <Button to="/contact?intent=waitlist" showArrow>

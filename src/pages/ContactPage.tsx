@@ -8,25 +8,25 @@ import { easeOut } from "../components/motion";
 const FOUNDERS_EMAIL = "info@bizdaptive.com";
 
 const PLACEHOLDER =
-  "Hi — I'm Priya, ops lead at Northwind (140 people). Our answers live in Slack and eight wikis — new hires ask the same questions for months. We'd like to join the Bizdaptive waitlist. Can we talk this week?";
+  "Hi, I'm Priya, ops lead at Northwind (140 people). Our answers live in Slack and eight wikis, and new hires ask the same questions for months. We'd like to join the Bizdaptive waitlist. Can we talk this week?";
 
 const HINT =
-  "THREE LINES IS PLENTY — WHO YOU ARE — YOUR TEAM — WHERE CONTEXT GOES MISSING";
+  "THREE LINES IS PLENTY: WHO YOU ARE, YOUR TEAM, WHERE CONTEXT GOES MISSING";
 
-/** Keep mailto URLs short — long bodies break some desktop mail clients. */
+/** Keep mailto URLs short because long bodies break some desktop mail clients. */
 const MAX_BODY_CHARS = 1200;
 
 function subjectForIntent(intent: string | null) {
-  if (intent === "early-access") return "Bizdaptive — early access";
-  if (intent === "founder-demo") return "Bizdaptive — founder demo";
-  if (intent === "other") return "Bizdaptive — hello";
-  return "Bizdaptive — waitlist";
+  if (intent === "early-access") return "Bizdaptive: early access";
+  if (intent === "founder-demo") return "Bizdaptive: founder demo";
+  if (intent === "other") return "Bizdaptive: hello";
+  return "Bizdaptive: waitlist";
 }
 
 function buildMailto(from: string, subject: string, message: string) {
   const trimmed = message.trim().slice(0, MAX_BODY_CHARS);
   const body = encodeURIComponent(`Reply email: ${from.trim()}\n\n${trimmed}`);
-  const sub = encodeURIComponent(subject.trim() || "Bizdaptive — waitlist");
+  const sub = encodeURIComponent(subject.trim() || "Bizdaptive: waitlist");
   return `mailto:${FOUNDERS_EMAIL}?subject=${sub}&body=${body}`;
 }
 
@@ -41,7 +41,7 @@ function openMailto(href: string) {
 }
 
 export function ContactPage() {
-  usePageTitle("Contact — Bizdaptive");
+  usePageTitle("Contact | Bizdaptive");
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const bodyRef = useRef<HTMLTextAreaElement>(null);
@@ -83,7 +83,7 @@ export function ContactPage() {
       return;
     }
     if (!message.trim()) {
-      setError("Three lines is plenty — who you are, your team, where context goes missing.");
+      setError("Three lines is plenty: who you are, your team, and where context goes missing.");
       return;
     }
 
@@ -125,7 +125,7 @@ export function ContactPage() {
         eyebrow="Contact"
         accent="accent"
         title="Write the founders."
-        lead="Opens your email app with a draft to info@bizdaptive.com. You hit send — we read every note."
+        lead="Opens your email app with a draft to info@bizdaptive.com. You hit send, and we read every note."
       />
 
       <section className="px-5 pb-24 sm:px-8">
@@ -164,13 +164,13 @@ export function ContactPage() {
                   className="text-[11px] font-semibold uppercase tracking-[0.14em]"
                   style={{ color: "var(--fg-faint)" }}
                 >
-                  New message — Bizdaptive
+                  New message: Bizdaptive
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="rounded-full border px-3 py-1 text-[10px] font-semibold tracking-wide transition hover:opacity-80"
+                className="inline-flex min-h-11 items-center rounded-full border px-3 text-xs font-semibold tracking-wide transition hover:opacity-80"
                 style={{
                   borderColor: "var(--line)",
                   color: "var(--fg-faint)",
@@ -178,7 +178,8 @@ export function ContactPage() {
                 }}
                 aria-label="Close (Escape)"
               >
-                ESC
+                <span className="sm:hidden">Back</span>
+                <span className="hidden sm:inline">ESC</span>
               </button>
             </div>
 
@@ -276,7 +277,7 @@ export function ContactPage() {
                       placeholder="you@company.com"
                       autoComplete="email"
                       required
-                      className="mt-1.5 w-full bg-transparent text-sm outline-none placeholder:opacity-45"
+                      className="mt-1.5 w-full bg-transparent text-base outline-none placeholder:opacity-45"
                       style={{ color: "var(--fg)" }}
                     />
                   </label>
@@ -350,7 +351,7 @@ export function ContactPage() {
                   >
                     Open in mail
                     <kbd
-                      className="inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-medium opacity-90"
+                      className="hidden items-center rounded-md border px-1.5 py-0.5 text-[10px] font-medium opacity-90 sm:inline-flex"
                       style={{ borderColor: "rgba(255,255,255,0.35)" }}
                     >
                       {isMac ? "⌘" : "Ctrl"}↵

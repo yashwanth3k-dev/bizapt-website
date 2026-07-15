@@ -6,8 +6,9 @@ import { Button } from "./Button";
 import { useTheme } from "../theme/ThemeProvider";
 
 const links = [
-  { label: "With Bizdaptive", to: "/roi" },
+  { label: "With Bizdaptive", to: "/with-bizdaptive" },
   { label: "How it works", to: "/how-it-works" },
+  { label: "Pricing", to: "/pricing" },
   { label: "About us", to: "/about" },
 ];
 
@@ -63,7 +64,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={toggle}
-            className="inline-flex size-9 items-center justify-center rounded-full border transition hover:opacity-90"
+            className="inline-flex size-11 items-center justify-center rounded-full border transition hover:opacity-90"
             style={{
               borderColor: "var(--line)",
               color: "var(--fg)",
@@ -81,7 +82,7 @@ export function Navbar() {
       </div>
 
       <nav
-        className="flex items-center justify-center gap-5 border-t px-5 py-2.5 md:hidden"
+        className="flex items-center justify-start gap-4 overflow-x-auto whitespace-nowrap border-t px-5 py-2.5 sm:justify-center sm:gap-5 md:hidden"
         style={{ borderColor: "var(--line)" }}
         aria-label="Primary"
       >
@@ -89,7 +90,7 @@ export function Navbar() {
           <NavLink
             key={link.to}
             to={link.to}
-            className="text-xs font-medium transition hover:opacity-100"
+            className="inline-flex min-h-11 items-center text-xs font-medium transition hover:opacity-100"
             style={({ isActive }) => ({
               color: isActive ? "var(--fg)" : "var(--fg-muted)",
             })}

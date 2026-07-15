@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from "react";
 
-/** Portal spiral path — same curve as BrandMark / ScreenSpinner (onboarding). */
+/** Portal spiral path using the same curve as BrandMark / ScreenSpinner (onboarding). */
 export const BRAND_SPIRAL_PATH =
   "M14 56 C 8 34, 28 12, 50 16 C 70 20, 74 46, 58 56 C 46 63, 28 60, 28 46 C 28 36, 40 32, 48 38 C 54 43, 50 52, 42 50";
 
@@ -87,7 +87,7 @@ export function BrandMark({
   );
 }
 
-/** Large watermark spiral for hero — matches SpiralMark on portal. */
+/** Large watermark spiral for the hero that matches SpiralMark on the portal. */
 export function SpiralWatermark({
   size = 560,
   className = "",

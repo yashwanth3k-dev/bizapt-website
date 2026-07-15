@@ -2,21 +2,20 @@ import {
   BookOpen,
   Bot,
   Brain,
+  BrainCircuit,
   CheckSquare,
+  Crown,
   LayoutDashboard,
+  Network,
   RefreshCw,
   Shield,
   Sparkles,
   TrendingUp,
   UserPlus,
-  UserRound,
-  Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
-import { HoverIcon } from "../components/HoverIcon";
-import { TiltCard } from "../components/About3D";
 import { SectionHeader, easeOut } from "../components/motion";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -27,9 +26,14 @@ const roi = [
     body: "Every decision, interaction, and lesson becomes part of your organization's permanent knowledge.",
   },
   {
+    icon: BrainCircuit,
+    title: "Instinct is memory compiled for action",
+    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your organization owns, ready for every person and AI agent at the next decision.",
+  },
+  {
     icon: Sparkles,
     title: "Make better decisions with complete context",
-    body: "Give your people and your AI the confidence to act with the full picture — not fragmented information.",
+    body: "Give your people and your AI agents the confidence to act with the full picture, not fragmented information.",
   },
   {
     icon: RefreshCw,
@@ -50,15 +54,15 @@ const roi = [
 
 const stakeholders = [
   {
-    icon: UserRound,
+    icon: Crown,
     role: "Founder / CEO",
     line: "Stop being the human API for your own company.",
-    body: "Explain the org once. Get hours back every week. Show the board a trail — not a scavenger hunt.",
+    body: "Explain the org once. Get hours back every week. Show the board a trail, not a scavenger hunt.",
   },
   {
-    icon: Users,
+    icon: Network,
     role: "Manager / lead",
-    line: "One map the team can question — without a weekly re-onboarding.",
+    line: "One map the team can question without a weekly re-onboarding.",
     body: "Fewer alignment meetings. Catch KPI drift earlier. Contradictions surface before they become bugs.",
   },
   {
@@ -124,7 +128,7 @@ const vs = [
 ];
 
 export function RoiPage() {
-  usePageTitle("With Bizdaptive you will be able to — Bizdaptive");
+  usePageTitle("With Bizdaptive you will be able to | Bizdaptive");
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -132,27 +136,30 @@ export function RoiPage() {
         eyebrow="With Bizdaptive you will be able to"
         accent="accent"
         title="Use your organization's instinct intelligently always."
-        lead="Every decision, interaction, and outcome becomes lasting advantage — so people and AI act with proof, confidence, and clarity."
+        lead="Every decision, interaction, and outcome becomes lasting advantage, so people and AI agents act with proof, confidence, and clarity."
       />
 
       <section className="px-5 pb-20 sm:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="roi-focus-grid">
             {roi.map((card, i) => (
-              <div
+              <motion.div
                 key={card.title}
-                className={i === 4 ? "sm:col-span-2 lg:col-span-1 lg:col-start-2" : undefined}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: i * 0.06, duration: 0.45, ease: easeOut }}
               >
-                <TiltCard delay={i * 0.06} className="p-6">
-                  <HoverIcon icon={card.icon} variant="pulse" color="var(--accent)" />
-                  <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
+                <article className="roi-focus-card">
+                  <card.icon className="size-7" strokeWidth={1.5} aria-hidden />
+                  <h3 className="mt-4 text-lg font-semibold">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                  <p className="roi-focus-card__body mt-2 text-sm leading-relaxed">
                     {card.body}
                   </p>
-                </TiltCard>
-              </div>
+                </article>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -175,20 +182,26 @@ export function RoiPage() {
             </h2>
           </SectionHeader>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-3">
+          <div className="payday-card-grid mt-12">
             {stakeholders.map((s, i) => (
-              <TiltCard key={s.role} delay={i * 0.08} className="p-6">
-                <HoverIcon icon={s.icon} variant="pulse" color="var(--accent)" />
-                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
-                  {s.role}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {s.line}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {s.body}
-                </p>
-              </TiltCard>
+              <motion.div
+                key={s.role}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: i * 0.08, duration: 0.45, ease: easeOut }}
+              >
+                <article className="payday-card">
+                  <div className="payday-card__icon">
+                    <s.icon className="size-7" strokeWidth={1.6} aria-hidden />
+                  </div>
+                  <div className="payday-card__content">
+                    <p className="payday-card__role">{s.role}</p>
+                    <h3>{s.line}</h3>
+                    <p className="payday-card__body">{s.body}</p>
+                  </div>
+                </article>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -207,20 +220,60 @@ export function RoiPage() {
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              Directional — not a promise carved in stone.
+              Directional, not a promise carved in stone.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm" style={{ color: "var(--fg-muted)" }}>
               Internal model for design-partner conversations. Real orgs vary. We&apos;re honest about that.
             </p>
           </SectionHeader>
 
+          <div className="mt-8 grid gap-3 sm:hidden">
+            {numbers.map((row, i) => (
+              <motion.article
+                key={row.metric}
+                className="rounded-2xl border p-5"
+                style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.05, duration: 0.4, ease: easeOut }}
+              >
+                <h3 className="font-semibold leading-snug" style={{ color: "var(--fg)" }}>
+                  {row.metric}
+                </h3>
+                <dl className="mt-4 grid gap-3 text-sm">
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
+                      Typical today
+                    </dt>
+                    <dd className="mt-1" style={{ color: "var(--fg-muted)" }}>{row.today}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
+                      With Bizdaptive
+                    </dt>
+                    <dd className="mt-1 font-semibold" style={{ color: "var(--accent)" }}>{row.withUs}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
+                      Why
+                    </dt>
+                    <dd className="mt-1" style={{ color: "var(--fg-muted)" }}>{row.note}</dd>
+                  </div>
+                </dl>
+              </motion.article>
+            ))}
+          </div>
           <motion.div
-            className="mt-12 overflow-x-auto rounded-2xl border"
+            className="mt-12 hidden overflow-x-auto rounded-2xl border sm:block"
             style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
             initial={{ opacity: 0, y: 28, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, ease: easeOut }}
+            role="region"
+            aria-label="Bizdaptive outcome comparison table"
+            tabIndex={0}
           >
             <table className="w-full min-w-[640px] text-left text-sm">
               <thead>
@@ -275,24 +328,34 @@ export function RoiPage() {
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              We sit above them — not instead of them.
+              We sit above them, not instead of them.
             </h2>
           </SectionHeader>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <div className="tool-stack-grid mt-12">
             {vs.map((item, i) => (
-              <TiltCard key={item.title} delay={i * 0.06} className="p-6">
-                <HoverIcon icon={item.icon} variant="tilt" color="var(--accent)" />
-                <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm" style={{ color: "var(--fg-muted)" }}>
-                  <span style={{ color: "var(--fg)" }}>You get:</span> {item.get}
-                </p>
-                <p className="mt-1 text-sm" style={{ color: "var(--fg-muted)" }}>
-                  <span style={{ color: "var(--fg)" }}>You still miss:</span> {item.miss}
-                </p>
-              </TiltCard>
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.06, duration: 0.45, ease: easeOut }}
+                className="tool-stack-card"
+              >
+                <article className="tool-stack-card__panel">
+                  <div className="tool-stack-card__heading">
+                    <h3>{item.title}</h3>
+                    <p><span>You get:</span> {item.get}</p>
+                  </div>
+                  <div className="tool-stack-card__reveal">
+                    <p className="tool-stack-card__label">Bizdaptive adds the missing layer</p>
+                    <p><span>You still miss:</span> {item.miss}</p>
+                  </div>
+                </article>
+                <div className="tool-stack-card__icon">
+                  <item.icon aria-hidden />
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -308,16 +371,13 @@ export function RoiPage() {
               Ready for what Bizdaptive enables?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base" style={{ color: "var(--fg-muted)" }}>
-              Join the waitlist. We&apos;ll show you a live company picture — not a slide.
+              Join the waitlist. We&apos;ll show you a live company picture, not a slide.
             </p>
           </SectionHeader>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Button to="/contact?intent=waitlist" showArrow>
               Join the waitlist
-            </Button>
-            <Button to="/how-it-works" variant="ghost">
-              How it works
             </Button>
           </div>
         </div>

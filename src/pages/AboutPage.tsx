@@ -1,9 +1,9 @@
 import {
   Brain,
+  BrainCircuit,
   Building2,
-  Compass,
-  Eye,
-  Heart,
+  ClipboardCheck,
+  FileCheck2,
   Layers,
   Lightbulb,
   Target,
@@ -11,7 +11,6 @@ import {
   Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { TiltCard } from "../components/About3D";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { SectionHeader, easeOut } from "../components/motion";
@@ -28,29 +27,39 @@ const story = [
     icon: Layers,
     label: "What we’re building",
     title: "The AI Operating System for Companies.",
-    body: "A living operational layer that preserves context, keeps accountability, and learns from every decision and interaction — not another place to dump files.",
+    body: "A living operational layer that preserves context, keeps accountability, and learns from every decision and interaction. It is not another place to dump files.",
   },
   {
     icon: TrendingUp,
     label: "What compounds",
     title: "Organizational intelligence that lasts.",
-    body: "Every decision. Every interaction. Every outcome. Experience doesn’t disappear — it becomes Compounding Organizational Intelligence.",
+    body: "Every decision. Every interaction. Every outcome. Experience doesn’t disappear. It becomes Compounding Organizational Intelligence.",
+  },
+];
+
+const aboutIntroCards = [
+  ...story,
+  {
+    icon: Brain,
+    label: "Our approach",
+    title: "We’re not building another tool to store information.",
+    body: "We’re building a system that helps organizations understand themselves, and we believe organizations deserve better than Slack archaeology.",
   },
 ];
 
 const beliefs = [
   {
-    icon: Heart,
+    icon: BrainCircuit,
     title: "Judgment, strengthened",
     body: "Technology shouldn't replace human judgment. It should strengthen it.",
   },
   {
-    icon: Eye,
+    icon: FileCheck2,
     title: "Evidence over memory",
     body: "Organizations shouldn't rely on memory. They should rely on evidence.",
   },
   {
-    icon: Compass,
+    icon: ClipboardCheck,
     title: "Context & accountability",
     body: "Every decision should have context. Every action should have accountability. Every outcome should become institutional knowledge.",
   },
@@ -62,53 +71,29 @@ const founders = [
     say: "S",
     role: "Co-founder",
     tag: "Systems Thinker · Precision-Driven",
-    body: "Sudarshan is the engineer behind Bizdaptive's foundation. He architects the systems that make complex problems feel simple — building scalable, reliable infrastructure that enables the platform to grow without compromising performance. He believes the best architecture is the one users never have to think about.",
+    linkedin: "https://in.linkedin.com/in/sudarshan-rajan-",
+    body: "Sudarshan is the engineer behind Bizdaptive's foundation. He architects the systems that make complex problems feel simple, building scalable, reliable infrastructure that enables the platform to grow without compromising performance. He believes the best architecture is the one users never have to think about.",
   },
   {
     name: "Akil Srikanth",
     say: "A",
     role: "Co-founder",
     tag: "Vision-Led · Customer-Obsessed",
-    body: "Akil focuses on connecting technology with real business problems. From shaping the product vision and brand to working closely with customers, partnerships, and growth, he ensures every idea is driven by purpose and every decision creates long-term value. He believes great companies aren't built by adding more features — they're built by solving the right problems.",
+    linkedin: "https://www.linkedin.com/in/akil-srikanth-2aaaa5149/",
+    body: "Akil focuses on connecting technology with real business problems. From shaping the product vision and brand to working closely with customers, partnerships, and growth, he ensures every idea is driven by purpose and every decision creates long-term value. He believes great companies aren't built by adding more features. They're built by solving the right problems.",
   },
   {
     name: "Yashwanth",
     say: "Y",
     role: "Co-founder",
     tag: "Design-Led · Experience-Driven",
-    body: "Yashwanth believes exceptional products are defined by how they make people feel, not just what they do. He transforms complex ideas into intuitive, elegant experiences by combining thoughtful design with frontend engineering. His philosophy is simple: great software doesn't demand attention — it earns trust through clarity, simplicity, and consistency.",
+    linkedin: "https://www.linkedin.com/in/yashwanth0311/",
+    body: "Yashwanth believes exceptional products are defined by how they make people feel, not just what they do. He transforms complex ideas into intuitive, elegant experiences by combining thoughtful design with frontend engineering. His philosophy is simple: great software doesn't demand attention. It earns trust through clarity, simplicity, and consistency.",
   },
 ];
 
-function SayLetter({ letter }: { letter: string }) {
-  return (
-    <span
-      className="inline-flex size-14 items-center justify-center rounded-2xl text-xl font-bold"
-      style={{
-        background: "color-mix(in srgb, var(--accent) 12%, transparent)",
-        color: "var(--accent)",
-      }}
-      aria-hidden
-    >
-      {letter}
-    </span>
-  );
-}
-
-function SayName({ name, letter }: { name: string; letter: string }) {
-  const first = name[0] ?? "";
-  const rest = name.slice(1);
-  return (
-    <h3 className="text-xl font-semibold" style={{ color: "var(--fg)" }}>
-      <span style={{ color: "var(--accent)" }}>{first}</span>
-      {rest}
-      <span className="sr-only"> ({letter} in SAY)</span>
-    </h3>
-  );
-}
-
 export function AboutPage() {
-  usePageTitle("About us — Bizdaptive");
+  usePageTitle("About us | Bizdaptive");
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -142,53 +127,35 @@ export function AboutPage() {
 
       <section className="px-5 pb-16 sm:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid gap-4 md:grid-cols-3">
-            {story.map((card, i) => (
-              <TiltCard key={card.label} delay={i * 0.08} className="flex h-full flex-col p-6 sm:p-7">
-                <HoverIcon icon={card.icon} variant="float" color="var(--accent)" />
-                <p
-                  className="text-[10px] font-semibold uppercase tracking-[0.16em]"
-                  style={{ color: "var(--accent)" }}
-                >
-                  {card.label}
-                </p>
-                <h3
-                  className="mt-2 text-lg font-semibold tracking-tight sm:text-xl"
-                  style={{ color: "var(--fg)" }}
-                >
-                  {card.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {card.body}
-                </p>
-              </TiltCard>
-            ))}
-          </div>
-
-          <div className="mt-4">
-            <TiltCard
-              delay={0.28}
-              className="flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:gap-6 sm:p-8"
-            >
-              <span
-                className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl"
-                style={{
-                  background: "color-mix(in srgb, var(--accent) 12%, transparent)",
-                  color: "var(--accent)",
-                }}
+          <div className="about-flip-grid">
+            {aboutIntroCards.map((card, i) => (
+              <motion.div
+                key={card.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.08, duration: 0.45, ease: easeOut }}
               >
-                <Brain size={22} strokeWidth={1.5} aria-hidden />
-              </span>
-              <div>
-                <p className="text-base font-semibold sm:text-lg" style={{ color: "var(--fg)" }}>
-                  We&apos;re not building another tool to store information.
-                </p>
-                <p className="mt-1 text-sm leading-relaxed sm:text-base" style={{ color: "var(--fg-muted)" }}>
-                  We&apos;re building a system that helps organizations understand themselves —
-                  and we believe organizations deserve better than Slack archaeology.
-                </p>
-              </div>
-            </TiltCard>
+                <article
+                  className="about-flip-card"
+                  tabIndex={0}
+                  aria-label={`${card.label}: ${card.title}`}
+                >
+                  <div className="about-flip-card__inner">
+                    <div className="about-flip-card__face about-flip-card__front">
+                      <card.icon className="size-8" strokeWidth={1.5} aria-hidden />
+                      <p>{card.label}</p>
+                      <h3>{card.title}</h3>
+                    </div>
+                    <div className="about-flip-card__face about-flip-card__back">
+                      <card.icon className="size-7" strokeWidth={1.5} aria-hidden />
+                      <h3>{card.title}</h3>
+                      <p>{card.body}</p>
+                    </div>
+                  </div>
+                </article>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -209,17 +176,32 @@ export function AboutPage() {
               Organizations that learn faster outperform those that only work harder.
             </h2>
           </SectionHeader>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="belief-card-grid">
             {beliefs.map((p, i) => (
-              <TiltCard key={p.title} delay={i * 0.08} className="p-6">
-                <HoverIcon icon={p.icon} variant="tilt" color="var(--accent)" />
-                <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {p.body}
-                </p>
-              </TiltCard>
+              <motion.div
+                key={p.title}
+                className="belief-card-shell"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: i * 0.08, duration: 0.45, ease: easeOut }}
+              >
+                <article className="belief-expand-card" tabIndex={0}>
+                  <div className="belief-expand-card__circle">
+                    <p.icon strokeWidth={1.5} aria-hidden />
+                  </div>
+                  <div className="belief-expand-card__content">
+                    <div className="belief-expand-card__detail">
+                      <span>Our belief</span>
+                      <h3>{p.title}</h3>
+                      <p>{p.body}</p>
+                    </div>
+                    <div className="belief-expand-card__visual">
+                      <p.icon strokeWidth={1.35} aria-hidden />
+                    </div>
+                  </div>
+                </article>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -254,69 +236,93 @@ export function AboutPage() {
               <span style={{ color: "var(--accent)" }} className="font-semibold">
                 Y
               </span>
-              ashwanth — easy to remember.
+              ashwanth. Easy to remember.
             </p>
           </SectionHeader>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="founder-profile-grid">
             {founders.map((f, i) => (
-              <TiltCard key={f.name} delay={i * 0.1} className="p-7 sm:p-8">
-                <SayLetter letter={f.say} />
-                <div className="mt-5">
-                  <SayName name={f.name.split(" ")[0]!} letter={f.say} />
-                  {f.name.includes(" ") && (
-                    <p className="text-sm" style={{ color: "var(--fg-muted)" }}>
-                      {f.name.split(" ").slice(1).join(" ")}
-                    </p>
-                  )}
+              <motion.article
+                key={f.name}
+                className="founder-profile-card"
+                tabIndex={0}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.1, duration: 0.5, ease: easeOut }}
+              >
+                <div className="founder-profile-card__avatar" aria-hidden>
+                  {f.say}
                 </div>
-                <p
-                  className="mt-1 text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: "var(--fg-faint)" }}
+                <h3>{f.name}</h3>
+                <p className="founder-profile-card__role">{f.role}</p>
+                <p className="founder-profile-card__tag">{f.tag}</p>
+                <p className="founder-profile-card__info">{f.body}</p>
+                <a
+                  className="founder-profile-card__linkedin"
+                  href={f.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${f.name} on LinkedIn`}
                 >
-                  {f.role}
-                </p>
-                <p className="mt-1 text-xs font-medium" style={{ color: "var(--accent)" }}>
-                  {f.tag}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  {f.body}
-                </p>
-              </TiltCard>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14Zm-.5 15.5v-5.3c0-2.6-.55-4.6-3.85-4.6-1.6 0-2.67.87-3.11 1.7h-.04V8.9H8.38v9.6h3.25v-4.75c0-1.25.23-2.45 1.77-2.45 1.52 0 1.54 1.42 1.54 2.53v4.67h3.56ZM6.88 8.9H3.63v9.6h3.25V8.9ZM5.25 4.1a1.88 1.88 0 1 0 0 3.75 1.88 1.88 0 0 0 0-3.75Z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
       <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
-        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
-          <TiltCard className="p-8">
-            <HoverIcon icon={Target} variant="float" color="var(--accent)" />
+        <div className="mx-auto grid max-w-5xl items-start gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+          <SectionHeader>
             <p
               className="text-xs font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              Our mission
+              Why we exist
             </p>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-              To transform every decision, interaction, and outcome into Compounding Organizational
-              Intelligence — helping organizations make better decisions, strengthen accountability,
-              and continuously improve.
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: "var(--fg)" }}>
+              Build memory into how the organization moves.
+            </h2>
+            <p className="mt-4 max-w-md text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+              Our mission defines what we change today. Our vision describes what becomes possible
+              when organizational knowledge compounds instead of disappearing.
             </p>
-          </TiltCard>
-          <TiltCard delay={0.08} className="p-8">
-            <HoverIcon icon={Lightbulb} variant="bounce" color="var(--accent)" />
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              Our vision
-            </p>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-              To build the AI Operating System for Companies — a future where every organization has
-              a living operational layer that understands, learns, and continuously adapts.
-            </p>
-          </TiltCard>
+          </SectionHeader>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <article className="mission-bloom-card" tabIndex={0}>
+              <span className="mission-bloom-card__fill" aria-hidden />
+              <div className="mission-bloom-card__content">
+                <span className="mission-bloom-card__icon">
+                  <Target strokeWidth={1.5} aria-hidden />
+                </span>
+                <p className="mission-bloom-card__label">Our mission</p>
+                <p className="mission-bloom-card__body">
+                  To transform every decision, interaction, and outcome into Compounding Organizational
+                  Intelligence, helping organizations make better decisions, strengthen accountability,
+                  and continuously improve.
+                </p>
+              </div>
+            </article>
+            <article className="mission-bloom-card" tabIndex={0}>
+              <span className="mission-bloom-card__fill" aria-hidden />
+              <div className="mission-bloom-card__content">
+                <span className="mission-bloom-card__icon">
+                  <Lightbulb strokeWidth={1.5} aria-hidden />
+                </span>
+                <p className="mission-bloom-card__label">Our vision</p>
+                <p className="mission-bloom-card__body">
+                  To build the AI Operating System for Companies, a future where every organization has
+                  a living operational layer that understands, learns, and continuously adapts.
+                </p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -348,17 +354,17 @@ export function AboutPage() {
                 <Button to="/contact?intent=waitlist" showArrow>
                   Join the waitlist
                 </Button>
-                <Button to="/roi" variant="ghost">
-                  With Bizdaptive you will be able to
-                </Button>
               </div>
             </motion.div>
 
             <div className="space-y-4">
-              <TiltCard className="p-6 sm:p-8" delay={0.08}>
+              <article
+                className="rounded-2xl border p-6 sm:p-8"
+                style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
+              >
                 <p className="text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
                   We envision a future where every organization has a system that doesn&apos;t just
-                  store information — it understands context, learns from experience, and helps
+                  store information. It understands context, learns from experience, and helps
                   people make better decisions every day.
                 </p>
                 <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
@@ -366,11 +372,15 @@ export function AboutPage() {
                   into every decision. Where every interaction makes the organization smarter than
                   it was yesterday.
                 </p>
-              </TiltCard>
+              </article>
 
-              <TiltCard
-                delay={0.16}
+              <article
                 className="p-6 sm:p-7"
+                style={{
+                  border: "1px solid var(--line)",
+                  borderRadius: "1rem",
+                  background: "var(--card-solid)",
+                }}
               >
                 <div
                   className="mb-4 h-1 w-12 rounded-full"
@@ -386,7 +396,7 @@ export function AboutPage() {
                 <p className="mt-2 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
                   They&apos;ll be the ones whose intelligence compounds over time.
                 </p>
-              </TiltCard>
+              </article>
             </div>
           </div>
         </div>
