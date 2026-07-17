@@ -6,10 +6,7 @@ import {
   FileQuestion,
   FileText,
   Gauge,
-  Globe2,
-  Handshake,
   LockKeyhole,
-  Rocket,
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -86,87 +83,6 @@ export function LegalHubPage() {
               </Link>
             </TiltCard>
           ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-const pricingCards = [
-  {
-    icon: Handshake,
-    label: "Now",
-    title: "Design partner access",
-    body: "For organizations willing to shape the product through direct feedback, real workflows, and a close working relationship.",
-    detail: "Scope and commercial terms are discussed directly.",
-  },
-  {
-    icon: Rocket,
-    label: "Next",
-    title: "Early access",
-    body: "A guided rollout for a limited number of teams once the core experience is ready for broader use.",
-    detail: "Pricing will be published before paid access begins.",
-  },
-  {
-    icon: Globe2,
-    label: "Later",
-    title: "General availability",
-    body: "Transparent plans based on organizational needs, product scope, support, and security requirements.",
-    detail: "No public price is available yet.",
-  },
-];
-
-export function PricingPage() {
-  usePageTitle("Pricing | Bizdaptive");
-
-  return (
-    <div style={{ background: "var(--bg)" }}>
-      <PageHero
-        eyebrow="Pricing"
-        title="Pricing that grows from real use."
-        lead="Bizdaptive is in an early stage. We are learning with design partners before publishing standard plans."
-      />
-      <section className="px-5 pb-20 sm:px-8">
-        <div className="pricing-flex-cards mx-auto max-w-5xl">
-          {pricingCards.map((card) => (
-            <article key={card.title} className="pricing-flex-card group" tabIndex={0}>
-              <div className="pricing-flex-card__icon">
-                <card.icon strokeWidth={1.6} aria-hidden />
-              </div>
-              <p className="pricing-flex-card__label">
-                {card.label}
-              </p>
-              <h2>
-                {card.title}
-              </h2>
-              <div className="pricing-flex-card__reveal">
-                <p>
-                  {card.body}
-                </p>
-                <p className="pricing-flex-card__detail">
-                  {card.detail}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="px-5 pb-24 sm:px-8">
-        <div
-          className="mx-auto max-w-3xl rounded-3xl border p-8 text-center sm:p-12"
-          style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
-        >
-          <h2 className="text-2xl font-bold sm:text-3xl" style={{ color: "var(--fg)" }}>
-            Interested in becoming a design partner?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 sm:text-base" style={{ color: "var(--fg-muted)" }}>
-            Tell us how your organization currently preserves context, makes decisions, and brings new people up to speed.
-          </p>
-          <div className="mt-8">
-            <Button to="/contact?intent=early-access" showArrow>
-              Start a conversation
-            </Button>
-          </div>
         </div>
       </section>
     </div>

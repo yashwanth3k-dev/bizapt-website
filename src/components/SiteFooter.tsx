@@ -4,7 +4,6 @@ import { BrandMark } from "./BrandMark";
 const productLinks = [
   { label: "With Bizdaptive", to: "/with-bizdaptive" },
   { label: "How it works", to: "/how-it-works" },
-  { label: "Pricing", to: "/pricing" },
   { label: "FAQ", to: "/faq" },
   { label: "Status", to: "/status" },
 ];

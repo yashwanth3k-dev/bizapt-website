@@ -123,7 +123,7 @@ export function HomePage() {
   return (
     <>
       <section
-        className="relative flex flex-col items-center justify-center overflow-hidden px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-16 md:min-h-[calc(100svh-4rem)]"
+        className="relative flex flex-col items-center justify-center overflow-x-clip px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-16 md:min-h-[calc(100svh-4rem)]"
         style={{ background: "var(--hero-veil)" }}
       >
         <motion.div
@@ -174,39 +174,42 @@ export function HomePage() {
             </motion.div>
           </div>
 
-          <motion.div
-            variants={heroItem}
-            className="hero-cube-container"
-            role="img"
-            aria-label="Organizational instinct connects decisions, evidence, context, authority, execution, and learning."
-          >
-            <div className="hero-cube">
-              <div className="hero-cube__face hero-cube__face--front">
-                <strong>Decisions</strong>
-                <span>What the organization chooses</span>
-              </div>
-              <div className="hero-cube__face hero-cube__face--right">
-                <strong>Evidence</strong>
-                <span>Why it makes those choices</span>
-              </div>
-              <div className="hero-cube__face hero-cube__face--top">
-                <strong>Context</strong>
-                <span>What the organization understands</span>
-              </div>
-              <div className="hero-cube__face hero-cube__face--back">
-                <strong>Authority</strong>
-                <span>Who can make decisions</span>
-              </div>
-              <div className="hero-cube__face hero-cube__face--left">
-                <strong>Execution</strong>
-                <span>What happens next</span>
-              </div>
-              <div className="hero-cube__face hero-cube__face--bottom">
-                <strong>Learning</strong>
-                <span>What compounds over time</span>
+          <div className="hero-cube-stage">
+            <div
+              className="hero-cube-container"
+              role="img"
+              aria-label="Organizational instinct connects decisions, evidence, context, authority, execution, and learning."
+            >
+              <div className="hero-cube-scaler">
+                <div className="hero-cube">
+                  <div className="hero-cube__face hero-cube__face--front">
+                    <strong>Decisions</strong>
+                    <span>What the organization chooses</span>
+                  </div>
+                  <div className="hero-cube__face hero-cube__face--right">
+                    <strong>Evidence</strong>
+                    <span>Why it makes those choices</span>
+                  </div>
+                  <div className="hero-cube__face hero-cube__face--top">
+                    <strong>Context</strong>
+                    <span>What the organization understands</span>
+                  </div>
+                  <div className="hero-cube__face hero-cube__face--back">
+                    <strong>Authority</strong>
+                    <span>Who can make decisions</span>
+                  </div>
+                  <div className="hero-cube__face hero-cube__face--left">
+                    <strong>Execution</strong>
+                    <span>What happens next</span>
+                  </div>
+                  <div className="hero-cube__face hero-cube__face--bottom">
+                    <strong>Learning</strong>
+                    <span>What compounds over time</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </section>
 

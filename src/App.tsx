@@ -18,7 +18,6 @@ import {
   FaqPage,
   LegalHubPage,
   NotFoundPage,
-  PricingPage,
   StatusPage,
 } from "./pages/InfoPages";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -37,7 +36,6 @@ export default function App() {
               <Route path="how-it-works" element={<HowItWorksPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<ContactPage />} />
-              <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
               <Route path="status" element={<StatusPage />} />
               <Route path="legal" element={<LegalHubPage />} />
@@ -53,6 +51,7 @@ export default function App() {
               <Route path="returns" element={<Navigate to="/with-bizdaptive" replace />} />
               <Route path="capabilities" element={<Navigate to="/with-bizdaptive" replace />} />
               <Route path="platform" element={<Navigate to="/with-bizdaptive" replace />} />
+              <Route path="pricing" element={<Navigate to="/contact" replace />} />
               <Route path="for-you" element={<Navigate to="/about" replace />} />
               <Route path="problem" element={<Navigate to="/" replace />} />
               <Route path="why-change" element={<Navigate to="/" replace />} />

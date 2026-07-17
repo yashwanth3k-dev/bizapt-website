@@ -13,6 +13,7 @@ import {
 import { motion } from "framer-motion";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
+import { FounderAvatar } from "../components/FounderAvatar";
 import { SectionHeader, easeOut } from "../components/motion";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -68,7 +69,8 @@ const beliefs = [
 const founders = [
   {
     name: "Sudarshan",
-    say: "S",
+    slug: "sudarshan",
+    photo: "/founders/sudarshan.jpg",
     role: "Co-founder",
     tag: "Systems Thinker · Precision-Driven",
     linkedin: "https://in.linkedin.com/in/sudarshan-rajan-",
@@ -76,7 +78,8 @@ const founders = [
   },
   {
     name: "Akil Srikanth",
-    say: "A",
+    slug: "akil",
+    photo: "/founders/akil.jpg",
     role: "Co-founder",
     tag: "Vision-Led · Customer-Obsessed",
     linkedin: "https://www.linkedin.com/in/akil-srikanth-2aaaa5149/",
@@ -84,7 +87,8 @@ const founders = [
   },
   {
     name: "Yashwanth",
-    say: "Y",
+    slug: "yashwanth",
+    photo: "/founders/yashwanth.jpg",
     role: "Co-founder",
     tag: "Design-Led · Experience-Driven",
     linkedin: "https://www.linkedin.com/in/yashwanth0311/",
@@ -251,9 +255,7 @@ export function AboutPage() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: i * 0.1, duration: 0.5, ease: easeOut }}
               >
-                <div className="founder-profile-card__avatar" aria-hidden>
-                  {f.say}
-                </div>
+                <FounderAvatar name={f.name} slug={f.slug} photo={f.photo} />
                 <h3>{f.name}</h3>
                 <p className="founder-profile-card__role">{f.role}</p>
                 <p className="founder-profile-card__tag">{f.tag}</p>
