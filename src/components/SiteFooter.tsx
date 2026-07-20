@@ -35,7 +35,7 @@ export function SiteFooter() {
               <BrandMark size={26} />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6" style={{ color: "var(--fg-muted)" }}>
-              Adaptive organizational instinct for people and AI agents.
+              Adaptive business instinct for people and AI agents.
             </p>
             <a
               href="mailto:info@bizdaptive.com"

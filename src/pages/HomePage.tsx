@@ -1,21 +1,15 @@
 import {
   Brain,
-  BrainCircuit,
   Map,
-  MessageSquare,
   Receipt,
-  RefreshCw,
   Shield,
   Sparkles,
   Tag,
-  TrendingUp,
   UserPlus,
-  Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BrandLogo, SpiralWatermark } from "../components/BrandMark";
 import { Button } from "../components/Button";
-import { HoverIcon } from "../components/HoverIcon";
 import { FogCtaShell } from "../components/Site3D";
 import {
   SectionHeader,
@@ -48,34 +42,12 @@ const dayOne = [
   },
 ];
 
-const steps = [
-  {
-    icon: MessageSquare,
-    title: "Talk",
-    body: "Describe the company in plain language. About ten minutes.",
-  },
-  {
-    icon: Map,
-    title: "Map",
-    body: "See it connected. Fix what’s wrong while history stays labeled.",
-  },
-  {
-    icon: Users,
-    title: "Share",
-    body: "Ask why with a trail. Invite someone, propose a change, approve it, and go live.",
-  },
-];
-
-const roi = [
+/** Home shows the three pillars; full six live on /with-bizdaptive. */
+const roiHome = [
   {
     icon: Brain,
-    title: "Never lose what your organization learns",
-    body: "Every decision, interaction, and lesson becomes part of your organization's permanent knowledge.",
-  },
-  {
-    icon: BrainCircuit,
-    title: "Instinct is memory compiled for action",
-    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your organization owns, ready for every person and AI agent at the next decision.",
+    title: "Never lose what your business learns",
+    body: "Every decision, interaction, and lesson becomes part of your business's permanent knowledge.",
   },
   {
     icon: Sparkles,
@@ -83,19 +55,9 @@ const roi = [
     body: "Give your people and your AI agents the confidence to act with the full picture, not fragmented information.",
   },
   {
-    icon: RefreshCw,
-    title: "Stop repeating the same mistakes",
-    body: "Capture every decision once, learn from every outcome, and never solve the same problem twice.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Turn every interaction into a competitive advantage",
-    body: "Every meeting, approval, customer conversation, and workflow strengthens your organization's intelligence over time.",
-  },
-  {
     icon: Shield,
-    title: "Build an organization that gets smarter every day",
-    body: "The longer you use Bizdaptive, the more context, knowledge, and organizational instinct you accumulate.",
+    title: "Build an business that gets smarter every day",
+    body: "The longer you use Bizdaptive, the more context, knowledge, and business instinct you accumulate.",
   },
 ];
 
@@ -118,7 +80,7 @@ const heroItem = {
 };
 
 export function HomePage() {
-  usePageTitle("Adaptive Organizational Instinct | Bizdaptive");
+  usePageTitle("Adaptive Business Instinct | Bizdaptive");
 
   return (
     <>
@@ -148,7 +110,7 @@ export function HomePage() {
               className="text-4xl font-bold tracking-tight sm:text-5xl md:text-[3.15rem] md:leading-[1.1]"
               style={{ color: "var(--fg)" }}
             >
-              Adaptive Organizational Instinct
+              Adaptive Business Instinct
             </motion.h1>
 
             <motion.p
@@ -156,7 +118,7 @@ export function HomePage() {
               className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg lg:mx-0"
               style={{ color: "var(--fg-muted)" }}
             >
-              Bizdaptive continuously learns how your organization works. This creates a compounding
+              Bizdaptive continuously learns how your business works. This creates a compounding
               impact over time so that every person and every AI agent has the context needed to
               make better decisions, backed by proof, confidence, and clarity.
             </motion.p>
@@ -178,13 +140,13 @@ export function HomePage() {
             <div
               className="hero-cube-container"
               role="img"
-              aria-label="Organizational instinct connects decisions, evidence, context, authority, execution, and learning."
+              aria-label="Business instinct connects decisions, evidence, context, authority, execution, and learning."
             >
               <div className="hero-cube-scaler">
                 <div className="hero-cube">
                   <div className="hero-cube__face hero-cube__face--front">
                     <strong>Decisions</strong>
-                    <span>What the organization chooses</span>
+                    <span>What the business chooses</span>
                   </div>
                   <div className="hero-cube__face hero-cube__face--right">
                     <strong>Evidence</strong>
@@ -192,7 +154,7 @@ export function HomePage() {
                   </div>
                   <div className="hero-cube__face hero-cube__face--top">
                     <strong>Context</strong>
-                    <span>What the organization understands</span>
+                    <span>What the business understands</span>
                   </div>
                   <div className="hero-cube__face hero-cube__face--back">
                     <strong>Authority</strong>
@@ -231,7 +193,7 @@ export function HomePage() {
                 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
                 style={{ color: "var(--fg)" }}
               >
-                Use your organization's instinct intelligently always.
+                Use your business's instinct intelligently always.
               </h2>
               <p
                 className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
@@ -243,7 +205,7 @@ export function HomePage() {
           </motion.div>
 
           <div className="insight-card-grid mt-14">
-            {roi.map((card) => (
+            {roiHome.map((card) => (
               <motion.article
                 key={card.title}
                 variants={cascadeItem}
@@ -320,65 +282,6 @@ export function HomePage() {
                 </div>
               </motion.article>
             ))}
-          </div>
-        </div>
-      </SectionReveal>
-
-      <SectionReveal
-        variant="clip"
-        className="px-5 py-24 sm:px-8"
-        style={{ background: "var(--bg-soft)" }}
-      >
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader className="text-center" replay>
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              How it works
-            </p>
-            <h2
-              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-              style={{ color: "var(--fg)" }}
-            >
-              Talk. Map. Share.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base" style={{ color: "var(--fg-muted)" }}>
-              Three moves. That’s the path from conversation to a shared company picture.
-            </p>
-          </SectionHeader>
-
-          <div className="step-accordion mt-12">
-            {steps.map((s, i) => (
-              <motion.article
-                key={s.title}
-                className="step-accordion__item group"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: i * 0.1, duration: 0.5, ease: easeOut }}
-              >
-                <div className="step-accordion__rail" aria-hidden>
-                  <span className="step-accordion__vertical-title">{s.title}</span>
-                </div>
-
-                <div className="step-accordion__content">
-                  <HoverIcon icon={s.icon} variant="float" color="var(--accent)" />
-                  <h3 className="text-xl font-semibold" style={{ color: "var(--fg)" }}>
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                    {s.body}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Button to="/how-it-works" showArrow>
-              Full walkthrough
-            </Button>
           </div>
         </div>
       </SectionReveal>

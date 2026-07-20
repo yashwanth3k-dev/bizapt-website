@@ -20,32 +20,32 @@ const steps = [
   {
     n: "01",
     icon: MessageSquare,
-    title: "Describe your company",
-    body: "Plain language. Who you are, what you sell, who’s on the team, and what you’re aiming for. Share a file if useful. We process it for context and do not retain the uploaded file.",
+    title: "Describe Your Company",
+    body: "Tell us about your company, your goals, and how you work today. This gives Bizdaptive the context it needs to understand your business from day one.",
   },
   {
     n: "02",
     icon: Map,
-    title: "See a living map",
-    body: "People, products, goals, and how they connect in one place you can walk. Structure for shape. Dynamics for what’s moving.",
+    title: "See a Living Map",
+    body: "Watch your business come to life as people, goals, projects, decisions, and responsibilities connect into one living picture.",
   },
   {
     n: "03",
     icon: PencilLine,
-    title: "Correct anytime",
-    body: "Wrong KPI? Person moved teams? Say so. We update the picture and keep the old version labeled, so past-you doesn’t quietly vanish.",
+    title: "Correct Anytime",
+    body: "Your business is always evolving. Update, refine, or correct anything at any time so Bizdaptive always reflects how your company truly operates.",
   },
   {
     n: "04",
     icon: HelpCircle,
-    title: "Ask why and get receipts",
-    body: "Who owns revenue? Why did we pivot? Answers come with a trail: what was said, what was inferred, and how sure we are. Not vibes.",
+    title: "Ask Why and Get Receipts",
+    body: "Ask any question about your business and trace every answer back to the decisions, conversations, and evidence that shaped it.",
   },
   {
     n: "05",
     icon: UsersRound,
-    title: "Invite the team",
-    body: "A teammate joins and gets recognized, not re-interrogated. They propose a change. The right person approves. It goes live for everyone.",
+    title: "Invite Your Team",
+    body: "Bring your team into the conversation. As Bizdaptive grows with every contribution, your company's shared understanding grows too, and so does the value of every decision you make together.",
   },
 ];
 

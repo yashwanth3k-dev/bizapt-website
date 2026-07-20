@@ -1,5 +1,4 @@
 import {
-  Brain,
   BrainCircuit,
   Building2,
   ClipboardCheck,
@@ -11,7 +10,6 @@ import {
   Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { FounderAvatar } from "../components/FounderAvatar";
 import { SectionHeader, easeOut } from "../components/motion";
@@ -22,7 +20,7 @@ const story = [
     icon: Building2,
     label: "The problem",
     title: "Information everywhere. Memory nowhere.",
-    body: "As organizations grow, decisions scatter across meetings, email, chat, docs, and a few people’s heads. Context gets lost. Knowledge walks out the door.",
+    body: "As businesses grow, decisions scatter across meetings, email, chat, docs, and a few people’s heads. Context gets lost. Knowledge walks out the door.",
   },
   {
     icon: Layers,
@@ -33,18 +31,8 @@ const story = [
   {
     icon: TrendingUp,
     label: "What compounds",
-    title: "Organizational intelligence that lasts.",
-    body: "Every decision. Every interaction. Every outcome. Experience doesn’t disappear. It becomes Compounding Organizational Intelligence.",
-  },
-];
-
-const aboutIntroCards = [
-  ...story,
-  {
-    icon: Brain,
-    label: "Our approach",
-    title: "We’re not building another tool to store information.",
-    body: "We’re building a system that helps organizations understand themselves, and we believe organizations deserve better than Slack archaeology.",
+    title: "Business intelligence that lasts.",
+    body: "Every decision. Every interaction. Every outcome. Experience doesn’t disappear. It becomes Compounding Business Intelligence.",
   },
 ];
 
@@ -57,7 +45,7 @@ const beliefs = [
   {
     icon: FileCheck2,
     title: "Evidence over memory",
-    body: "Organizations shouldn't rely on memory. They should rely on evidence.",
+    body: "Businesses shouldn't rely on memory. They should rely on evidence.",
   },
   {
     icon: ClipboardCheck,
@@ -132,7 +120,7 @@ export function AboutPage() {
       <section className="px-5 pb-16 sm:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="about-flip-grid">
-            {aboutIntroCards.map((card, i) => (
+            {story.map((card, i) => (
               <motion.div
                 key={card.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -177,7 +165,7 @@ export function AboutPage() {
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              Organizations that learn faster outperform those that only work harder.
+              Businesses that learn faster outperform those that only work harder.
             </h2>
           </SectionHeader>
           <div className="belief-card-grid">
@@ -288,11 +276,11 @@ export function AboutPage() {
               Why we exist
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: "var(--fg)" }}>
-              Build memory into how the organization moves.
+              Build memory into how the business moves.
             </h2>
             <p className="mt-4 max-w-md text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
               Our mission defines what we change today. Our vision describes what becomes possible
-              when organizational knowledge compounds instead of disappearing.
+              when business knowledge compounds instead of disappearing.
             </p>
           </SectionHeader>
 
@@ -305,8 +293,8 @@ export function AboutPage() {
                 </span>
                 <p className="mission-bloom-card__label">Our mission</p>
                 <p className="mission-bloom-card__body">
-                  To transform every decision, interaction, and outcome into Compounding Organizational
-                  Intelligence, helping organizations make better decisions, strengthen accountability,
+                  To transform every decision, interaction, and outcome into Compounding Business
+                  Intelligence, helping businesses make better decisions, strengthen accountability,
                   and continuously improve.
                 </p>
               </div>
@@ -319,87 +307,11 @@ export function AboutPage() {
                 </span>
                 <p className="mission-bloom-card__label">Our vision</p>
                 <p className="mission-bloom-card__body">
-                  To build the AI Operating System for Companies, a future where every organization has
+                  To build the AI Operating System for Companies, a future where every business has
                   a living operational layer that understands, learns, and continuously adapts.
                 </p>
               </div>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.15fr] lg:gap-14">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.55, ease: easeOut }}
-            >
-              <p
-                className="text-xs font-semibold uppercase tracking-[0.2em]"
-                style={{ color: "var(--accent)" }}
-              >
-                Looking ahead
-              </p>
-              <h2
-                className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-tight"
-                style={{ color: "var(--fg)" }}
-              >
-                Intelligence that compounds.
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed" style={{ color: "var(--fg-faint)" }}>
-                Every organization generates knowledge. Bizdaptive ensures it compounds.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button to="/contact?intent=waitlist" showArrow>
-                  Join the waitlist
-                </Button>
-              </div>
-            </motion.div>
-
-            <div className="space-y-4">
-              <article
-                className="rounded-2xl border p-6 sm:p-8"
-                style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
-              >
-                <p className="text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  We envision a future where every organization has a system that doesn&apos;t just
-                  store information. It understands context, learns from experience, and helps
-                  people make better decisions every day.
-                </p>
-                <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  A future where knowledge never walks out the door. Where accountability is built
-                  into every decision. Where every interaction makes the organization smarter than
-                  it was yesterday.
-                </p>
-              </article>
-
-              <article
-                className="p-6 sm:p-7"
-                style={{
-                  border: "1px solid var(--line)",
-                  borderRadius: "1rem",
-                  background: "var(--card-solid)",
-                }}
-              >
-                <div
-                  className="mb-4 h-1 w-12 rounded-full"
-                  style={{ background: "var(--accent)" }}
-                  aria-hidden
-                />
-                <p
-                  className="text-lg font-semibold leading-snug tracking-tight sm:text-xl"
-                  style={{ color: "var(--fg)" }}
-                >
-                  The companies that lead tomorrow won&apos;t be the ones with the most data.
-                </p>
-                <p className="mt-2 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-                  They&apos;ll be the ones whose intelligence compounds over time.
-                </p>
-              </article>
-            </div>
           </div>
         </div>
       </section>

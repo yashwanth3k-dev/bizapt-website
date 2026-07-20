@@ -3,6 +3,7 @@ import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "./theme/ThemeProvider";
 import { SiteLayout } from "./layouts/SiteLayout";
 import { HomePage } from "./pages/HomePage";
+import { AxonPage } from "./pages/AxonPage";
 import { RoiPage } from "./pages/RoiPage";
 import { HowItWorksPage } from "./pages/HowItWorksPage";
 import { AboutPage } from "./pages/AboutPage";
@@ -30,6 +31,7 @@ export default function App() {
           <ScrollToTop />
           <div className="min-h-svh" style={{ background: "var(--bg)", color: "var(--fg)" }}>
             <Routes>
+              <Route path="axon" element={<AxonPage />} />
               <Route element={<SiteLayout />}>
               <Route index element={<HomePage />} />
               <Route path="with-bizdaptive" element={<RoiPage />} />

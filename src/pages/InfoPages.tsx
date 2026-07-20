@@ -44,7 +44,7 @@ const legalLinks = [
   {
     icon: Database,
     title: "Data Handling",
-    body: "How uploaded files and organizational context are processed, controlled, and protected.",
+    body: "How uploaded files and business context are processed, controlled, and protected.",
     to: "/data-handling",
   },
 ];
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "What is Bizdaptive?",
     answer:
-      "Bizdaptive is an organizational intelligence layer that helps teams preserve decision context, understand how their company works, and make the next action clearer for people and AI agents.",
+      "Bizdaptive is an business intelligence layer that helps teams preserve decision context, understand how their company works, and make the next action clearer for people and AI agents.",
   },
   {
     question: "Is Bizdaptive a wiki or document tool?",
@@ -103,7 +103,7 @@ const faqs = [
   {
     question: "Who is Bizdaptive for?",
     answer:
-      "We are initially focused on growing organizations where critical context is fragmented across founders, managers, meetings, messages, and documents.",
+      "We are initially focused on growing businesses where critical context is fragmented across founders, managers, meetings, messages, and documents.",
   },
   {
     question: "Is the product generally available?",
@@ -113,7 +113,7 @@ const faqs = [
   {
     question: "How does onboarding work?",
     answer:
-      "The intended experience begins with a short plain-language conversation and optional supporting information. Uploaded files are processed for relevant context and are not retained. The organization reviews and corrects the resulting company picture.",
+      "The intended experience begins with a short plain-language conversation and optional supporting information. Uploaded files are processed for relevant context and are not retained. The business reviews and corrects the resulting company picture.",
   },
   {
     question: "Does Bizdaptive replace human judgment?",
@@ -121,9 +121,9 @@ const faqs = [
       "No. It is designed to strengthen judgment by making relevant context, evidence, ownership, and uncertainty available when a decision is made.",
   },
   {
-    question: "How is organizational data protected?",
+    question: "How is business data protected?",
     answer:
-      "Uploaded files are not retained after processing. Our direction for organizational context includes data minimization, customer separation, least-privilege access, encryption, and auditable evidence. See the Security and Data Handling pages for current details and limitations.",
+      "Uploaded files are not retained after processing. Our direction for business context includes data minimization, customer separation, least-privilege access, encryption, and auditable evidence. See the Security and Data Handling pages for current details and limitations.",
   },
   {
     question: "How much does it cost?",

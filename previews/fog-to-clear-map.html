@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bizdaptive — Orchestra Narrative</title>
+    <style>
+      :root {
+        --bg: #eef2f9;
+        --accent: #1e3a8a;
+        --soft: #93c5fd;
+        --ink: #2a4a9a;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: linear-gradient(180deg, #f5f7fb 0%, #eef2f9 45%, #dfe7f4 100%);
+        overflow: hidden;
+      }
+
+      .stage {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        animation: sceneCycle 18s ease-in-out infinite;
+      }
+
+      .scene-1 {
+        animation-delay: 0s;
+      }
+      .scene-2 {
+        animation-delay: 4.5s;
+      }
+      .scene-3 {
+        animation-delay: 9s;
+      }
+      .scene-4 {
+        animation-delay: 13.5s;
+      }
+
+      @keyframes sceneCycle {
+        0%,
+        3% {
+          opacity: 0;
+        }
+        8%,
+        22% {
+          opacity: 1;
+        }
+        28%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      /* Floor / stage platform */
+      .platform {
+        position: absolute;
+        left: 50%;
+        bottom: 14%;
+        width: min(780px, 88vw);
+        height: 18px;
+        transform: translateX(-50%);
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.18), transparent);
+      }
+
+      .platform-shadow {
+        position: absolute;
+        left: 50%;
+        bottom: 10%;
+        width: min(640px, 70vw);
+        height: 40px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(30, 58, 138, 0.12), transparent 70%);
+      }
+
+      /* Musicians as abstract figures with instruments */
+      .orchestra {
+        position: absolute;
+        left: 50%;
+        bottom: 18%;
+        transform: translateX(-50%);
+        width: min(720px, 86vw);
+        height: 42vh;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 2%;
+      }
+
+      .player {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 11%;
+      }
+
+      .head {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        z-index: 2;
+      }
+
+      .torso {
+        width: 22px;
+        height: 34px;
+        margin-top: 3px;
+        border-radius: 6px;
+        background: var(--ink);
+        z-index: 1;
+      }
+
+      /* Instruments (abstract shapes) */
+      .inst {
+        position: absolute;
+        z-index: 3;
+      }
+
+      /* violin bow / stick */
+      .bow {
+        width: 3px;
+        height: 36px;
+        background: var(--soft);
+        border-radius: 2px;
+        top: 8px;
+        right: -6px;
+        transform-origin: bottom center;
+      }
+
+      /* trumpet / horn */
+      .horn {
+        width: 28px;
+        height: 10px;
+        background: var(--soft);
+        border-radius: 3px 10px 10px 3px;
+        top: 28px;
+        left: 18px;
+      }
+
+      /* drum */
+      .drum {
+        width: 26px;
+        height: 16px;
+        border: 2.5px solid var(--soft);
+        border-radius: 4px;
+        top: 36px;
+        left: -4px;
+        background: rgba(147, 197, 253, 0.25);
+      }
+
+      /* piano keys block */
+      .keys {
+        width: 32px;
+        height: 14px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--accent) 0 3px,
+          #fff 3px 5px
+        );
+        border-radius: 2px;
+        top: 38px;
+        left: -6px;
+        border: 1px solid var(--accent);
+      }
+
+      /* cello body */
+      .cello {
+        width: 14px;
+        height: 40px;
+        background: var(--soft);
+        border-radius: 40% 40% 30% 30%;
+        top: 12px;
+        left: -12px;
+        opacity: 0.85;
+      }
+
+      /* Chaos: each player on different wild rhythm */
+      .scene-1 .player:nth-child(1) {
+        animation: thrashA 0.55s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(2) {
+        animation: thrashB 0.38s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(3) {
+        animation: thrashA 0.72s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(4) {
+        animation: thrashB 0.45s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(5) {
+        animation: thrashA 0.33s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(6) {
+        animation: thrashB 0.6s ease-in-out infinite;
+      }
+      .scene-1 .player:nth-child(7) {
+        animation: thrashA 0.48s ease-in-out infinite;
+      }
+
+      .scene-1 .bow {
+        animation: bowChaos 0.4s linear infinite;
+      }
+      .scene-1 .horn {
+        animation: hornChaos 0.35s ease-in-out infinite;
+      }
+      .scene-1 .drum {
+        animation: drumChaos 0.28s ease-in-out infinite;
+      }
+
+      @keyframes thrashA {
+        0%,
+        100% {
+          transform: rotate(-8deg) translateY(0);
+        }
+        50% {
+          transform: rotate(10deg) translateY(-6px);
+        }
+      }
+
+      @keyframes thrashB {
+        0%,
+        100% {
+          transform: rotate(6deg) translateX(0);
+        }
+        50% {
+          transform: rotate(-12deg) translateX(4px);
+        }
+      }
+
+      @keyframes bowChaos {
+        0% {
+          transform: rotate(-40deg);
+        }
+        50% {
+          transform: rotate(50deg);
+        }
+        100% {
+          transform: rotate(-40deg);
+        }
+      }
+
+      @keyframes hornChaos {
+        0%,
+        100% {
+          transform: translateX(0) scaleX(1);
+        }
+        50% {
+          transform: translateX(4px) scaleX(1.1);
+        }
+      }
+
+      @keyframes drumChaos {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+      }
+
+      /* Noise scribbles / discordant marks */
+      .noise {
+        position: absolute;
+        inset: 8% 5% 30%;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .scene-1 .noise {
+        opacity: 0.55;
+      }
+
+      .noise path {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        opacity: 0.35;
+        animation: scribble 0.8s linear infinite;
+      }
+
+      .noise path:nth-child(2) {
+        animation-duration: 0.55s;
+        opacity: 0.25;
+      }
+      .noise path:nth-child(3) {
+        animation-duration: 1.1s;
+        opacity: 0.2;
+      }
+
+      @keyframes scribble {
+        0% {
+          stroke-dashoffset: 0;
+        }
+        100% {
+          stroke-dashoffset: 40;
+        }
+      }
+
+      /* Scene 2: conductor / Bizdaptive mark appears (no words — geometric mark) */
+      .conductor {
+        position: absolute;
+        left: 50%;
+        top: 14%;
+        transform: translateX(-50%);
+        width: 56px;
+        height: 56px;
+        opacity: 0;
+      }
+
+      .scene-2 .conductor,
+      .scene-3 .conductor,
+      .scene-4 .conductor {
+        opacity: 1;
+      }
+
+      .conductor-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2.5px solid var(--accent);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 28px rgba(30, 58, 138, 0.2);
+      }
+
+      .conductor-core {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        height: 16px;
+        margin: -8px 0 0 -8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .conductor-rays {
+        position: absolute;
+        inset: -18px;
+        animation: spinSlow 8s linear infinite;
+      }
+
+      .conductor-rays span {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 2px;
+        height: 14px;
+        margin-left: -1px;
+        background: var(--soft);
+        border-radius: 2px;
+        transform-origin: center 46px;
+      }
+
+      .conductor-rays span:nth-child(1) {
+        transform: rotate(0deg);
+      }
+      .conductor-rays span:nth-child(2) {
+        transform: rotate(60deg);
+      }
+      .conductor-rays span:nth-child(3) {
+        transform: rotate(120deg);
+      }
+      .conductor-rays span:nth-child(4) {
+        transform: rotate(180deg);
+      }
+      .conductor-rays span:nth-child(5) {
+        transform: rotate(240deg);
+      }
+      .conductor-rays span:nth-child(6) {
+        transform: rotate(300deg);
+      }
+
+      @keyframes spinSlow {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Score / sheet music descending */
+      .score {
+        position: absolute;
+        left: 50%;
+        top: 28%;
+        transform: translateX(-50%);
+        width: min(520px, 70vw);
+        height: 56px;
+        opacity: 0;
+      }
+
+      .scene-2 .score {
+        opacity: 0.85;
+        animation: scoreDrop 1.2s ease both;
+      }
+
+      .scene-3 .score,
+      .scene-4 .score {
+        opacity: 1;
+      }
+
+      @keyframes scoreDrop {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-24px);
+        }
+        to {
+          opacity: 0.85;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      .staff {
+        width: 100%;
+        height: 100%;
+      }
+
+      .staff line {
+        stroke: var(--accent);
+        stroke-width: 1.2;
+        stroke-opacity: 0.35;
+      }
+
+      .note {
+        fill: var(--accent);
+      }
+
+      .scene-2 .note {
+        opacity: 0.4;
+      }
+
+      /* Harmony: synced sway */
+      .scene-3 .player,
+      .scene-4 .player {
+        animation: swayTogether 1.8s ease-in-out infinite;
+      }
+
+      .scene-3 .player:nth-child(even),
+      .scene-4 .player:nth-child(even) {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes swayTogether {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-2deg);
+        }
+        50% {
+          transform: translateY(-5px) rotate(2deg);
+        }
+      }
+
+      .scene-3 .bow,
+      .scene-4 .bow {
+        animation: bowSync 1.8s ease-in-out infinite;
+      }
+
+      @keyframes bowSync {
+        0%,
+        100% {
+          transform: rotate(-18deg);
+        }
+        50% {
+          transform: rotate(22deg);
+        }
+      }
+
+      .scene-3 .horn,
+      .scene-4 .horn {
+        animation: hornSync 1.8s ease-in-out infinite;
+      }
+
+      @keyframes hornSync {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(3px);
+        }
+      }
+
+      .scene-3 .drum,
+      .scene-4 .drum {
+        animation: drumSync 1.8s ease-in-out infinite;
+      }
+
+      @keyframes drumSync {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.06);
+        }
+      }
+
+      /* Sound waves in harmony — concentric arcs */
+      .waves {
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        width: 200px;
+        height: 200px;
+        margin: -100px 0 0 -100px;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .scene-3 .waves,
+      .scene-4 .waves {
+        opacity: 1;
+      }
+
+      .waves i {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2px solid var(--soft);
+        opacity: 0;
+        animation: ripple 2.4s ease-out infinite;
+      }
+
+      .waves i:nth-child(2) {
+        animation-delay: 0.8s;
+      }
+      .waves i:nth-child(3) {
+        animation-delay: 1.6s;
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: scale(0.35);
+          opacity: 0.55;
+        }
+        100% {
+          transform: scale(1.35);
+          opacity: 0;
+        }
+      }
+
+      /* Final glow — unified */
+      .glow {
+        position: absolute;
+        left: 50%;
+        bottom: 22%;
+        width: 70%;
+        height: 40%;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse, rgba(147, 197, 253, 0.35), transparent 70%);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .scene-4 .glow {
+        opacity: 1;
+      }
+
+      .scene-4 .note {
+        animation: notePulse 1.8s ease-in-out infinite;
+      }
+
+      @keyframes notePulse {
+        0%,
+        100% {
+          opacity: 0.7;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .scene,
+        .scene-1 {
+          animation: none !important;
+          opacity: 0;
+        }
+        .scene-4 {
+          opacity: 1 !important;
+        }
+        .player,
+        .bow,
+        .horn,
+        .drum,
+        .waves i,
+        .conductor-rays,
+        .noise path,
+        .note {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" aria-hidden="true">
+      <!-- Scene 1: chaos — everyone playing out of sync -->
+      <div class="scene scene-1">
+        <svg class="noise" viewBox="0 0 800 400" preserveAspectRatio="none">
+          <path d="M40 80 Q120 20 200 90 T360 60 T520 100 T700 40" stroke-dasharray="8 6" />
+          <path d="M60 200 Q180 260 300 180 T540 220 T760 160" stroke-dasharray="5 8" />
+          <path d="M20 320 Q160 280 280 340 T500 300 T780 350" stroke-dasharray="10 5" />
+        </svg>
+        <div class="platform-shadow"></div>
+        <div class="platform"></div>
+        <div class="orchestra">
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst cello"></div>
+            <div class="inst bow"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst horn"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst drum"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst keys"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst bow" style="left: -8px"></div>
+            <div class="inst cello" style="left: 14px"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst horn" style="left: -22px; transform: scaleX(-1)"></div>
+          </div>
+          <div class="player">
+            <div class="head"></div>
+            <div class="torso"></div>
+            <div class="inst drum"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 2: conductor mark + score appears -->
+      <div class="scene scene-2">
+        <div class="conductor">
+          <div class="conductor-rays">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="conductor-ring"></div>
+          <div class="conductor-core"></div>
+        </div>
+        <div class="score">
+          <svg class="staff" viewBox="0 0 520 56">
+            <line x1="0" y1="8" x2="520" y2="8" />
+            <line x1="0" y1="18" x2="520" y2="18" />
+            <line x1="0" y1="28" x2="520" y2="28" />
+            <line x1="0" y1="38" x2="520" y2="38" />
+            <line x1="0" y1="48" x2="520" y2="48" />
+            <ellipse class="note" cx="60" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="120" cy="18" rx="5" ry="4" />
+            <ellipse class="note" cx="180" cy="38" rx="5" ry="4" />
+            <ellipse class="note" cx="240" cy="22" rx="5" ry="4" />
+            <ellipse class="note" cx="300" cy="32" rx="5" ry="4" />
+            <ellipse class="note" cx="360" cy="16" rx="5" ry="4" />
+            <ellipse class="note" cx="420" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="480" cy="20" rx="5" ry="4" />
+          </svg>
+        </div>
+        <div class="platform-shadow"></div>
+        <div class="platform"></div>
+        <div class="orchestra" style="opacity: 0.75">
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst cello"></div><div class="inst bow"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst keys"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst bow" style="left:-8px"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn" style="left:-22px;transform:scaleX(-1)"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+        </div>
+      </div>
+
+      <!-- Scene 3: playing in sync -->
+      <div class="scene scene-3">
+        <div class="waves"><i></i><i></i><i></i></div>
+        <div class="conductor">
+          <div class="conductor-rays">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="conductor-ring"></div>
+          <div class="conductor-core"></div>
+        </div>
+        <div class="score">
+          <svg class="staff" viewBox="0 0 520 56">
+            <line x1="0" y1="8" x2="520" y2="8" />
+            <line x1="0" y1="18" x2="520" y2="18" />
+            <line x1="0" y1="28" x2="520" y2="28" />
+            <line x1="0" y1="38" x2="520" y2="38" />
+            <line x1="0" y1="48" x2="520" y2="48" />
+            <ellipse class="note" cx="60" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="120" cy="18" rx="5" ry="4" />
+            <ellipse class="note" cx="180" cy="38" rx="5" ry="4" />
+            <ellipse class="note" cx="240" cy="22" rx="5" ry="4" />
+            <ellipse class="note" cx="300" cy="32" rx="5" ry="4" />
+            <ellipse class="note" cx="360" cy="16" rx="5" ry="4" />
+            <ellipse class="note" cx="420" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="480" cy="20" rx="5" ry="4" />
+          </svg>
+        </div>
+        <div class="platform-shadow"></div>
+        <div class="platform"></div>
+        <div class="orchestra">
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst cello"></div><div class="inst bow"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst keys"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst bow" style="left:-8px"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn" style="left:-22px;transform:scaleX(-1)"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+        </div>
+      </div>
+
+      <!-- Scene 4: full harmony glow -->
+      <div class="scene scene-4">
+        <div class="glow"></div>
+        <div class="waves"><i></i><i></i><i></i></div>
+        <div class="conductor">
+          <div class="conductor-rays">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="conductor-ring"></div>
+          <div class="conductor-core"></div>
+        </div>
+        <div class="score">
+          <svg class="staff" viewBox="0 0 520 56">
+            <line x1="0" y1="8" x2="520" y2="8" />
+            <line x1="0" y1="18" x2="520" y2="18" />
+            <line x1="0" y1="28" x2="520" y2="28" />
+            <line x1="0" y1="38" x2="520" y2="38" />
+            <line x1="0" y1="48" x2="520" y2="48" />
+            <ellipse class="note" cx="60" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="120" cy="18" rx="5" ry="4" />
+            <ellipse class="note" cx="180" cy="38" rx="5" ry="4" />
+            <ellipse class="note" cx="240" cy="22" rx="5" ry="4" />
+            <ellipse class="note" cx="300" cy="32" rx="5" ry="4" />
+            <ellipse class="note" cx="360" cy="16" rx="5" ry="4" />
+            <ellipse class="note" cx="420" cy="28" rx="5" ry="4" />
+            <ellipse class="note" cx="480" cy="20" rx="5" ry="4" />
+          </svg>
+        </div>
+        <div class="platform-shadow"></div>
+        <div class="platform"></div>
+        <div class="orchestra">
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst cello"></div><div class="inst bow"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst keys"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst bow" style="left:-8px"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst horn" style="left:-22px;transform:scaleX(-1)"></div></div>
+          <div class="player"><div class="head"></div><div class="torso"></div><div class="inst drum"></div></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

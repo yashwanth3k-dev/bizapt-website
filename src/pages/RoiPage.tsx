@@ -4,14 +4,11 @@ import {
   Brain,
   BrainCircuit,
   CheckSquare,
-  Crown,
   LayoutDashboard,
-  Network,
   RefreshCw,
   Shield,
   Sparkles,
   TrendingUp,
-  UserPlus,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
@@ -22,13 +19,13 @@ import { usePageTitle } from "../hooks/usePageTitle";
 const roi = [
   {
     icon: Brain,
-    title: "Never lose what your organization learns",
-    body: "Every decision, interaction, and lesson becomes part of your organization's permanent knowledge.",
+    title: "Never lose what your business learns",
+    body: "Every decision, interaction, and lesson becomes part of your business's permanent knowledge.",
   },
   {
     icon: BrainCircuit,
     title: "Instinct is memory compiled for action",
-    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your organization owns, ready for every person and AI agent at the next decision.",
+    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your business owns, ready for every person and AI agent at the next decision.",
   },
   {
     icon: Sparkles,
@@ -43,60 +40,43 @@ const roi = [
   {
     icon: TrendingUp,
     title: "Turn every interaction into a competitive advantage",
-    body: "Every meeting, approval, customer conversation, and workflow strengthens your organization's intelligence over time.",
+    body: "Every meeting, approval, customer conversation, and workflow strengthens your business's intelligence over time.",
   },
   {
     icon: Shield,
-    title: "Build an organization that gets smarter every day",
-    body: "The longer you use Bizdaptive, the more context, knowledge, and organizational instinct you accumulate.",
-  },
-];
-
-const stakeholders = [
-  {
-    icon: Crown,
-    role: "Founder / CEO",
-    line: "Stop being the human API for your own company.",
-    body: "Explain the org once. Get hours back every week. Show the board a trail, not a scavenger hunt.",
-  },
-  {
-    icon: Network,
-    role: "Manager / lead",
-    line: "One map the team can question without a weekly re-onboarding.",
-    body: "Fewer alignment meetings. Catch KPI drift earlier. Contradictions surface before they become bugs.",
-  },
-  {
-    icon: UserPlus,
-    role: "Joiner / teammate",
-    line: "Land somewhere that already expected you.",
-    body: "Hours to situational awareness, not weeks of tribal knowledge. See why things are the way they are.",
+    title: "Build an business that gets smarter every day",
+    body: "The longer you use Bizdaptive, the more context, knowledge, and business instinct you accumulate.",
   },
 ];
 
 const numbers = [
   {
-    metric: "Time to answer “why did we decide X?”",
-    today: "Hours to days",
-    withUs: "Minutes",
-    note: "Trail on the map",
+    department: "Finance",
+    without:
+      "Budget approval lost in Slack. Team implements wrong amount. “Why?” Nobody knows.",
+    withUs:
+      "Every budget decision recorded with reason, who approved, and proof.",
   },
   {
-    metric: "Time for a joiner to get “how we work”",
-    today: "1–2 weeks",
-    withUs: "Hours",
-    note: "Shared picture, not hallway lore",
+    department: "Sales",
+    without:
+      "Deal discount approved verbally. No record of who approved or why.",
+    withUs:
+      "Every discount has an approval trail with reason. Audit finds it instantly.",
   },
   {
-    metric: "Time to fix a wrong org fact",
-    today: "Often never",
-    withUs: "Seconds",
-    note: "Correct anytime; history stays",
+    department: "Operations",
+    without:
+      "Feature deprioritized mid-sprint. Team confused. Happens every week.",
+    withUs:
+      "Priority change records why it happened and who decided. No repeat decisions.",
   },
   {
-    metric: "Founder context-transfer per week",
-    today: "3–8+ hours",
-    withUs: "Compounds down",
-    note: "Internal model for small orgs",
+    department: "Marketing",
+    without:
+      "Campaign budget approved in a call. Results miss target. “Why?” Forgotten.",
+    withUs:
+      "Every campaign decision recorded. Learn what works. Use insights for the next one.",
   },
 ];
 
@@ -135,7 +115,7 @@ export function RoiPage() {
       <PageHero
         eyebrow="With Bizdaptive you will be able to"
         accent="accent"
-        title="Use your organization's instinct intelligently always."
+        title="Use your business's instinct intelligently always."
         lead="Every decision, interaction, and outcome becomes lasting advantage, so people and AI agents act with proof, confidence, and clarity."
       />
 
@@ -172,150 +152,49 @@ export function RoiPage() {
               className="text-xs font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              By seat
-            </p>
-            <h2
-              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-              style={{ color: "var(--fg)" }}
-            >
-              Same map. Different payday.
-            </h2>
-          </SectionHeader>
-
-          <div className="payday-card-grid mt-12">
-            {stakeholders.map((s, i) => (
-              <motion.div
-                key={s.role}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ delay: i * 0.08, duration: 0.45, ease: easeOut }}
-              >
-                <article className="payday-card">
-                  <div className="payday-card__icon">
-                    <s.icon className="size-7" strokeWidth={1.6} aria-hidden />
-                  </div>
-                  <div className="payday-card__content">
-                    <p className="payday-card__role">{s.role}</p>
-                    <h3>{s.line}</h3>
-                    <p className="payday-card__body">{s.body}</p>
-                  </div>
-                </article>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader className="text-center">
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
               By the numbers
             </p>
             <h2
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              Directional, not a promise carved in stone.
+              Without Bizdaptive vs with Bizdaptive.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm" style={{ color: "var(--fg-muted)" }}>
-              Internal model for design-partner conversations. Real orgs vary. We&apos;re honest about that.
+              Same decisions. Different outcomes — across finance, sales, operations, and marketing.
             </p>
           </SectionHeader>
 
-          <div className="mt-8 grid gap-3 sm:hidden">
-            {numbers.map((row, i) => (
-              <motion.article
-                key={row.metric}
-                className="rounded-2xl border p-5"
-                style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.05, duration: 0.4, ease: easeOut }}
-              >
-                <h3 className="font-semibold leading-snug" style={{ color: "var(--fg)" }}>
-                  {row.metric}
-                </h3>
-                <dl className="mt-4 grid gap-3 text-sm">
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
-                      Typical today
-                    </dt>
-                    <dd className="mt-1" style={{ color: "var(--fg-muted)" }}>{row.today}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
-                      With Bizdaptive
-                    </dt>
-                    <dd className="mt-1 font-semibold" style={{ color: "var(--accent)" }}>{row.withUs}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--fg-faint)" }}>
-                      Why
-                    </dt>
-                    <dd className="mt-1" style={{ color: "var(--fg-muted)" }}>{row.note}</dd>
-                  </div>
-                </dl>
-              </motion.article>
-            ))}
-          </div>
-          <motion.div
-            className="mt-12 hidden overflow-x-auto rounded-2xl border sm:block"
-            style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}
-            initial={{ opacity: 0, y: 28, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55, ease: easeOut }}
-            role="region"
-            aria-label="Bizdaptive outcome comparison table"
-            tabIndex={0}
-          >
-            <table className="w-full min-w-[640px] text-left text-sm">
+          <div className="mt-12 overflow-x-auto rounded-2xl border" style={{ borderColor: "var(--line)", background: "var(--card-solid)" }}>
+            <table className="dept-compare-table w-full min-w-[720px] text-left">
               <thead>
-                <tr style={{ color: "var(--fg-faint)" }}>
-                  <th className="px-5 py-3 font-semibold">Metric</th>
-                  <th className="px-5 py-3 font-semibold">Typical today</th>
-                  <th className="px-5 py-3 font-semibold">With Bizdaptive</th>
-                  <th className="px-5 py-3 font-semibold">Why</th>
+                <tr>
+                  <th scope="col">Department</th>
+                  <th scope="col">Without Bizdaptive</th>
+                  <th scope="col">With Bizdaptive</th>
                 </tr>
               </thead>
               <tbody>
                 {numbers.map((row, i) => (
                   <motion.tr
-                    key={row.metric}
-                    className="border-t"
-                    style={{ borderColor: "var(--line)", color: "var(--fg)" }}
-                    initial={{ opacity: 0, y: 12, rotateX: -12 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{ delay: 0.15 + i * 0.08, duration: 0.45, ease: easeOut }}
+                    key={row.department}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ delay: i * 0.07, duration: 0.4, ease: easeOut }}
                   >
-                    <td className="px-5 py-4 font-medium">{row.metric}</td>
-                    <td className="px-5 py-4" style={{ color: "var(--fg-muted)" }}>
-                      {row.today}
-                    </td>
-                    <td className="px-5 py-4">
-                      <span className="font-semibold" style={{ color: "var(--accent)" }}>
-                        {row.withUs}
-                      </span>
-                    </td>
-                    <td className="px-5 py-4" style={{ color: "var(--fg-muted)" }}>
-                      {row.note}
-                    </td>
+                    <th scope="row">{row.department}</th>
+                    <td className="dept-compare-table__without">{row.without}</td>
+                    <td className="dept-compare-table__with">{row.withUs}</td>
                   </motion.tr>
                 ))}
               </tbody>
             </table>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg-soft)" }}>
+      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg)" }}>
         <div className="mx-auto max-w-5xl">
           <SectionHeader className="text-center">
             <p

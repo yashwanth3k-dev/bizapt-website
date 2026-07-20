@@ -109,8 +109,8 @@ const privacySections: PolicySection[] = [
     title: "Information you provide",
     icon: Database,
     paragraphs: [
-      "Depending on how you use Bizdaptive, we may process your name and email address; account credentials through our authentication provider; organization name, role, and professional information; and messages sent through email, support, waitlist, onboarding, or product experiences.",
-      "Product use may include organizational information such as people, teams, reporting relationships, goals, KPIs, decisions, tasks, observations, evidence, operating context, feedback, and corrections.",
+      "Depending on how you use Bizdaptive, we may process your name and email address; account credentials through our authentication provider; business name, role, and professional information; and messages sent through email, support, waitlist, onboarding, or product experiences.",
+      "Product use may include business information such as people, teams, reporting relationships, goals, KPIs, decisions, tasks, observations, evidence, operating context, feedback, and corrections.",
       "Our current website contact and waitlist links may open your email application. In that case, your email provider and our email provider process the sender details and message you choose to send.",
     ],
   },
@@ -127,7 +127,7 @@ const privacySections: PolicySection[] = [
     title: "Files and extracted information",
     icon: FileText,
     paragraphs: [
-      "Some Bizdaptive experiences may allow documents to be provided as organizational context. Original uploaded files are processed transiently and discarded after processing. Bizdaptive does not store the original uploaded files.",
+      "Some Bizdaptive experiences may allow documents to be provided as business context. Original uploaded files are processed transiently and discarded after processing. Bizdaptive does not store the original uploaded files.",
       "Bizdaptive may retain information derived from a document, including summaries, extracted facts, source references, checksums, classifications, confidence information, and clarification history.",
       "Do not provide a file unless you have the right and authority to provide and process its contents.",
     ],
@@ -137,8 +137,8 @@ const privacySections: PolicySection[] = [
     icon: ShieldCheck,
     bullets: [
       "Provide and operate the Bizdaptive website and product.",
-      "Create and manage accounts and organizations.",
-      "Understand organizational context supplied by users.",
+      "Create and manage accounts and businesses.",
+      "Understand business context supplied by users.",
       "Generate product outputs, recommendations, summaries, and reasoning trails.",
       "Respond to support requests, waitlist messages, and product inquiries.",
       "Process subscriptions, credits, and payments.",
@@ -152,8 +152,8 @@ const privacySections: PolicySection[] = [
     title: "AI processing",
     icon: LockKeyhole,
     paragraphs: [
-      "Bizdaptive uses AI services to process prompts and organizational context and produce product outputs. Depending on availability and configuration, information may be processed by Anthropic, Google services such as Gemini or Vertex AI, and OpenAI.",
-      "We do not use customer organizational information to train our own general-purpose AI models. Third-party AI providers process information according to their applicable service terms, privacy commitments, and the configurations used by Bizdaptive.",
+      "Bizdaptive uses AI services to process prompts and business context and produce product outputs. Depending on availability and configuration, information may be processed by Anthropic, Google services such as Gemini or Vertex AI, and OpenAI.",
+      "We do not use customer business information to train our own general-purpose AI models. Third-party AI providers process information according to their applicable service terms, privacy commitments, and the configurations used by Bizdaptive.",
       "AI-generated outputs may be incomplete or inaccurate and should be reviewed before being used for important business decisions.",
     ],
   },
@@ -169,7 +169,7 @@ const privacySections: PolicySection[] = [
     title: "Selling and advertising",
     icon: BadgeCheck,
     paragraphs: [
-      "We do not sell personal information. We do not share personal information with data brokers or use organizational information for third-party targeted advertising.",
+      "We do not sell personal information. We do not share personal information with data brokers or use business information for third-party targeted advertising.",
     ],
   },
   {
@@ -184,8 +184,8 @@ const privacySections: PolicySection[] = [
     title: "Data retention",
     icon: FileText,
     paragraphs: [
-      "Original uploaded files are not retained. Other information is retained for as long as reasonably necessary to provide the service, maintain organizational and governance records requested by users, secure and diagnose the service, maintain billing, audit, and legal records, resolve disputes, enforce agreements, and meet legal obligations.",
-      "Different categories of information may have different retention periods. Some governance records and logs are designed to preserve organizational history and may remain until the relevant organization or account is deleted, subject to legal, security, backup, and technical requirements.",
+      "Original uploaded files are not retained. Other information is retained for as long as reasonably necessary to provide the service, maintain business and governance records requested by users, secure and diagnose the service, maintain billing, audit, and legal records, resolve disputes, enforce agreements, and meet legal obligations.",
+      "Different categories of information may have different retention periods. Some governance records and logs are designed to preserve business history and may remain until the relevant business or account is deleted, subject to legal, security, backup, and technical requirements.",
       "We will not promise a specific deletion period unless that period is supported by an implemented retention process.",
     ],
   },
@@ -193,7 +193,7 @@ const privacySections: PolicySection[] = [
     title: "Security",
     icon: ShieldCheck,
     paragraphs: [
-      "We use technical and organizational measures designed to protect information, including authenticated access, encrypted connections, database access controls, and organization-level data isolation.",
+      "We use technical and organizational measures designed to protect information, including authenticated access, encrypted connections, database access controls, and business-level data isolation.",
       "No service can guarantee absolute security. Users are responsible for protecting their credentials and limiting submitted information to what is reasonably necessary.",
     ],
   },
@@ -323,7 +323,7 @@ const cookieSections: PolicySection[] = [
     title: "Analytics and advertising",
     icon: BadgeCheck,
     paragraphs: [
-      "We do not currently use third-party advertising cookies, cross-site advertising trackers, or organizational information for targeted advertising. If we add non-essential analytics or marketing technologies, we will update this page and provide choices where required.",
+      "We do not currently use third-party advertising cookies, cross-site advertising trackers, or business information for targeted advertising. If we add non-essential analytics or marketing technologies, we will update this page and provide choices where required.",
     ],
   },
   {
@@ -340,7 +340,7 @@ const securitySections: PolicySection[] = [
     title: "Our security approach",
     icon: ShieldCheck,
     paragraphs: [
-      "We use technical and organizational measures designed to protect information, including authenticated access, encrypted connections, database access controls, organization-level data isolation, data minimization, least-privilege access, auditability, and secure development practices.",
+      "We use technical and organizational measures designed to protect information, including authenticated access, encrypted connections, database access controls, business-level data isolation, data minimization, least-privilege access, auditability, and secure development practices.",
       "No service can guarantee absolute security. Users are responsible for protecting their credentials and limiting submitted information to what is reasonably necessary.",
     ],
   },
@@ -351,7 +351,7 @@ const securitySections: PolicySection[] = [
       "Encryption in transit through modern HTTPS connections.",
       "Uploaded source files are processed transiently and are not retained.",
       "Authentication and session controls for account access.",
-      "Database access controls and organization-level data isolation.",
+      "Database access controls and business-level data isolation.",
       "Restricted internal access based on operational need.",
       "Dependency review, source control, and deployment controls.",
       "Evidence-oriented product design with correction and history in mind.",
@@ -379,15 +379,15 @@ const dataSections: PolicySection[] = [
     title: "Data ownership",
     icon: Database,
     paragraphs: [
-      "Your organization retains ownership of the information it provides to Bizdaptive. Uploaded source files are not retained. We process organizational context only to provide, secure, support, and improve the agreed service, subject to the applicable customer agreement.",
+      "Your business retains ownership of the information it provides to Bizdaptive. Uploaded source files are not retained. We process business context only to provide, secure, support, and improve the agreed service, subject to the applicable customer agreement.",
     ],
   },
   {
     title: "Uploaded files",
     icon: FileText,
     paragraphs: [
-      "Files are processed transiently to identify relevant organizational context. The original uploaded file is discarded after processing and is not stored in Bizdaptive.",
-      "Organizational context produced from that processing may become part of the customer's living company picture. It remains subject to customer controls, correction, and the applicable agreement.",
+      "Files are processed transiently to identify relevant business context. The original uploaded file is discarded after processing and is not stored in Bizdaptive.",
+      "Business context produced from that processing may become part of the customer's living company picture. It remains subject to customer controls, correction, and the applicable agreement.",
     ],
   },
   {
@@ -401,7 +401,7 @@ const dataSections: PolicySection[] = [
     title: "AI and customer context",
     icon: LockKeyhole,
     paragraphs: [
-      "Bizdaptive may use Anthropic, Google services such as Gemini or Vertex AI, and OpenAI to process prompts and organizational context. We do not use customer organizational information to train our own general-purpose AI models.",
+      "Bizdaptive may use Anthropic, Google services such as Gemini or Vertex AI, and OpenAI to process prompts and business context. We do not use customer business information to train our own general-purpose AI models.",
       "Third-party AI providers process information according to their applicable service terms, privacy commitments, and the configurations used by Bizdaptive.",
     ],
   },
@@ -409,14 +409,14 @@ const dataSections: PolicySection[] = [
     title: "Derived document information",
     icon: Database,
     paragraphs: [
-      "Although original uploaded files are discarded after processing, Bizdaptive may retain derived information such as summaries, extracted facts, source references, checksums, classifications, confidence information, and clarification history as part of the customer's organizational context.",
+      "Although original uploaded files are discarded after processing, Bizdaptive may retain derived information such as summaries, extracted facts, source references, checksums, classifications, confidence information, and clarification history as part of the customer's business context.",
     ],
   },
   {
     title: "Context retention, deletion, and export",
     icon: FileText,
     paragraphs: [
-      "Uploaded files are excluded from retention because they are not stored. Retention periods, deletion procedures, export capabilities, subprocessors, and backup handling for organizational context will be documented in customer agreements and product documentation as those systems become available.",
+      "Uploaded files are excluded from retention because they are not stored. Retention periods, deletion procedures, export capabilities, subprocessors, and backup handling for business context will be documented in customer agreements and product documentation as those systems become available.",
     ],
   },
   {
@@ -481,7 +481,7 @@ export function DataHandlingPage() {
     <PolicyPage
       eyebrow="Trust"
       title="Data Handling"
-      lead="How we intend to protect organizational context throughout its lifecycle."
+      lead="How we intend to protect business context throughout its lifecycle."
       updated="July 15, 2026"
       sections={dataSections}
     />
