@@ -8,6 +8,7 @@ import { useTheme } from "../theme/ThemeProvider";
 const links = [
   { label: "With Bizdaptive", to: "/with-bizdaptive" },
   { label: "How it works", to: "/how-it-works" },
+  { label: "Use cases", to: "/use-cases" },
   { label: "About us", to: "/about" },
 ];
 

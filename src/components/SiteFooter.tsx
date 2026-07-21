@@ -4,13 +4,13 @@ import { BrandMark } from "./BrandMark";
 const productLinks = [
   { label: "With Bizdaptive", to: "/with-bizdaptive" },
   { label: "How it works", to: "/how-it-works" },
+  { label: "Use cases", to: "/use-cases" },
   { label: "FAQ", to: "/faq" },
-  { label: "Status", to: "/status" },
 ];
 
-const learnLinks = [
-  { label: "What is Bizdaptive?", to: "/what-is-bizdaptive" },
-  { label: "vs wiki & ChatGPT", to: "/bizdaptive-vs-wiki" },
+const resourceLinks = [
+  { label: "Blog", to: "/blog" },
+  { label: "Status", to: "/status" },
 ];
 
 const companyLinks = [
@@ -52,7 +52,7 @@ export function SiteFooter() {
           </div>
 
           <FooterGroup title="Product" links={productLinks} />
-          <FooterGroup title="Learn" links={learnLinks} />
+          <FooterGroup title="Resources" links={resourceLinks} />
           <FooterGroup title="Company" links={companyLinks} />
           <FooterGroup title="Legal" links={policyLinks} />
         </div>

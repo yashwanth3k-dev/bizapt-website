@@ -16,19 +16,64 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://bizapt-website.vercel.app/about</loc>
+    <loc>https://bizapt-website.vercel.app/use-cases</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/use-cases/finance</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bizapt-website.vercel.app/what-is-bizdaptive</loc>
+    <loc>https://bizapt-website.vercel.app/use-cases/sales</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bizapt-website.vercel.app/bizdaptive-vs-wiki</loc>
+    <loc>https://bizapt-website.vercel.app/use-cases/operations</loc>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/use-cases/marketing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/use-cases/leadership</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/blog</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/blog/living-company-map</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/blog/decision-receipts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/blog/from-conversation-to-shared-picture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/blog/when-context-scatters</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://bizapt-website.vercel.app/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://bizapt-website.vercel.app/contact</loc>

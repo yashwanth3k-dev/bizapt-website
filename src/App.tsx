@@ -21,10 +21,8 @@ import {
   NotFoundPage,
   StatusPage,
 } from "./pages/InfoPages";
-import {
-  BizdaptiveVsWikiPage,
-  WhatIsBizdaptivePage,
-} from "./pages/SeoContentPages";
+import { BlogHubPage, BlogPostPage } from "./pages/BlogPages";
+import { UseCaseDetailPage, UseCasesHubPage } from "./pages/UseCasesPages";
 import { ScrollToTop } from "./components/ScrollToTop";
 
 export default function App() {
@@ -37,34 +35,38 @@ export default function App() {
             <Routes>
               <Route path="axon" element={<AxonPage />} />
               <Route element={<SiteLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="with-bizdaptive" element={<RoiPage />} />
-              <Route path="how-it-works" element={<HowItWorksPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<ContactPage />} />
-              <Route path="faq" element={<FaqPage />} />
-              <Route path="what-is-bizdaptive" element={<WhatIsBizdaptivePage />} />
-              <Route path="bizdaptive-vs-wiki" element={<BizdaptiveVsWikiPage />} />
-              <Route path="status" element={<StatusPage />} />
-              <Route path="legal" element={<LegalHubPage />} />
-              <Route path="privacy" element={<PrivacyPage />} />
-              <Route path="terms" element={<TermsPage />} />
-              <Route path="cookies" element={<CookiesPage />} />
-              <Route path="security" element={<SecurityPage />} />
-              <Route path="data-handling" element={<DataHandlingPage />} />
-              <Route path="waitlist" element={<Navigate to="/contact?intent=waitlist" replace />} />
-              <Route path="request-demo" element={<Navigate to="/contact?intent=founder-demo" replace />} />
-              {/* Legacy paths */}
-              <Route path="roi" element={<Navigate to="/with-bizdaptive" replace />} />
-              <Route path="returns" element={<Navigate to="/with-bizdaptive" replace />} />
-              <Route path="capabilities" element={<Navigate to="/with-bizdaptive" replace />} />
-              <Route path="platform" element={<Navigate to="/with-bizdaptive" replace />} />
-              <Route path="pricing" element={<Navigate to="/contact" replace />} />
-              <Route path="for-you" element={<Navigate to="/about" replace />} />
-              <Route path="problem" element={<Navigate to="/" replace />} />
-              <Route path="why-change" element={<Navigate to="/" replace />} />
-              <Route path="product" element={<Navigate to="/how-it-works" replace />} />
-              <Route path="*" element={<NotFoundPage />} />
+                <Route index element={<HomePage />} />
+                <Route path="with-bizdaptive" element={<RoiPage />} />
+                <Route path="how-it-works" element={<HowItWorksPage />} />
+                <Route path="use-cases" element={<UseCasesHubPage />} />
+                <Route path="use-cases/:slug" element={<UseCaseDetailPage />} />
+                <Route path="blog" element={<BlogHubPage />} />
+                <Route path="blog/:slug" element={<BlogPostPage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="contact" element={<ContactPage />} />
+                <Route path="faq" element={<FaqPage />} />
+                <Route path="status" element={<StatusPage />} />
+                <Route path="legal" element={<LegalHubPage />} />
+                <Route path="privacy" element={<PrivacyPage />} />
+                <Route path="terms" element={<TermsPage />} />
+                <Route path="cookies" element={<CookiesPage />} />
+                <Route path="security" element={<SecurityPage />} />
+                <Route path="data-handling" element={<DataHandlingPage />} />
+                <Route path="waitlist" element={<Navigate to="/contact?intent=waitlist" replace />} />
+                <Route path="request-demo" element={<Navigate to="/contact?intent=founder-demo" replace />} />
+                {/* Legacy / removed comparison pages */}
+                <Route path="what-is-bizdaptive" element={<Navigate to="/blog/living-company-map" replace />} />
+                <Route path="bizdaptive-vs-wiki" element={<Navigate to="/use-cases" replace />} />
+                <Route path="roi" element={<Navigate to="/with-bizdaptive" replace />} />
+                <Route path="returns" element={<Navigate to="/with-bizdaptive" replace />} />
+                <Route path="capabilities" element={<Navigate to="/with-bizdaptive" replace />} />
+                <Route path="platform" element={<Navigate to="/with-bizdaptive" replace />} />
+                <Route path="pricing" element={<Navigate to="/contact" replace />} />
+                <Route path="for-you" element={<Navigate to="/about" replace />} />
+                <Route path="problem" element={<Navigate to="/" replace />} />
+                <Route path="why-change" element={<Navigate to="/" replace />} />
+                <Route path="product" element={<Navigate to="/how-it-works" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </div>

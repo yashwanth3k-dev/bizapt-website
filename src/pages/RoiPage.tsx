@@ -1,20 +1,23 @@
 import {
-  BookOpen,
-  Bot,
+  ArrowRight,
+  Briefcase,
   BrainCircuit,
-  CheckSquare,
-  LayoutDashboard,
+  Landmark,
+  Megaphone,
   Receipt,
   RefreshCw,
+  Settings2,
   Shield,
   Sparkles,
   TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { SectionHeader, easeOut } from "../components/motion";
 import { usePageSeo } from "../hooks/usePageTitle";
+import { useCases } from "../content/stories";
 
 const roi = [
   {
@@ -77,33 +80,6 @@ const numbers = [
       "Campaign budget approved in a call. Results miss target. “Why?” Forgotten.",
     withUs:
       "Campaign choices stay connected to results, so the next plan starts from insight, not amnesia.",
-  },
-];
-
-const vs = [
-  {
-    icon: BookOpen,
-    title: "Wikis & docs",
-    get: "Pages you write",
-    miss: "A living company picture with decisions and ownership",
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Dashboards",
-    get: "Numbers",
-    miss: "Who decided, why, and what’s behind the belief",
-  },
-  {
-    icon: Bot,
-    title: "ChatGPT alone",
-    get: "Fast answers",
-    miss: "Shared decision context and receipts your whole team can use",
-  },
-  {
-    icon: CheckSquare,
-    title: "Task tools",
-    get: "Tickets",
-    miss: "Strategy-to-execution in one connected map",
   },
 ];
 
@@ -206,41 +182,62 @@ export function RoiPage() {
               className="text-xs font-semibold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              Vs tools you already have
+              By team
             </p>
             <h2
               className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              We sit above them, not instead of them.
+              Used across the company.
             </h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm" style={{ color: "var(--fg-muted)" }}>
+              Each team asks “why?” differently. Same living map. Same decision receipts.
+            </p>
           </SectionHeader>
 
-          <div className="tool-stack-grid mt-12">
-            {vs.map((item, i) => (
+          <div className="story-card-grid mt-12">
+            {useCases.map((uc, i) => {
+              const Icon =
+                {
+                  finance: Landmark,
+                  sales: TrendingUp,
+                  operations: Settings2,
+                  marketing: Megaphone,
+                  leadership: Briefcase,
+                }[uc.slug] ?? Briefcase;
+              return (
               <motion.div
-                key={item.title}
+                key={uc.slug}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: i * 0.06, duration: 0.45, ease: easeOut }}
-                className="tool-stack-card"
               >
-                <article className="tool-stack-card__panel">
-                  <div className="tool-stack-card__heading">
-                    <h3>{item.title}</h3>
-                    <p><span>You get:</span> {item.get}</p>
+                <Link to={`/use-cases/${uc.slug}`} className="story-card" style={{ minHeight: "12.5rem" }}>
+                  <span className="story-card__wash" aria-hidden />
+                  <div className="story-card__top">
+                    <span className="story-card__label">{uc.label}</span>
+                    <span className="story-card__icon" aria-hidden>
+                      <Icon strokeWidth={1.6} />
+                    </span>
                   </div>
-                  <div className="tool-stack-card__reveal">
-                    <p className="tool-stack-card__label">Bizdaptive adds the missing layer</p>
-                    <p><span>You still miss:</span> {item.miss}</p>
-                  </div>
-                </article>
-                <div className="tool-stack-card__icon">
-                  <item.icon aria-hidden />
-                </div>
+                  <p className="story-card__question" style={{ marginTop: "1rem" }}>
+                    “{uc.question}”
+                  </p>
+                  <span className="story-card__cta">
+                    Open story
+                    <ArrowRight aria-hidden />
+                  </span>
+                </Link>
               </motion.div>
-            ))}
+            );
+            })}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Button to="/use-cases" variant="ghost" showArrow>
+              All use cases
+            </Button>
           </div>
         </div>
       </section>

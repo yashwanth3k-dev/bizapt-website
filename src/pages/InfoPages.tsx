@@ -215,12 +215,12 @@ export function FaqPage() {
           ))}
           <p className="pt-4 text-center text-sm" style={{ color: "var(--fg-muted)" }}>
             Go deeper:{" "}
-            <Link to="/what-is-bizdaptive" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
-              What is Bizdaptive?
+            <Link to="/use-cases" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+              Use cases
             </Link>
             {" · "}
-            <Link to="/bizdaptive-vs-wiki" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
-              vs wiki &amp; ChatGPT
+            <Link to="/blog" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+              Blog &amp; guides
             </Link>
           </p>
         </div>
