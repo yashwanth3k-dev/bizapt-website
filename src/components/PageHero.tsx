@@ -5,6 +5,7 @@ type Props = {
   title: string;
   lead?: string;
   accent?: "teal" | "sky" | "accent";
+  className?: string;
 };
 
 const accentVar = {
@@ -13,13 +14,13 @@ const accentVar = {
   accent: "var(--accent)",
 } as const;
 
-export function PageHero({ eyebrow, title, lead, accent = "accent" }: Props) {
+export function PageHero({ eyebrow, title, lead, accent = "accent", className = "" }: Props) {
   return (
     <motion.header
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="mx-auto max-w-3xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pt-20"
+      className={`mx-auto max-w-3xl px-5 pb-12 pt-16 text-center sm:px-8 sm:pt-20 ${className}`.trim()}
     >
       <p
         className="text-xs font-semibold uppercase tracking-[0.2em]"

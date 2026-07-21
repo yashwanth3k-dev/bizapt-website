@@ -1,26 +1,11 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import {
-  ArrowRight,
-  Briefcase,
-  Landmark,
-  Megaphone,
-  Settings2,
-  TrendingUp,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Briefcase, ListChecks, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { easeOut } from "../components/motion";
 import { usePageSeo } from "../hooks/usePageTitle";
-import { getUseCase, useCases } from "../content/stories";
-
-const icons = {
-  finance: Landmark,
-  sales: TrendingUp,
-  operations: Settings2,
-  marketing: Megaphone,
-  leadership: Briefcase,
-} as const;
+import { getUseCase, useCaseIcons, useCases } from "../content/stories";
 
 export function UseCasesHubPage() {
   usePageSeo({
@@ -41,7 +26,7 @@ export function UseCasesHubPage() {
       <section className="px-5 pb-20 sm:px-8">
         <div className="story-card-grid mx-auto max-w-5xl">
           {useCases.map((uc, i) => {
-            const Icon = icons[uc.slug as keyof typeof icons] ?? Briefcase;
+            const Icon = useCaseIcons[uc.slug] ?? Briefcase;
             return (
               <motion.div
                 key={uc.slug}
@@ -74,11 +59,19 @@ export function UseCasesHubPage() {
           <p className="text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
             Early flow: describe the company, see a living map, correct anytime, ask why, invite the
             team.{" "}
-            <Link to="/how-it-works" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+            <Link
+              to="/how-it-works"
+              className="underline-offset-2 hover:underline"
+              style={{ color: "var(--accent)" }}
+            >
               How it works
             </Link>
             {" · "}
-            <Link to="/blog" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+            <Link
+              to="/blog"
+              className="underline-offset-2 hover:underline"
+              style={{ color: "var(--accent)" }}
+            >
               Guides
             </Link>
           </p>
@@ -109,52 +102,72 @@ export function UseCaseDetailPage() {
     return <Navigate to="/use-cases" replace />;
   }
 
-  const Icon = icons[uc.slug as keyof typeof icons] ?? Briefcase;
+  const Icon = useCaseIcons[uc.slug] ?? Briefcase;
 
   return (
     <div style={{ background: "var(--bg)" }}>
-      <PageHero eyebrow={uc.eyebrow} title={uc.title} lead={uc.lead} />
-
+      <div className="mx-auto max-w-3xl px-5 pt-14 sm:px-8 sm:pt-16">
+        <Link to="/use-cases" className="story-back">
+          <ArrowLeft aria-hidden />
+          All use cases
+        </Link>
+      </div>
+      <PageHero
+        eyebrow={uc.eyebrow}
+        title={uc.title}
+        lead={uc.lead}
+        className="!pt-6 sm:!pt-8"
+      />
       <section className="px-5 pb-20 sm:px-8">
         <div className="mx-auto max-w-3xl space-y-10">
           <motion.article
-            className="story-evidence"
+            className="story-section"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: easeOut }}
           >
-            <div className="mb-5 flex items-center gap-3">
-              <span className="story-card__icon" aria-hidden>
+            <div className="story-section__head">
+              <span className="story-section__icon" aria-hidden>
                 <Icon strokeWidth={1.6} />
               </span>
-              <p
-                className="text-xs font-semibold uppercase tracking-[0.16em]"
-                style={{ color: "var(--accent)" }}
-              >
-                The question
-              </p>
+              <div>
+                <p className="story-section__eyebrow">{uc.label}</p>
+                <p className="story-section__eyebrow story-section__eyebrow--muted">The question</p>
+              </div>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight" style={{ color: "var(--fg)" }}>
-              “{uc.question}”
-            </h2>
-            <p className="mt-5 text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-              {uc.answer}
-            </p>
-            <div className="mt-6">
-              {uc.evidence.map((item) => (
-                <div key={item} className="story-evidence__row">
-                  <span className="story-evidence__mark" aria-hidden />
-                  <span>{item}</span>
-                </div>
-              ))}
+            <h2 className="story-section__title">“{uc.question}”</h2>
+            <p className="story-section__body">{uc.answer}</p>
+          </motion.article>
+
+          <motion.article
+            className="story-evidence"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: easeOut }}
+          >
+            <div className="story-section__head mb-5">
+              <span className="story-section__icon" aria-hidden>
+                <Sparkles strokeWidth={1.7} />
+              </span>
+              <p className="story-section__eyebrow">Evidence in Bizdaptive</p>
             </div>
+            {uc.evidence.map((item) => (
+              <div key={item} className="story-evidence__row">
+                <span className="story-evidence__mark" aria-hidden />
+                <span>{item}</span>
+              </div>
+            ))}
           </motion.article>
 
           <div>
-            <h3 className="text-lg font-semibold" style={{ color: "var(--fg)" }}>
-              What you have on day one
-            </h3>
-            <div className="story-chip-grid mt-4">
+            <div className="story-section__head mb-4">
+              <span className="story-section__icon" aria-hidden>
+                <ListChecks strokeWidth={1.7} />
+              </span>
+              <h3 className="story-section__title story-section__title--sm">What you have on day one</h3>
+            </div>
+            <div className="story-chip-grid">
               {uc.dayOne.map((item, i) => (
                 <motion.div
                   key={item}
@@ -174,22 +187,27 @@ export function UseCaseDetailPage() {
             <Button to="/contact?intent=waitlist" showArrow>
               Join the waitlist
             </Button>
-            <Button to="/use-cases" variant="ghost">
-              All use cases
-            </Button>
             <Button to="/how-it-works" variant="ghost">
               How it works
             </Button>
           </div>
 
-          <nav className="flex flex-wrap gap-2.5 border-t pt-8" style={{ borderColor: "var(--line)" }} aria-label="Other use cases">
+          <nav
+            className="flex flex-wrap gap-2.5 border-t pt-8"
+            style={{ borderColor: "var(--line)" }}
+            aria-label="Other use cases"
+          >
             {useCases
               .filter((o) => o.slug !== uc.slug)
-              .map((o) => (
-                <Link key={o.slug} to={`/use-cases/${o.slug}`} className="story-pill">
-                  {o.label}
-                </Link>
-              ))}
+              .map((o) => {
+                const PillIcon = useCaseIcons[o.slug] ?? Briefcase;
+                return (
+                  <Link key={o.slug} to={`/use-cases/${o.slug}`} className="story-pill story-pill--icon">
+                    <PillIcon strokeWidth={1.7} aria-hidden />
+                    {o.label}
+                  </Link>
+                );
+              })}
           </nav>
         </div>
       </section>

@@ -1,23 +1,16 @@
 import {
-  ArrowRight,
-  Briefcase,
   BrainCircuit,
-  Landmark,
-  Megaphone,
   Receipt,
   RefreshCw,
-  Settings2,
   Shield,
   Sparkles,
   TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { SectionHeader, easeOut } from "../components/motion";
 import { usePageSeo } from "../hooks/usePageTitle";
-import { useCases } from "../content/stories";
 
 const roi = [
   {
@@ -171,73 +164,6 @@ export function RoiPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-20 sm:px-8" style={{ background: "var(--bg)" }}>
-        <div className="mx-auto max-w-5xl">
-          <SectionHeader className="text-center">
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.2em]"
-              style={{ color: "var(--accent)" }}
-            >
-              By team
-            </p>
-            <h2
-              className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-              style={{ color: "var(--fg)" }}
-            >
-              Used across the company.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm" style={{ color: "var(--fg-muted)" }}>
-              Each team asks “why?” differently. Same living map. Same decision receipts.
-            </p>
-          </SectionHeader>
-
-          <div className="story-card-grid mt-12">
-            {useCases.map((uc, i) => {
-              const Icon =
-                {
-                  finance: Landmark,
-                  sales: TrendingUp,
-                  operations: Settings2,
-                  marketing: Megaphone,
-                  leadership: Briefcase,
-                }[uc.slug] ?? Briefcase;
-              return (
-              <motion.div
-                key={uc.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.06, duration: 0.45, ease: easeOut }}
-              >
-                <Link to={`/use-cases/${uc.slug}`} className="story-card" style={{ minHeight: "12.5rem" }}>
-                  <span className="story-card__wash" aria-hidden />
-                  <div className="story-card__top">
-                    <span className="story-card__label">{uc.label}</span>
-                    <span className="story-card__icon" aria-hidden>
-                      <Icon strokeWidth={1.6} />
-                    </span>
-                  </div>
-                  <p className="story-card__question" style={{ marginTop: "1rem" }}>
-                    “{uc.question}”
-                  </p>
-                  <span className="story-card__cta">
-                    Open story
-                    <ArrowRight aria-hidden />
-                  </span>
-                </Link>
-              </motion.div>
-            );
-            })}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Button to="/use-cases" variant="ghost" showArrow>
-              All use cases
-            </Button>
           </div>
         </div>
       </section>

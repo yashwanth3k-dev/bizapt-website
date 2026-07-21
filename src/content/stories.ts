@@ -1,3 +1,16 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  FileText,
+  Landmark,
+  Map,
+  Megaphone,
+  MessageSquare,
+  Receipt,
+  Settings2,
+  TrendingUp,
+} from "lucide-react";
+
 export type UseCase = {
   slug: string;
   label: string;
@@ -8,6 +21,14 @@ export type UseCase = {
   answer: string;
   evidence: string[];
   dayOne: string[];
+};
+
+export const useCaseIcons: Record<string, LucideIcon> = {
+  finance: Landmark,
+  sales: TrendingUp,
+  operations: Settings2,
+  marketing: Megaphone,
+  leadership: Briefcase,
 };
 
 /** Sentra-style vertical stories, grounded in Bizdaptive POC (map + receipts + shared context). */
@@ -118,16 +139,24 @@ export function getUseCase(slug: string) {
   return useCases.find((u) => u.slug === slug);
 }
 
+export type BlogSection = {
+  heading: string;
+  body: string;
+  bullets?: string[];
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
   minutes: number;
   kind: "Guide" | "Note";
-  body: string[];
+  icon: LucideIcon;
+  visual: "map" | "receipt" | "flow" | "scatter";
+  sections: BlogSection[];
 };
 
-/** Starter guides from product knowledge — no competitor comparisons. */
+/** Starter guides — structured headings for a normal blog layout. */
 export const blogPosts: BlogPost[] = [
   {
     slug: "living-company-map",
@@ -136,11 +165,34 @@ export const blogPosts: BlogPost[] = [
       "A living company map connects people, goals, decisions, and responsibilities as the business changes — a shared picture, not a page you wrote once and forgot.",
     minutes: 6,
     kind: "Guide",
-    body: [
-      "Most growing companies already have documents. What they lack is a shared picture of how the company actually operates today: who owns what, what was decided, and what is still unknown.",
-      "A living company map is that picture. People, products, goals, and decisions connect from your perspective. When someone joins, they land in the same map — not a blank slate.",
-      "Bizdaptive starts with a short conversation. You describe the company. You see a map. You correct it anytime. The point is not filing more pages. It is keeping judgment grounded in how the business really works.",
-      "Day one on Bizdaptive is meant to leave you with a usable map, honest labels (stated vs guessed vs unknown), and a path for the next person to sit in the same picture.",
+    icon: Map,
+    visual: "map",
+    sections: [
+      {
+        heading: "Lead",
+        body: "Most growing companies already have documents. What they lack is a shared picture of how the company actually operates today: who owns what, what was decided, and what is still unknown.",
+      },
+      {
+        heading: "The problem",
+        body: "Structure lives in someone’s head. Decisions live in chat. Goals live in a deck. When someone joins — or leaves — the next action starts from guesswork.",
+      },
+      {
+        heading: "The idea",
+        body: "A living company map is that picture. People, products, goals, and decisions connect from your perspective. Bizdaptive starts with a short conversation: describe the company, see a map, correct it anytime.",
+      },
+      {
+        heading: "What makes it different",
+        body: "The point is not filing more pages. It is keeping judgment grounded in how the business really works.",
+        bullets: [
+          "People, goals, and decisions on one shared picture",
+          "Honest labels: stated, guessed, unknown",
+          "The next person lands in the same map — not a blank slate",
+        ],
+      },
+      {
+        heading: "Where this leaves you",
+        body: "Day one is meant to leave you with a usable map and a path for the next person to sit in the same picture. That’s the foundation of decision intelligence.",
+      },
     ],
   },
   {
@@ -150,11 +202,34 @@ export const blogPosts: BlogPost[] = [
       "A decision receipt stamps ownership and rationale before the next meeting starts — accountability without archaeology.",
     minutes: 5,
     kind: "Guide",
-    body: [
-      "Teams don’t fail from a lack of chat. They fail when the next person cannot see who decided, what they knew, and what the outcome was.",
-      "A decision receipt is a simple artifact: who decided, why, what it was for, and later what happened. It strengthens judgment. It is not another archive of files.",
-      "In Bizdaptive, asking why traces answers back to the conversations and evidence that shaped a choice. Finance, sales, ops, and marketing all hit the same failure mode when receipts don’t exist.",
-      "On day one, minting a first receipt — even for a small live decision — changes the habit: decisions become part of the living company map, not vapor after the call.",
+    icon: Receipt,
+    visual: "receipt",
+    sections: [
+      {
+        heading: "Lead",
+        body: "Teams don’t fail from a lack of chat. They fail when the next person cannot see who decided, what they knew, and what the outcome was.",
+      },
+      {
+        heading: "The problem",
+        body: "Approvals happen on calls. Rationales disappear. Months later, finance, sales, ops, and marketing all hit the same failure mode: nobody can reconstruct why.",
+      },
+      {
+        heading: "The idea",
+        body: "A decision receipt is a simple artifact: who decided, why, what it was for, and later what happened. In Bizdaptive, asking why traces answers back to the evidence that shaped a choice.",
+      },
+      {
+        heading: "What makes it different",
+        body: "Receipts strengthen judgment. They are not another archive of files.",
+        bullets: [
+          "Owner and rationale stamped before the next meeting",
+          "Outcomes can attach later without erasing history",
+          "Ask why walks a trail — belief + evidence, not a fake “truth”",
+        ],
+      },
+      {
+        heading: "Where this leaves you",
+        body: "On day one, minting a first receipt — even for a small live decision — changes the habit: decisions become part of the living company map, not vapor after the call.",
+      },
     ],
   },
   {
@@ -164,11 +239,36 @@ export const blogPosts: BlogPost[] = [
       "How Bizdaptive’s early flow works: describe, see the map, correct anytime, ask why, invite the team.",
     minutes: 7,
     kind: "Guide",
-    body: [
-      "Bizdaptive’s early experience is deliberately small. Five moves: describe your company, see a living map, correct anytime, ask why and get receipts, invite your team.",
-      "Describe: goals and how you work today. See: people, projects, and responsibilities connect into one picture. Correct: the map stays honest as the business evolves.",
-      "Ask why: answers come with a trail. Invite: shared understanding grows as people contribute — and so does the quality of the next decision together.",
-      "This is decision intelligence for growing companies: context and ownership available when it matters, without promising a full agent platform on day one.",
+    icon: MessageSquare,
+    visual: "flow",
+    sections: [
+      {
+        heading: "Lead",
+        body: "Bizdaptive’s early experience is deliberately small. Five moves take you from talk to a shared, correctable picture of how the company works.",
+      },
+      {
+        heading: "The problem",
+        body: "Most tools ask you to fill forms or dump files first. Growing companies need a brief that feels like briefing a sharp ops hire — then a picture they can correct.",
+      },
+      {
+        heading: "The idea",
+        body: "Describe your company. See a living map. Correct anytime. Ask why and get receipts. Invite your team so shared understanding grows with every contribution.",
+      },
+      {
+        heading: "What makes it different",
+        body: "This is decision intelligence for growing companies: context and ownership when it matters.",
+        bullets: [
+          "Describe — goals and how you work today",
+          "See — people, projects, and responsibilities connect",
+          "Correct — the map stays honest as the business evolves",
+          "Ask why — answers come with a trail",
+          "Invite — the next person lands in the same picture",
+        ],
+      },
+      {
+        heading: "Where this leaves you",
+        body: "That’s the early path: conversation compiled into a company graph you can stand behind — without promising a full agent platform on day one.",
+      },
     ],
   },
   {
@@ -178,11 +278,34 @@ export const blogPosts: BlogPost[] = [
       "Meetings, email, chat, and a few people’s heads. Context gets lost. The next action starts from guesswork — unless the picture is shared.",
     minutes: 5,
     kind: "Note",
-    body: [
-      "As businesses grow, choices fragment. The budget is in a sheet. The why is in Slack. The owner is “someone on the call.” Dashboards show numbers. Task tools show tickets. Neither shows judgment.",
-      "The cost shows up as rework: wrong amounts, forgotten discounts, weekly priority fights, campaigns that cannot explain themselves.",
-      "Bizdaptive’s answer is not more storage. It is a living operational layer — map plus receipts — so people decide with proof, confidence, and clarity.",
-      "If that sounds like your week, start with the use cases for finance, sales, operations, marketing, or leadership — then join the waitlist to see a live company picture.",
+    icon: FileText,
+    visual: "scatter",
+    sections: [
+      {
+        heading: "Lead",
+        body: "As businesses grow, choices fragment. The budget is in a sheet. The why is in Slack. The owner is “someone on the call.”",
+      },
+      {
+        heading: "The problem",
+        body: "Dashboards show numbers. Task tools show tickets. Neither shows judgment. The cost shows up as rework: wrong amounts, forgotten discounts, weekly priority fights, campaigns that cannot explain themselves.",
+      },
+      {
+        heading: "The idea",
+        body: "Bizdaptive’s answer is not more storage. It is a living operational layer — map plus receipts — so people decide with proof, confidence, and clarity.",
+      },
+      {
+        heading: "What makes it different",
+        body: "One honest, living, shared, evidence-backed picture — and it gets clearer the more you use it.",
+        bullets: [
+          "Belief + evidence, not a truth oracle",
+          "Structure and dynamics on one underlying org picture",
+          "Corrections version history instead of overwriting it",
+        ],
+      },
+      {
+        heading: "Where this leaves you",
+        body: "If that sounds like your week, start with the use cases for finance, sales, operations, marketing, or leadership — then join the waitlist to see a live company picture.",
+      },
     ],
   },
 ];
