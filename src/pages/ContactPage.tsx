@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 import { easeOut } from "../components/motion";
 
 const FOUNDERS_EMAIL = "info@bizdaptive.com";
@@ -38,7 +38,12 @@ function openMailto(href: string) {
 }
 
 export function ContactPage() {
-  usePageTitle("Contact | Bizdaptive");
+  usePageSeo({
+    title: "Contact Bizdaptive | Waitlist & Founder Demo",
+    description:
+      "Write the Bizdaptive founders for waitlist access, a founder demo, or a design partnership about decision intelligence and living company maps.",
+    path: "/contact",
+  });
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const bodyRef = useRef<HTMLTextAreaElement>(null);

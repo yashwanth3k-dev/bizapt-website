@@ -1,10 +1,10 @@
 import {
   BookOpen,
   Bot,
-  Brain,
   BrainCircuit,
   CheckSquare,
   LayoutDashboard,
+  Receipt,
   RefreshCw,
   Shield,
   Sparkles,
@@ -14,38 +14,38 @@ import { motion } from "framer-motion";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { SectionHeader, easeOut } from "../components/motion";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const roi = [
   {
-    icon: Brain,
-    title: "Never lose what your business learns",
-    body: "Every decision, interaction, and lesson becomes part of your business's permanent knowledge.",
+    icon: Sparkles,
+    title: "Decide with the full picture",
+    body: "Decision intelligence for your team: context, ownership, and evidence before the next call or action.",
   },
   {
     icon: BrainCircuit,
-    title: "Instinct is memory compiled for action",
-    body: "Bizdaptive compresses situations, choices, rationales, outcomes, and values into shared priors your business owns, ready for every person and AI agent at the next decision.",
+    title: "Turn experience into shared instinct",
+    body: "Situations, choices, rationales, and outcomes become shared priors your business owns, ready at the next decision.",
   },
   {
-    icon: Sparkles,
-    title: "Make better decisions with complete context",
-    body: "Give your people and your AI agents the confidence to act with the full picture, not fragmented information.",
+    icon: Receipt,
+    title: "Ask why and get a decision receipt",
+    body: "Trace answers back to who decided, what they knew, and what happened after. Accountability without archaeology.",
   },
   {
     icon: RefreshCw,
     title: "Stop repeating the same mistakes",
-    body: "Capture every decision once, learn from every outcome, and never solve the same problem twice.",
+    body: "Capture the decision once, learn from the outcome, and move on. Teams stop solving the same problem twice.",
   },
   {
     icon: TrendingUp,
-    title: "Turn every interaction into a competitive advantage",
-    body: "Every meeting, approval, customer conversation, and workflow strengthens your business's intelligence over time.",
+    title: "Make every interaction count forward",
+    body: "Meetings, approvals, customer conversations, and workflows sharpen the living company map over time.",
   },
   {
     icon: Shield,
-    title: "Build an business that gets smarter every day",
-    body: "The longer you use Bizdaptive, the more context, knowledge, and business instinct you accumulate.",
+    title: "Build a business that acts smarter",
+    body: "The longer you use Bizdaptive, the clearer the next move becomes for everyone on the team.",
   },
 ];
 
@@ -55,28 +55,28 @@ const numbers = [
     without:
       "Budget approval lost in Slack. Team implements wrong amount. “Why?” Nobody knows.",
     withUs:
-      "Every budget decision recorded with reason, who approved, and proof.",
+      "Next budget decision opens with who approved last time, why, and what the outcome was.",
   },
   {
     department: "Sales",
     without:
       "Deal discount approved verbally. No record of who approved or why.",
     withUs:
-      "Every discount has an approval trail with reason. Audit finds it instantly.",
+      "Discount decisions carry ownership and rationale. Reps and leaders act from the same trail.",
   },
   {
     department: "Operations",
     without:
       "Feature deprioritized mid-sprint. Team confused. Happens every week.",
     withUs:
-      "Priority change records why it happened and who decided. No repeat decisions.",
+      "Priority changes show why and who decided. The team executes without re-litigating last week.",
   },
   {
     department: "Marketing",
     without:
       "Campaign budget approved in a call. Results miss target. “Why?” Forgotten.",
     withUs:
-      "Every campaign decision recorded. Learn what works. Use insights for the next one.",
+      "Campaign choices stay connected to results, so the next plan starts from insight, not amnesia.",
   },
 ];
 
@@ -85,7 +85,7 @@ const vs = [
     icon: BookOpen,
     title: "Wikis & docs",
     get: "Pages you write",
-    miss: "A living, shared company picture with approvals",
+    miss: "A living company picture with decisions and ownership",
   },
   {
     icon: LayoutDashboard,
@@ -95,9 +95,9 @@ const vs = [
   },
   {
     icon: Bot,
-    title: "Chat AI alone",
+    title: "ChatGPT alone",
     get: "Fast answers",
-    miss: "Persistent multi-person memory of your org",
+    miss: "Shared decision context and receipts your whole team can use",
   },
   {
     icon: CheckSquare,
@@ -108,15 +108,20 @@ const vs = [
 ];
 
 export function RoiPage() {
-  usePageTitle("With Bizdaptive you will be able to | Bizdaptive");
+  usePageSeo({
+    title: "With Bizdaptive | Decision Intelligence & Decision Receipts",
+    description:
+      "See what Bizdaptive enables: decide with the full picture, get decision receipts, stop repeating mistakes, and keep a living company map across the team.",
+    path: "/with-bizdaptive",
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
       <PageHero
         eyebrow="With Bizdaptive you will be able to"
         accent="accent"
-        title="Use your business's instinct intelligently always."
-        lead="Every decision, interaction, and outcome becomes lasting advantage, so people and AI agents act with proof, confidence, and clarity."
+        title="Decision intelligence your team can actually use."
+        lead="A living company map so people move with proof, confidence, and clarity, not scattered context."
       />
 
       <section className="px-5 pb-20 sm:px-8">
@@ -161,7 +166,7 @@ export function RoiPage() {
               Without Bizdaptive vs with Bizdaptive.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm" style={{ color: "var(--fg-muted)" }}>
-              Same decisions. Different outcomes — across finance, sales, operations, and marketing.
+              Same decisions. Clearer next moves across finance, sales, operations, and marketing.
             </p>
           </SectionHeader>
 

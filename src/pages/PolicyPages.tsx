@@ -12,7 +12,7 @@ import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { AnimatedCard } from "../components/motion";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 type PolicySection = {
   title: string;
@@ -26,11 +26,17 @@ type PolicyPageProps = {
   title: string;
   lead: string;
   updated: string;
+  path: string;
+  description: string;
   sections: PolicySection[];
 };
 
-function PolicyPage({ eyebrow, title, lead, updated, sections }: PolicyPageProps) {
-  usePageTitle(`${title} | Bizdaptive`);
+function PolicyPage({ eyebrow, title, lead, updated, path, description, sections }: PolicyPageProps) {
+  usePageSeo({
+    title: `${title} | Bizdaptive`,
+    description,
+    path,
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -435,6 +441,8 @@ export function PrivacyPage() {
       title="Privacy Policy"
       lead="What we process when you visit the website, contact us, create an account, or use the Bizdaptive platform."
       updated="July 15, 2026"
+      path="/privacy"
+      description="Bizdaptive privacy policy: what we process on the website, waitlist, and product, and the choices available to you."
       sections={privacySections}
     />
   );
@@ -447,6 +455,8 @@ export function TermsPage() {
       title="Terms of Service"
       lead="The rules for using the Bizdaptive website and engaging with our early product."
       updated="July 15, 2026"
+      path="/terms"
+      description="Terms of service for the Bizdaptive website, waitlist, and early product engagement with Spirality Solutions."
       sections={termsSections}
     />
   );
@@ -459,6 +469,8 @@ export function CookiesPage() {
       title="Cookie Policy"
       lead="How this website uses cookies and similar browser storage."
       updated="July 15, 2026"
+      path="/cookies"
+      description="How the Bizdaptive website uses essential cookies and browser storage for preferences and sessions."
       sections={cookieSections}
     />
   );
@@ -471,6 +483,8 @@ export function SecurityPage() {
       title="Security and Compliance"
       lead="A clear view of our current safeguards, design principles, and work in progress."
       updated="July 15, 2026"
+      path="/security"
+      description="Bizdaptive security and compliance posture: safeguards, data isolation, and work toward certifications."
       sections={securitySections}
     />
   );
@@ -483,6 +497,8 @@ export function DataHandlingPage() {
       title="Data Handling"
       lead="How we intend to protect business context throughout its lifecycle."
       updated="July 15, 2026"
+      path="/data-handling"
+      description="How Bizdaptive handles business context: transient file processing, retention, ownership, and AI processing."
       sections={dataSections}
     />
   );

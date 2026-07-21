@@ -9,12 +9,13 @@ import {
   LockKeyhole,
   ShieldCheck,
 } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { TiltCard } from "../components/About3D";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const legalLinks = [
   {
@@ -50,7 +51,12 @@ const legalLinks = [
 ];
 
 export function LegalHubPage() {
-  usePageTitle("Legal and Trust | Bizdaptive");
+  usePageSeo({
+    title: "Legal and Trust | Bizdaptive",
+    description:
+      "Privacy, terms, cookies, security, and data handling for Bizdaptive — how we protect business context and operate the marketing site.",
+    path: "/legal",
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -93,12 +99,27 @@ const faqs = [
   {
     question: "What is Bizdaptive?",
     answer:
-      "Bizdaptive is an business intelligence layer that helps teams preserve decision context, understand how their company works, and make the next action clearer for people and AI agents.",
+      "Bizdaptive is decision intelligence for growing companies. It builds a living company map that connects people, goals, and decisions, and issues decision receipts so teams can act with proof and clarity.",
   },
   {
-    question: "Is Bizdaptive a wiki or document tool?",
+    question: "Is Bizdaptive a wiki or knowledge management tool?",
     answer:
-      "No. Documents can provide evidence, but Bizdaptive is designed around a living company picture that connects people, goals, decisions, rationales, outcomes, and confidence.",
+      "No. Wikis store pages you write. Bizdaptive is built around a living company map that connects people, goals, decisions, rationales, outcomes, and confidence. Documents can provide evidence; they are not the product.",
+  },
+  {
+    question: "What is a decision receipt?",
+    answer:
+      "A decision receipt captures who decided, why, what context was known at the time, and what happened next. It is an accountable trail for judgment, not a dump of files.",
+  },
+  {
+    question: "What is a living company map?",
+    answer:
+      "A living company map is a shared picture of how the business works today: people, goals, projects, decisions, and responsibilities, updated as the company changes.",
+  },
+  {
+    question: "How is Bizdaptive different from ChatGPT alone?",
+    answer:
+      "ChatGPT answers from a prompt. Bizdaptive holds shared business context across your team, with ownership and decision history, so answers stay grounded in how your company actually operates.",
   },
   {
     question: "Who is Bizdaptive for?",
@@ -113,12 +134,12 @@ const faqs = [
   {
     question: "How does onboarding work?",
     answer:
-      "The intended experience begins with a short plain-language conversation and optional supporting information. Uploaded files are processed for relevant context and are not retained. The business reviews and corrects the resulting company picture.",
+      "The intended experience begins with a short plain-language conversation and optional supporting information. Uploaded files are processed for relevant context and are not retained. The business reviews and corrects the resulting company map.",
   },
   {
     question: "Does Bizdaptive replace human judgment?",
     answer:
-      "No. It is designed to strengthen judgment by making relevant context, evidence, ownership, and uncertainty available when a decision is made.",
+      "No. It strengthens judgment by making relevant context, evidence, ownership, and uncertainty available when a decision is made.",
   },
   {
     question: "How is business data protected?",
@@ -133,14 +154,41 @@ const faqs = [
 ];
 
 export function FaqPage() {
-  usePageTitle("FAQ | Bizdaptive");
+  usePageSeo({
+    title: "FAQ | Decision Intelligence, Living Company Map & Receipts",
+    description:
+      "Answers about Bizdaptive decision intelligence: living company maps, decision receipts, how onboarding works, and how we differ from wikis and ChatGPT.",
+    path: "/faq",
+  });
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "bizdaptive-faq-schema";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    });
+    document.head.appendChild(script);
+    return () => {
+      document.getElementById("bizdaptive-faq-schema")?.remove();
+    };
+  }, []);
 
   return (
     <div style={{ background: "var(--bg)" }}>
       <PageHero
         eyebrow="FAQ"
-        title="Questions, answered plainly."
-        lead="What Bizdaptive is, who it is for, and what to expect at this stage."
+        title="Decision intelligence, answered plainly."
+        lead="What Bizdaptive is, how a living company map works, and what to expect at this stage."
       />
       <section className="px-5 pb-24 sm:px-8">
         <div className="mx-auto max-w-3xl space-y-3">
@@ -165,6 +213,16 @@ export function FaqPage() {
               </p>
             </details>
           ))}
+          <p className="pt-4 text-center text-sm" style={{ color: "var(--fg-muted)" }}>
+            Go deeper:{" "}
+            <Link to="/what-is-bizdaptive" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+              What is Bizdaptive?
+            </Link>
+            {" · "}
+            <Link to="/bizdaptive-vs-wiki" className="underline-offset-2 hover:underline" style={{ color: "var(--accent)" }}>
+              vs wiki &amp; ChatGPT
+            </Link>
+          </p>
         </div>
       </section>
     </div>
@@ -178,7 +236,13 @@ const services = [
 ];
 
 export function StatusPage() {
-  usePageTitle("Status | Bizdaptive");
+  usePageSeo({
+    title: "Status | Bizdaptive",
+    description:
+      "Current status of the Bizdaptive marketing website, waitlist contact, and product availability.",
+    path: "/status",
+    noIndex: true,
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -243,7 +307,12 @@ export function StatusPage() {
 }
 
 export function NotFoundPage() {
-  usePageTitle("Page not found | Bizdaptive");
+  usePageSeo({
+    title: "Page not found | Bizdaptive",
+    description: "This Bizdaptive page is not on the map. Return home or explore how decision intelligence works.",
+    path: "/404",
+    noIndex: true,
+  });
 
   return (
     <section

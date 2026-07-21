@@ -8,6 +8,11 @@ const productLinks = [
   { label: "Status", to: "/status" },
 ];
 
+const learnLinks = [
+  { label: "What is Bizdaptive?", to: "/what-is-bizdaptive" },
+  { label: "vs wiki & ChatGPT", to: "/bizdaptive-vs-wiki" },
+];
+
 const companyLinks = [
   { label: "About us", to: "/about" },
   { label: "Contact", to: "/contact" },
@@ -29,13 +34,13 @@ export function SiteFooter() {
       style={{ borderColor: "var(--line)", background: "var(--bg)" }}
     >
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
             <Link to="/" className="inline-flex items-center" aria-label="Bizdaptive home">
               <BrandMark size={26} />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-6" style={{ color: "var(--fg-muted)" }}>
-              Adaptive business instinct for people and AI agents.
+              Adaptive business instinct. Decision intelligence for growing companies.
             </p>
             <a
               href="mailto:info@bizdaptive.com"
@@ -47,6 +52,7 @@ export function SiteFooter() {
           </div>
 
           <FooterGroup title="Product" links={productLinks} />
+          <FooterGroup title="Learn" links={learnLinks} />
           <FooterGroup title="Company" links={companyLinks} />
           <FooterGroup title="Legal" links={policyLinks} />
         </div>

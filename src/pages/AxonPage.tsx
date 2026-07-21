@@ -1,4 +1,4 @@
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const NAV_LINKS = ["Features", "Plans", "Security", "About"] as const;
 
@@ -18,7 +18,13 @@ function AxonLogo() {
 }
 
 export function AxonPage() {
-  usePageTitle("Axon — Digital Workers for Mundane Workflows");
+  usePageSeo({
+    title: "Axon — Digital Workers for Mundane Workflows",
+    description:
+      "Axon deploys digital workers for routine workflows. A separate experimental landing from the Bizdaptive marketing site.",
+    path: "/axon",
+    noIndex: true,
+  });
 
   return (
     <section className="axon-page relative flex h-screen w-full flex-col overflow-hidden">

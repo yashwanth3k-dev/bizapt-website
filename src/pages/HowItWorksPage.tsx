@@ -14,38 +14,38 @@ import { PageHero } from "../components/PageHero";
 import { Button } from "../components/Button";
 import { HoverIcon } from "../components/HoverIcon";
 import { SectionHeader } from "../components/motion";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const steps = [
   {
     n: "01",
     icon: MessageSquare,
     title: "Describe Your Company",
-    body: "Tell us about your company, your goals, and how you work today. This gives Bizdaptive the context it needs to understand your business from day one.",
+    body: "Tell us about your company, goals, and how you work today. Bizdaptive uses that to build a working picture from day one.",
   },
   {
     n: "02",
     icon: Map,
     title: "See a Living Map",
-    body: "Watch your business come to life as people, goals, projects, decisions, and responsibilities connect into one living picture.",
+    body: "Watch people, goals, projects, decisions, and responsibilities connect into one living picture your team can navigate.",
   },
   {
     n: "03",
     icon: PencilLine,
     title: "Correct Anytime",
-    body: "Your business is always evolving. Update, refine, or correct anything at any time so Bizdaptive always reflects how your company truly operates.",
+    body: "Your business keeps changing. Update or correct anything so Bizdaptive always reflects how the company truly operates.",
   },
   {
     n: "04",
     icon: HelpCircle,
     title: "Ask Why and Get Receipts",
-    body: "Ask any question about your business and trace every answer back to the decisions, conversations, and evidence that shaped it.",
+    body: "Ask questions and follow every answer back to the decisions, conversations, and evidence that shaped it.",
   },
   {
     n: "05",
     icon: UsersRound,
     title: "Invite Your Team",
-    body: "Bring your team into the conversation. As Bizdaptive grows with every contribution, your company's shared understanding grows too, and so does the value of every decision you make together.",
+    body: "Bring people in. As everyone contributes, shared understanding grows, and so does the quality of the next decision together.",
   },
 ];
 
@@ -83,15 +83,20 @@ function WalkthroughCard({ step }: { step: (typeof steps)[number] }) {
 }
 
 export function HowItWorksPage() {
-  usePageTitle("How it works | Bizdaptive");
+  usePageSeo({
+    title: "How Bizdaptive Works | Living Company Map & Decision Receipts",
+    description:
+      "Five steps from a short conversation to a living company map: describe your company, see the map, correct anytime, ask why, and invite your team.",
+    path: "/how-it-works",
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
       <PageHero
         eyebrow="How it works"
         accent="accent"
-        title="Talk once. Walk the company forever."
-        lead="Five steps. Scroll to walk through them."
+        title="From a short conversation to a living company map."
+        lead="Five steps to decision receipts and shared company context your team can use every day."
       />
 
       <section className="px-5 pb-20 sm:px-8">
@@ -134,11 +139,11 @@ export function HowItWorksPage() {
               className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl"
               style={{ color: "var(--fg)" }}
             >
-              Close the browser. Come back tomorrow.
+              Ready when you need the next decision.
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base" style={{ color: "var(--fg-muted)" }}>
-              Your company&apos;s picture is still there. Shared across people. Walled off from every
-              other company. Boring in the best way.
+              Your company&apos;s living picture stays shared across people, ready for the next
+              question, and walled off from every other company.
             </p>
           </SectionHeader>
 

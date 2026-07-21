@@ -21,6 +21,10 @@ import {
   NotFoundPage,
   StatusPage,
 } from "./pages/InfoPages";
+import {
+  BizdaptiveVsWikiPage,
+  WhatIsBizdaptivePage,
+} from "./pages/SeoContentPages";
 import { ScrollToTop } from "./components/ScrollToTop";
 
 export default function App() {
@@ -39,6 +43,8 @@ export default function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="faq" element={<FaqPage />} />
+              <Route path="what-is-bizdaptive" element={<WhatIsBizdaptivePage />} />
+              <Route path="bizdaptive-vs-wiki" element={<BizdaptiveVsWikiPage />} />
               <Route path="status" element={<StatusPage />} />
               <Route path="legal" element={<LegalHubPage />} />
               <Route path="privacy" element={<PrivacyPage />} />

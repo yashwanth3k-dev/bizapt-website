@@ -13,26 +13,26 @@ import { motion } from "framer-motion";
 import { HoverIcon } from "../components/HoverIcon";
 import { FounderAvatar } from "../components/FounderAvatar";
 import { SectionHeader, easeOut } from "../components/motion";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const story = [
   {
     icon: Building2,
     label: "The problem",
-    title: "Information everywhere. Memory nowhere.",
-    body: "As businesses grow, decisions scatter across meetings, email, chat, docs, and a few people’s heads. Context gets lost. Knowledge walks out the door.",
+    title: "Decisions scatter. Clarity doesn’t follow.",
+    body: "As businesses grow, choices fragment across meetings, email, chat, docs, and a few people’s heads. Context gets lost. The next action starts from guesswork.",
   },
   {
     icon: Layers,
     label: "What we’re building",
     title: "The AI Operating System for Companies.",
-    body: "A living operational layer that preserves context, keeps accountability, and learns from every decision and interaction. It is not another place to dump files.",
+    body: "A living operational layer that connects people, goals, decisions, and evidence. It strengthens judgment and accountability. It is not another place to dump files.",
   },
   {
     icon: TrendingUp,
     label: "What compounds",
-    title: "Business intelligence that lasts.",
-    body: "Every decision. Every interaction. Every outcome. Experience doesn’t disappear. It becomes Compounding Business Intelligence.",
+    title: "Business intelligence that moves work forward.",
+    body: "Every decision. Every interaction. Every outcome. Experience becomes shared instinct so the next person acts with clearer context.",
   },
 ];
 
@@ -44,13 +44,13 @@ const beliefs = [
   },
   {
     icon: FileCheck2,
-    title: "Evidence over memory",
-    body: "Businesses shouldn't rely on memory. They should rely on evidence.",
+    title: "Evidence over guesswork",
+    body: "Businesses shouldn't rely on who happened to be in the room. They should rely on evidence.",
   },
   {
     icon: ClipboardCheck,
     title: "Context & accountability",
-    body: "Every decision should have context. Every action should have accountability. Every outcome should become institutional knowledge.",
+    body: "Every decision should have context. Every action should have ownership. Every outcome should sharpen the next move.",
   },
 ];
 
@@ -85,7 +85,12 @@ const founders = [
 ];
 
 export function AboutPage() {
-  usePageTitle("About us | Bizdaptive");
+  usePageSeo({
+    title: "About Bizdaptive | AI Operating System for Companies",
+    description:
+      "Bizdaptive builds decision intelligence for growing companies: a living company map, decision receipts, and shared context so teams decide with evidence and accountability.",
+    path: "/about",
+  });
 
   return (
     <div style={{ background: "var(--bg)" }}>
@@ -106,13 +111,13 @@ export function AboutPage() {
             className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-tight"
             style={{ color: "var(--fg)" }}
           >
-            We build systems that remember.
+            We build systems that help businesses decide.
           </h1>
           <p
             className="mx-auto mt-5 max-w-xl text-base leading-relaxed sm:text-lg"
             style={{ color: "var(--fg-muted)" }}
           >
-            Every company has information. Very few have institutional memory.
+            Every company has information. Few have a living company map that turns it into clear decisions.
           </p>
         </motion.div>
       </header>
@@ -276,11 +281,11 @@ export function AboutPage() {
               Why we exist
             </p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: "var(--fg)" }}>
-              Build memory into how the business moves.
+              Build judgment into how the business moves.
             </h2>
             <p className="mt-4 max-w-md text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
               Our mission defines what we change today. Our vision describes what becomes possible
-              when business knowledge compounds instead of disappearing.
+              when shared context compounds into clearer decisions.
             </p>
           </SectionHeader>
 
@@ -295,7 +300,7 @@ export function AboutPage() {
                 <p className="mission-bloom-card__body">
                   To transform every decision, interaction, and outcome into Compounding Business
                   Intelligence, helping businesses make better decisions, strengthen accountability,
-                  and continuously improve.
+                  and continuously improve how work gets done.
                 </p>
               </div>
             </article>

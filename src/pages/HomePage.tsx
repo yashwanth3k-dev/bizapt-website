@@ -1,5 +1,4 @@
 import {
-  Brain,
   Map,
   Receipt,
   Shield,
@@ -17,7 +16,7 @@ import {
   cascadeItem,
   easeOut,
 } from "../components/motion";
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageSeo } from "../hooks/usePageTitle";
 
 const dayOne = [
   {
@@ -45,19 +44,19 @@ const dayOne = [
 /** Home shows the three pillars; full six live on /with-bizdaptive. */
 const roiHome = [
   {
-    icon: Brain,
-    title: "Never lose what your business learns",
-    body: "Every decision, interaction, and lesson becomes part of your business's permanent knowledge.",
+    icon: Sparkles,
+    title: "Decide with the full picture",
+    body: "Decision intelligence for your team: context, ownership, and evidence before the next call or action.",
   },
   {
-    icon: Sparkles,
-    title: "Make better decisions with complete context",
-    body: "Give your people and your AI agents the confidence to act with the full picture, not fragmented information.",
+    icon: Receipt,
+    title: "Trace every answer back to why",
+    body: "Decision receipts show who decided, what they knew, and what happened after. Judgment with proof, not another archive.",
   },
   {
     icon: Shield,
-    title: "Build an business that gets smarter every day",
-    body: "The longer you use Bizdaptive, the more context, knowledge, and business instinct you accumulate.",
+    title: "Stop repeating the same work",
+    body: "When the living company map updates, the next person starts from clarity, not a blank slate.",
   },
 ];
 
@@ -80,7 +79,12 @@ const heroItem = {
 };
 
 export function HomePage() {
-  usePageTitle("Adaptive Business Instinct | Bizdaptive");
+  usePageSeo({
+    title: "Bizdaptive | Decision Intelligence & Living Company Map",
+    description:
+      "Bizdaptive is decision intelligence for growing companies: a living company map, decision receipts, and shared business context so teams decide with proof and clarity.",
+    path: "/",
+  });
 
   return (
     <>
@@ -118,9 +122,9 @@ export function HomePage() {
               className="mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg lg:mx-0"
               style={{ color: "var(--fg-muted)" }}
             >
-              Bizdaptive continuously learns how your business works. This creates a compounding
-              impact over time so that every person and every AI agent has the context needed to
-              make better decisions, backed by proof, confidence, and clarity.
+              Bizdaptive is decision intelligence for growing companies: a living company map that
+              connects people, goals, and choices, with decision receipts so teams act with proof,
+              confidence, and clarity.
             </motion.p>
 
             <motion.div
@@ -193,13 +197,13 @@ export function HomePage() {
                 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
                 style={{ color: "var(--fg)" }}
               >
-                Use your business's instinct intelligently always.
+                Clearer decisions. Stronger accountability. Shared instinct.
               </h2>
               <p
                 className="mx-auto mt-5 max-w-2xl text-base leading-relaxed"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Every day on Bizdaptive makes the next action clearer for people and AI agents alike.
+                A living company map that keeps decision context shared across the team.
               </p>
             </SectionHeader>
           </motion.div>
@@ -309,13 +313,13 @@ export function HomePage() {
                 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
                 style={{ color: "var(--fg)" }}
               >
-                Ready to see your org without the fog?
+                Ready for decisions without the fog?
               </h2>
               <p
                 className="mx-auto mt-4 max-w-md text-base"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Join the waitlist. Bring curiosity and leave with proof, confidence, and clarity.
+                Join the waitlist. See a living company picture, not another place to dump files.
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <Button to="/contact?intent=waitlist" showArrow>
