@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { BrandMark } from "./BrandMark";
 import { Button } from "./Button";
-import { useTheme } from "../theme/ThemeProvider";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 const links = [
   { label: "With Bizdaptive", to: "/with-bizdaptive" },
@@ -14,7 +13,6 @@ const links = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const { isDark, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -25,7 +23,8 @@ export function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-[border-color] duration-300"
+      className="sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-[border-color,background] duration-300"
+      data-scrolled={scrolled ? "true" : "false"}
       style={{
         background: "var(--nav-blur)",
         borderColor: scrolled ? "var(--line)" : "transparent",
@@ -61,20 +60,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex shrink-0 items-center justify-self-end gap-2 sm:gap-3">
-          <button
-            type="button"
-            onClick={toggle}
-            className="inline-flex size-11 items-center justify-center rounded-full border transition hover:opacity-90"
-            style={{
-              borderColor: "var(--line)",
-              color: "var(--fg)",
-              background: "var(--card)",
-            }}
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            title={isDark ? "Light mode" : "Dark mode"}
-          >
-            {isDark ? <Sun className="size-3.5" aria-hidden /> : <Moon className="size-3.5" aria-hidden />}
-          </button>
+          <ThemeSwitch />
           <Button to="/contact?intent=waitlist" className="!px-4 !py-2 text-xs sm:text-sm">
             Contact Us
           </Button>
